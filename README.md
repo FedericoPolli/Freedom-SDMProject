@@ -1,6 +1,6 @@
 # Freedom - SDM project
 
-[![Build Status](https://travis-ci.com/AngieC96/Bank-OCR-assignment.svg?branch=master)](https://travis-ci.com/AngieC96/Bank-OCR-assignment)
+[![Build Status](https://travis-ci.org/FedericoPolli/Freedom-SDMProject.svg?branch=main)](https://travis-ci.org/FedericoPolli/Freedom-SDMProject)
 
 Repository for the project of the course "Software Development Methods" of the master degree "Data Science and Scientific Computing" @UniTS.
 
