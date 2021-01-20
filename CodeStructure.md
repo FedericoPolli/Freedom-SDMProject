@@ -31,6 +31,7 @@ Encodes the tile of the board or the stone on the tile, <font color="red">still 
   - `makeWhite()`, `makeBlack()`
   - `isWhite()`, `isBlack()`
   - `isStoneLive()`
+  - `Tile tileAt(int x, int y)` → To avoid creating new instances of `Tile` all the time, we create all tiles when initializing the board and we use this function to obtain it
 
 ##### Class `Board`:
 
