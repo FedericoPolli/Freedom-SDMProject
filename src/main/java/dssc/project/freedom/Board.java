@@ -16,7 +16,15 @@ public class Board {
         }
     }
 
-    public HashMap<Position, Stone> getBoard() {
-        return board;
+    public Stone getStoneAt(Position p) {
+        return board.get(p);
+    }
+
+    public long countLiveStones() {
+        return board.values().stream().filter(Stone::isLive).count();
+    }
+
+    public void updateStoneAt(Position p, Colour c) {
+        board.get(p).makeColoured(c);
     }
 }
