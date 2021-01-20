@@ -1,0 +1,30 @@
+Position class:
+	-ints coordinates	
+	-method isOnHorizontalBorders()
+	-method isOnVerticalBorders()
+	-method getAdjacentPositions()
+	
+Colour enum:
+	-WHITE, BLACK, NONE
+	
+Tile class:
+	-Position p
+	-Colour colour
+	-Bool isLive
+	-methods makeWhite(), makeBlack()
+	-methods isWhite(), isBlack()
+	-method isStoneLive()
+	
+Board class:
+	-List<Tiles> board
+	-method Update()
+	-methods check4horizontal(), check4vertical(), check4diagonal()
+	-method countLiveStones()
+	-method areAdjacentTilesOccupied()
+	
+Game class:
+	-Board board
+	-int numberOfStonesPlaced
+	-int boardSize
+	-create and populate board
+	-method isMoveValid()
