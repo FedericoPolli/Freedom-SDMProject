@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dssc.project.freedom.StoneTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-01-20T15:28:54" hostname="DESKTOP-CR6G0CG" time="0.024">
+<testsuite name="dssc.project.freedom.StoneTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-01-20T15:36:28" hostname="DESKTOP-CR6G0CG" time="0.025">
   <properties/>
-  <testcase name="checkBlack()" classname="dssc.project.freedom.StoneTests" time="0.022"/>
-  <testcase name="checkWhite()" classname="dssc.project.freedom.StoneTests" time="0.001"/>
+  <testcase name="checkBlack()" classname="dssc.project.freedom.StoneTests" time="0.021"/>
+  <testcase name="checkWhite()" classname="dssc.project.freedom.StoneTests" time="0.0"/>
+  <testcase name="checkNotBlack()" classname="dssc.project.freedom.StoneTests" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

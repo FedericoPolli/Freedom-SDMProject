@@ -1,8 +1,8 @@
 package dssc.project.freedom;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class StoneTests {
@@ -17,5 +17,11 @@ public class StoneTests {
     void checkBlack() {
         Stone stone = new Stone(Colour.BLACK);
         assertTrue(stone.isBlack());
+    }
+
+    @Test
+    void checkNotBlack() {
+        Stone stone = new Stone(Colour.WHITE);
+        assertFalse(stone.isBlack());
     }
 }
