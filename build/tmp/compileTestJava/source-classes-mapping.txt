@@ -1,2 +1,0 @@
-dssc/project/freedom/StoneTests.java
- dssc.project.freedom.StoneTests
