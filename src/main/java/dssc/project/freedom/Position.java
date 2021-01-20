@@ -1,7 +1,12 @@
 package dssc.project.freedom;
 
 public class Position {
+
     private final int x, y;
+
+    public static Position createAt(int x, int y) {
+        return new Position(x, y);
+    }
 
     public Position(int x, int y) {
         this.x = x;

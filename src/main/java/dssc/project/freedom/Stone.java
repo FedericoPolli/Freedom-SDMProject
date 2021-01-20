@@ -1,8 +1,13 @@
 package dssc.project.freedom;
 
 public class Stone {
+
     private Colour colour;
     private boolean isLive = false;
+
+    public static Stone createEmpty() {
+        return new Stone(Colour.NONE);
+    }
 
     public Stone(Colour colour) {
         this.colour = colour;
