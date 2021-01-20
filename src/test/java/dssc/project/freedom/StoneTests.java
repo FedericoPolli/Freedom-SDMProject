@@ -24,4 +24,17 @@ public class StoneTests {
         Stone stone = new Stone(Colour.WHITE);
         assertFalse(stone.isBlack());
     }
+
+    @Test
+    void checkIfLive() {
+        Stone stone = new Stone(Colour.WHITE);
+        assertFalse(stone.isLive());
+    }
+
+    @Test
+    void checkIfColoured() {
+        Stone stone = new Stone(Colour.NONE);
+        stone.makeColoured(Colour.WHITE);
+        assertTrue(stone.isWhite());
+    }
 }
