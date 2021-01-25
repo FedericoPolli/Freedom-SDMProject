@@ -25,4 +25,22 @@ public class BoardTests {
         assertTrue(board.getStoneAt(Position.createAt(3,2)).isWhite());
     }
 
+    @Test
+    void adjacentPositionsAllOccupied(){
+        Board board = new Board(3);
+        board.updateStoneAt(Position.createAt(1, 2), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(2, 1), Colour.BLACK);
+        board.updateStoneAt(Position.createAt(2, 2), Colour.WHITE);
+        assertTrue(board.areAdjacentPositionOccupied(Position.createAt(1,1)));
+    }
+
+    @Test
+    void adjacentPositionsNotOccupied(){
+        Board board = new Board(3);
+        board.updateStoneAt(Position.createAt(1, 2), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(2, 1), Colour.BLACK);
+        board.updateStoneAt(Position.createAt(2, 2), Colour.WHITE);
+        assertFalse(board.areAdjacentPositionOccupied(Position.createAt(1,3)));
+    }
+
 }
