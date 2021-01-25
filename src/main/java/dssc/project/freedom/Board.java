@@ -27,4 +27,9 @@ public class Board {
     public void updateStoneAt(Position p, Colour c) {
         board.get(p).makeColoured(c);
     }
+
+    public boolean areAdjacentPositionOccupied(Position pos){
+        // True -> all positions are occupied
+        return board.keySet().stream().filter(p -> p.isInSorroundingPositions(pos)).filter(p -> board.get(p).isNotColored()).findAny().isEmpty();
+    }
 }

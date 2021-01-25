@@ -31,4 +31,8 @@ public final class Position {
         result = result*prime+y;
         return result;
     }
+
+    public boolean isInSorroundingPositions(Position p){
+        return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
+    }
 }
