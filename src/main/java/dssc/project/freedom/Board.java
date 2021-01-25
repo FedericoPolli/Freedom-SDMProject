@@ -1,10 +1,12 @@
 package dssc.project.freedom;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Board {
 
-    private HashMap<Position, Stone> board = new HashMap<>();
+    private Map<Position, Stone> board = new HashMap<>();
     private final int boardSize;
 
     public Board(int boardSize) {
@@ -32,4 +34,32 @@ public class Board {
         // True -> all positions are occupied
         return board.keySet().stream().filter(p -> p.isInSorroundingPositions(pos)).filter(p -> board.get(p).isNotColored()).findAny().isEmpty();
     }
+
+    public void check4Horizontal(){
+        Position next;
+        //for (Map.Entry<Position, Stone> entry : board.entrySet()){
+        Map.Entry<Position, Stone> entry = new AbstractMap.SimpleEntry<Position, Stone>(positionAt(1,1), board.get(positionAt(1,1)));
+            int counter = 1;
+            for (int i = 1; i < 5; ++i){
+                next = positionAt(entry.getKey().getX()+i, entry.getKey().getY());
+                if (board.get(next).isOfColour(entry.getValue().getColour())){
+                    counter++;
+                } else {
+                    break;
+                }
+            }
+            if (counter == 4){
+                entry.getValue().makeLive();
+                for (int i=1; i<4; ++i){
+                    next = positionAt(entry.getKey().getX()+i, entry.getKey().getY());
+                    board.get(next).makeLive();
+                }
+            }
+        //}
+    }
+
+    private Position positionAt(int x, int y) {
+        return board.keySet().stream().filter(p -> p.isAt(x, y)).findAny().orElseThrow();
+    }
+
 }

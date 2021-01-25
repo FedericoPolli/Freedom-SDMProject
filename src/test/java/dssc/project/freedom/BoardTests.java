@@ -43,4 +43,16 @@ public class BoardTests {
         assertFalse(board.areAdjacentPositionOccupied(Position.createAt(1,3)));
     }
 
+    @Test
+    void horizontalLiveStones(){
+        Board board = new Board(5);
+        board.updateStoneAt(Position.createAt(1, 1), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 2), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 3), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 4), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 5), Colour.BLACK);
+        board.check4Horizontal();
+        assertEquals(0, board.countLiveStones(Colour.WHITE));
+    }
+
 }

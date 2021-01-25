@@ -27,6 +27,10 @@ public class Stone {
 
     public boolean isNotColored(){ return this.isOfColour(Colour.NONE); }
 
+    public Colour getColour() {
+        return colour;
+    }
+
     public boolean isLive() {
         return isLive;
     }

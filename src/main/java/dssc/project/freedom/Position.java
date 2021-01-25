@@ -13,6 +13,14 @@ public final class Position {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -34,5 +42,9 @@ public final class Position {
 
     public boolean isInSorroundingPositions(Position p){
         return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
+    }
+
+    public boolean isAt(int x, int y){
+        return this.x == x && this.y == y;
     }
 }
