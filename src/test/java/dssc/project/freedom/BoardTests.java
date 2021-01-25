@@ -47,12 +47,12 @@ public class BoardTests {
     void horizontalLiveStones(){
         Board board = new Board(5);
         board.updateStoneAt(Position.createAt(1, 1), Colour.WHITE);
-        board.updateStoneAt(Position.createAt(1, 2), Colour.WHITE);
-        board.updateStoneAt(Position.createAt(1, 3), Colour.WHITE);
-        board.updateStoneAt(Position.createAt(1, 4), Colour.WHITE);
-        board.updateStoneAt(Position.createAt(1, 5), Colour.BLACK);
+        board.updateStoneAt(Position.createAt(2, 1), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(3, 1), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(4, 1), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(5, 1), Colour.BLACK);
         board.check4Horizontal();
-        assertEquals(0, board.countLiveStones(Colour.WHITE));
+        assertEquals(4, board.countLiveStones(Colour.WHITE));
     }
 
 }
