@@ -20,8 +20,8 @@ public class Board {
         return board.get(p);
     }
 
-    public long countLiveStones() {
-        return board.values().stream().filter(Stone::isLive).count();
+    public long countLiveStones(Colour colour) {
+        return board.values().stream().filter(s -> s.isOfColour(colour)).filter(Stone::isLive).count();
     }
 
     public void updateStoneAt(Position p, Colour c) {

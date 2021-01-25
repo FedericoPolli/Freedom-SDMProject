@@ -15,7 +15,7 @@ public class BoardTests {
     @Test
     void countLiveStones() {
         Board board = new Board(5);
-        assertEquals(0, board.countLiveStones());
+        assertEquals(0, board.countLiveStones(Colour.BLACK));
     }
 
     @Test

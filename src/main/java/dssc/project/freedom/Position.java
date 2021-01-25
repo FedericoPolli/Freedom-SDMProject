@@ -1,6 +1,6 @@
 package dssc.project.freedom;
 
-public class Position {
+public final class Position {
 
     private final int x, y;
 
@@ -25,6 +25,10 @@ public class Position {
 
     @Override
     public int hashCode() {
-        return 31 * x + 59 * y;
+        final int prime=31;
+        int result=17;
+        result = result*prime+x;
+        result = result*prime+y;
+        return result;
     }
 }

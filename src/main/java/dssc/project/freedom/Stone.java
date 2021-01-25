@@ -13,6 +13,7 @@ public class Stone {
         this.colour = colour;
     }
 
+    // functions to remove
     public boolean isWhite() {
         return colour == Colour.WHITE;
     }
@@ -20,10 +21,15 @@ public class Stone {
     public boolean isBlack() {
         return colour == Colour.BLACK;
     }
+    //
+
+    public boolean isOfColour(Colour colour) { return this.colour.equals(colour); }
 
     public boolean isLive() {
         return isLive;
     }
+
+    public void makeLive(){ this.isLive = true; }
 
     public boolean makeColoured(Colour colour) {
         if (this.colour.equals(Colour.NONE)) {
