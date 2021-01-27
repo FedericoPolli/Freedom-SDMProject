@@ -6,10 +6,8 @@ import java.util.Map;
 public class Board {
 
     private Map<Position, Stone> board = new HashMap<>();
-    private final int boardSize;
 
     public Board(int boardSize) {
-        this.boardSize = boardSize;
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
                 board.put(Position.createAt(i, j), Stone.createEmpty());
@@ -77,8 +75,12 @@ public class Board {
         check4(-1 , 1);
     }
 
-    private Position positionAt(int x, int y) {
+    public Position positionAt(int x, int y) {
         return board.keySet().stream().filter(p -> p.isAt(x, y)).findAny().orElse(null);
+    }
+
+    public void printBoard() {
+        System.out.println(board.toString());
     }
 
 }

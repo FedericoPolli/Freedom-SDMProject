@@ -92,4 +92,69 @@ public class BoardTests {
         assertEquals(0, board.countLiveStones(Colour.WHITE));
     }
 
+    @Test
+    void verticalLiveStones(){
+        Board board = new Board(5);
+        board.updateStoneAt(Position.createAt(1, 1), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 2), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 3), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 4), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(1, 5), Colour.BLACK);
+        board.checkAllDirections();
+        assertEquals(4, board.countLiveStones(Colour.WHITE));
+    }
+
+    @Test
+    void diagonalLiveStones(){
+        Board board = new Board(5);
+        board.updateStoneAt(Position.createAt(1, 1), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(2, 2), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(3, 3), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(4, 4), Colour.WHITE);
+        board.updateStoneAt(Position.createAt(5, 5), Colour.BLACK);
+        board.checkAllDirections();
+        assertEquals(4, board.countLiveStones(Colour.WHITE));
+    }
+
+    @Test
+    void LiveStones(){
+        int size = 4;
+        Board board = new Board(size);
+        for(int x = 1; x <= size; ++x) {
+            for(int y = 1; y <= size; ++y) {
+                if(x*y % 2 == 0) {
+                    board.updateStoneAt(Position.createAt(x, y), Colour.WHITE);
+                } else {
+                    board.updateStoneAt(Position.createAt(x, y), Colour.BLACK);
+                }
+            }
+        }
+        board.checkAllDirections();
+        assertAll(
+            () -> assertEquals(12, board.countLiveStones(Colour.WHITE)),
+            () -> assertEquals(0, board.countLiveStones(Colour.BLACK))
+        );
+    }
+
+    @Test
+    void LiveStonesPart2(){
+        int size = 4;
+        Board board = new Board(size);
+        for(int x = 1; x <= size; ++x) {
+            for(int y = 1; y <= size; ++y) {
+                if((x+y) % 2 == 0) {
+                    board.updateStoneAt(Position.createAt(x, y), Colour.WHITE);
+                } else {
+                    board.updateStoneAt(Position.createAt(x, y), Colour.BLACK);
+                }
+            }
+        }
+        board.checkAllDirections();
+        assertAll(
+            () -> assertEquals(4, board.countLiveStones(Colour.WHITE)),
+            () -> assertEquals(4, board.countLiveStones(Colour.BLACK))
+        );
+    }
+
+
 }
