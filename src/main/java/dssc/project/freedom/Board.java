@@ -37,9 +37,13 @@ public class Board {
     }
 
     public void check4Horizontal(){
-        Position next;
+        Position next, previous;
         for (Map.Entry<Position, Stone> entry : board.entrySet()){
             int counter = 1;
+            previous = positionAt(entry.getKey().getX() - 1, entry.getKey().getY());
+            if (previous != null && board.get(previous).isOfColour(entry.getValue().getColour())) {
+                continue;
+            }
             for (int i = 1; i < 5; ++i) {
                 next = positionAt(entry.getKey().getX() + i, entry.getKey().getY());
                 if (next == null) {
