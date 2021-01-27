@@ -47,4 +47,9 @@ public class Stone {
         }
     }
 
+    @Override
+    public String toString() {
+        return colour.toString();
+    }
+
 }

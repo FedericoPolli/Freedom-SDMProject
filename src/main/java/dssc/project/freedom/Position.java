@@ -47,4 +47,9 @@ public final class Position {
     public boolean isAt(int x, int y){
         return this.x == x && this.y == y;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 }
