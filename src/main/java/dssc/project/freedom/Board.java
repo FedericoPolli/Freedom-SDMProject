@@ -36,16 +36,17 @@ public class Board {
                 .findAny().isEmpty();
     }
 
-    public void check4Horizontal(){
+    public void check4(int xDirection, int yDirection){
         Position next, previous;
         for (Map.Entry<Position, Stone> entry : board.entrySet()){
             int counter = 1;
-            previous = positionAt(entry.getKey().getX() - 1, entry.getKey().getY());
+            previous = positionAt(entry.getKey().getX() - xDirection, entry.getKey().getY() - yDirection);
             if (previous != null && board.get(previous).isOfColour(entry.getValue().getColour())) {
                 continue;
             }
             for (int i = 1; i < 5; ++i) {
-                next = positionAt(entry.getKey().getX() + i, entry.getKey().getY());
+                next = positionAt(entry.getKey().getX() + i * xDirection,
+                                  entry.getKey().getY() + i * yDirection);
                 if (next == null) {
                     break;
                 }
@@ -58,11 +59,22 @@ public class Board {
             if (counter == 4){
                 entry.getValue().makeLive();
                 for (int i=1; i<4; ++i){
-                    next = positionAt(entry.getKey().getX()+i, entry.getKey().getY());
+                    next = positionAt(entry.getKey().getX() + i * xDirection,
+                                      entry.getKey().getY() + i * yDirection);
                     board.get(next).makeLive();
                 }
             }
         }
+    }
+
+    public void checkAllDirections(){
+        // Check tiles in horizontal
+        check4(1, 0);
+        // Check tiles in vertical
+        check4(0, 1);
+        // Check tiles in diagonal
+        check4(1 ,1);
+        check4(-1 , 1);
     }
 
     private Position positionAt(int x, int y) {

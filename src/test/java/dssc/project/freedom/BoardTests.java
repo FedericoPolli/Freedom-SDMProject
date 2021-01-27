@@ -51,7 +51,7 @@ public class BoardTests {
         board.updateStoneAt(Position.createAt(3, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(4, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(5, 1), Colour.BLACK);
-        board.check4Horizontal();
+        board.checkAllDirections();
         assertEquals(4, board.countLiveStones(Colour.WHITE));
     }
 
@@ -63,7 +63,7 @@ public class BoardTests {
         board.updateStoneAt(Position.createAt(3, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(4, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(5, 1), Colour.WHITE);
-        board.check4Horizontal();
+        board.checkAllDirections();
         assertEquals(0, board.countLiveStones(Colour.WHITE));
     }
 
@@ -76,7 +76,7 @@ public class BoardTests {
         board.updateStoneAt(Position.createAt(4, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(5, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(6, 1), Colour.WHITE);
-        board.check4Horizontal();
+        board.checkAllDirections();
         assertEquals(0, board.countLiveStones(Colour.WHITE));
     }
 
@@ -88,7 +88,7 @@ public class BoardTests {
         board.updateStoneAt(Position.createAt(3, 1), Colour.BLACK);
         board.updateStoneAt(Position.createAt(4, 1), Colour.WHITE);
         board.updateStoneAt(Position.createAt(5, 1), Colour.WHITE);
-        board.check4Horizontal();
+        board.checkAllDirections();
         assertEquals(0, board.countLiveStones(Colour.WHITE));
     }
 
