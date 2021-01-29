@@ -74,4 +74,8 @@ public class GameTests {
         }
         assertEquals(Colour.NONE, game.winner());
     }
+
+    public void lastMove() {
+        
+    }
 }
