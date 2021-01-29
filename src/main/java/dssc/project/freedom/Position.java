@@ -40,7 +40,7 @@ public final class Position {
         return result;
     }
 
-    public boolean isInSorroundingPositions(Position p){
+    public boolean isInSurroundingPositions(Position p){
         return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
     }
 

@@ -29,7 +29,7 @@ public class Board {
 
     public boolean areAdjacentPositionOccupied(Position pos){
         return board.keySet().stream()
-                .filter(p -> p.isInSorroundingPositions(pos))
+                .filter(p -> p.isInSurroundingPositions(pos))
                 .filter(p -> board.get(p).isNotColored())
                 .findAny().isEmpty();
     }
@@ -82,5 +82,7 @@ public class Board {
     public void printBoard() {
         System.out.println(board.toString());
     }
+
+
 
 }
