@@ -16,5 +16,7 @@ public class Main {
         if (game.isMoveValid(current)) {
             game.play(current, Colour.WHITE);
         }
+
+
     }
 }
