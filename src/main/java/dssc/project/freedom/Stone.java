@@ -39,14 +39,8 @@ public class Stone {
 
     public void makeDead(){ this.isLive = false; }
 
-    public boolean makeColoured(Colour colour) {
-        if (this.colour.equals(Colour.NONE)) {
-            this.colour = colour;
-            return true;
-        }
-        else {
-            return false;
-        }
+    public void makeColoured(Colour colour) {
+        this.colour = colour;
     }
 
     @Override

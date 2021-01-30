@@ -23,14 +23,15 @@ public class Main {
         Colour colour;
         for (int i = 1; i <= boardSize*boardSize; ++i){
             if (i%2 != 0){
-                System.out.println("White it's your turn! Enter the x and y coordinates of the stone:");
+                System.out.println("White it's your turn!");
                 colour = Colour.WHITE;
             } else {
-                System.out.println("Black it's your turn! Enter the x and y coordinates of the stone:");
+                System.out.println("Black it's your turn!");
                 colour = Colour.BLACK;
             }
             Position current;
             do {
+                System.out.println("Enter the x and y coordinates of the stone:");
                 // add some print
                 int x = in.nextInt();
                 int y = in.nextInt();
@@ -48,7 +49,6 @@ public class Main {
             game.play(current, colour);
         }
 
-
-
+        game.winner();
     }
 }
