@@ -55,4 +55,17 @@ public class Game {
             return Colour.NONE;
         }
     }
+
+    public boolean isLastMoveConvenient(Position position, Colour colour) {
+        board.checkAllDirections();
+        long beforeLastMove = board.countLiveStones(colour);
+
+        board.setAllStonesDead();
+        board.updateStoneAt(position, colour);
+        board.checkAllDirections();
+        long afterLastMove = board.countLiveStones(colour);
+
+        return afterLastMove >= beforeLastMove;
+
+    }
 }

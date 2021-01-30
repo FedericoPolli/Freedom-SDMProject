@@ -37,6 +37,8 @@ public class Stone {
 
     public void makeLive(){ this.isLive = true; }
 
+    public void makeDead(){ this.isLive = false; }
+
     public boolean makeColoured(Colour colour) {
         if (this.colour.equals(Colour.NONE)) {
             this.colour = colour;

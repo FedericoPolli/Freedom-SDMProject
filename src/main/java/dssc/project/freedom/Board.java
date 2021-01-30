@@ -10,7 +10,7 @@ public class Board {
     public Board(int boardSize) {
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
-                board.put(Position.createAt(i, j), Stone.createEmpty());
+                board.put(Position.at(i, j), Stone.createEmpty());
             }
         }
     }
@@ -83,6 +83,10 @@ public class Board {
         System.out.println(board.toString());
     }
 
-
-
+    public void setAllStonesDead(){
+        for(Stone value:board.values()){
+            value.makeDead();
+        }
+        // board.values().stream().forEach(stone -> stone.makeDead());
+    }
 }

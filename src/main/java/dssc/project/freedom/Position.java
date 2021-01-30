@@ -4,7 +4,7 @@ public final class Position {
 
     private final int x, y;
 
-    public static Position createAt(int x, int y) {
+    public static Position at(int x, int y) {
         return new Position(x, y);
     }
 
