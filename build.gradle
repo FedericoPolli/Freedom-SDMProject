@@ -18,3 +18,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jar {
+    manifest{
+        attributes(
+                'Main-Class': 'dssc.project.freedom.Main'
+        )
+    }
+}
