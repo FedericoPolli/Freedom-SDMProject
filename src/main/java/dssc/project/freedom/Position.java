@@ -21,6 +21,14 @@ public final class Position {
         return y;
     }
 
+    public boolean isAt(int x, int y){
+        return this.x == x && this.y == y;
+    }
+
+    public boolean isInSurroundingPositions(Position p){
+        return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -38,14 +46,6 @@ public final class Position {
         result = result*prime+x;
         result = result*prime+y;
         return result;
-    }
-
-    public boolean isInSurroundingPositions(Position p){
-        return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
-    }
-
-    public boolean isAt(int x, int y){
-        return this.x == x && this.y == y;
     }
 
     @Override

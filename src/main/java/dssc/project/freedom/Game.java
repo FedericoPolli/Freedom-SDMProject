@@ -24,7 +24,7 @@ public class Game {
             return false;
 
         // check if the stone is already coloured
-        if (! board.getStoneAt(current).isNotColored()) {
+        if (! board.getStoneAt(current).isOfColour(Colour.NONE)) {
             return false;
         }
 

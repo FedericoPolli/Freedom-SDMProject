@@ -3,7 +3,7 @@ package dssc.project.freedom;
 public class Stone {
 
     private Colour colour;
-    private boolean isLive = false;
+    private boolean liveStatus = false;
 
     public static Stone createEmpty() {
         return new Stone(Colour.NONE);
@@ -13,35 +13,26 @@ public class Stone {
         this.colour = colour;
     }
 
-    // functions to remove
-    public boolean isWhite() {
-        return colour == Colour.WHITE;
-    }
-
-    public boolean isBlack() {
-        return colour == Colour.BLACK;
-    }
-    //
-
     public boolean isOfColour(Colour colour) { return this.colour.equals(colour); }
 
-    public boolean isNotColored(){ return this.isOfColour(Colour.NONE); }
+    public void makeColoured(Colour colour) {
+        this.colour = colour;
+    }
 
     public Colour getColour() {
         return colour;
     }
 
     public boolean isLive() {
-        return isLive;
+        return liveStatus;
     }
 
-    public void makeLive(){ this.isLive = true; }
-
-    public void makeDead(){ this.isLive = false; }
-
-    public void makeColoured(Colour colour) {
-        this.colour = colour;
-    }
+    /**
+     * This function changes the variable @ref liveStatus to the value of the input.
+     *
+     * @param status The status to which update the variable @ref liveStatus.
+     */
+    public void changeLiveStatusTo(boolean status){ liveStatus = status; }
 
     @Override
     public String toString() {

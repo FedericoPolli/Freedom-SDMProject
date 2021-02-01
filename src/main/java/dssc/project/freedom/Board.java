@@ -30,7 +30,7 @@ public class Board {
     public boolean areAdjacentPositionOccupied(Position pos){
         return board.keySet().stream()
                 .filter(p -> p.isInSurroundingPositions(pos))
-                .filter(p -> board.get(p).isNotColored())
+                .filter(p -> board.get(p).isOfColour(Colour.NONE))
                 .findAny().isEmpty();
     }
 
@@ -55,11 +55,11 @@ public class Board {
                 }
             }
             if (counter == 4){
-                entry.getValue().makeLive();
+                entry.getValue().changeLiveStatusTo(true);
                 for (int i=1; i<4; ++i){
                     next = positionAt(entry.getKey().getX() + i * xDirection,
                                       entry.getKey().getY() + i * yDirection);
-                    board.get(next).makeLive();
+                    board.get(next).changeLiveStatusTo(true);
                 }
             }
         }
@@ -87,7 +87,7 @@ public class Board {
 
     public void setAllStonesDead(){
         for(Stone value:board.values()){
-            value.makeDead();
+            value.changeLiveStatusTo(false);
         }
         // board.values().stream().forEach(stone -> stone.makeDead());
     }
