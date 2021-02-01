@@ -80,7 +80,9 @@ public class Board {
     }
 
     public void printBoard() {
-        System.out.println(board.toString());
+        System.out.println((char)254);
+        char a = 254;
+        System.out.println(a);
     }
 
     public void setAllStonesDead(){

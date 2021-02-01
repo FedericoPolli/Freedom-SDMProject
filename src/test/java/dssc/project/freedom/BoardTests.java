@@ -156,5 +156,10 @@ public class BoardTests {
         );
     }
 
+    @Test
+    void testPrintBoard(){
+        Board board = new Board(3);
+        board.printBoard();
+    }
 
 }
