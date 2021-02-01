@@ -53,7 +53,7 @@ public class BoardTests {
         board.updateStoneAt(Position.at(3, 1), WHITE);
         board.updateStoneAt(Position.at(4, 1), WHITE);
         board.updateStoneAt(Position.at(5, 1), BLACK);
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertEquals(4, board.countLiveStones(WHITE));
     }
 
@@ -65,7 +65,7 @@ public class BoardTests {
         board.updateStoneAt(Position.at(3, 1), WHITE);
         board.updateStoneAt(Position.at(4, 1), WHITE);
         board.updateStoneAt(Position.at(5, 1), WHITE);
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertEquals(0, board.countLiveStones(WHITE));
     }
 
@@ -78,7 +78,7 @@ public class BoardTests {
         board.updateStoneAt(Position.at(4, 1), WHITE);
         board.updateStoneAt(Position.at(5, 1), WHITE);
         board.updateStoneAt(Position.at(6, 1), WHITE);
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertEquals(0, board.countLiveStones(WHITE));
     }
 
@@ -90,7 +90,7 @@ public class BoardTests {
         board.updateStoneAt(Position.at(3, 1), BLACK);
         board.updateStoneAt(Position.at(4, 1), WHITE);
         board.updateStoneAt(Position.at(5, 1), WHITE);
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertEquals(0, board.countLiveStones(WHITE));
     }
 
@@ -102,7 +102,7 @@ public class BoardTests {
         board.updateStoneAt(Position.at(1, 3), WHITE);
         board.updateStoneAt(Position.at(1, 4), WHITE);
         board.updateStoneAt(Position.at(1, 5), BLACK);
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertEquals(4, board.countLiveStones(WHITE));
     }
 
@@ -114,7 +114,7 @@ public class BoardTests {
         board.updateStoneAt(Position.at(3, 3), WHITE);
         board.updateStoneAt(Position.at(4, 4), WHITE);
         board.updateStoneAt(Position.at(5, 5), BLACK);
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertEquals(4, board.countLiveStones(WHITE));
     }
 
@@ -131,7 +131,7 @@ public class BoardTests {
                 }
             }
         }
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertAll(
             () -> assertEquals(12, board.countLiveStones(WHITE)),
             () -> assertEquals(0, board.countLiveStones(BLACK))
@@ -151,7 +151,7 @@ public class BoardTests {
                 }
             }
         }
-        board.checkAllDirections();
+        board.checkBoardAndMakeStonesLive();
         assertAll(
             () -> assertEquals(4, board.countLiveStones(WHITE)),
             () -> assertEquals(4, board.countLiveStones(BLACK))

@@ -19,8 +19,8 @@ public class Stone {
         this.colour = colour;
     }
 
-    public Colour getColour() {
-        return colour;
+    public boolean isOfSameColourAs(Stone s) {
+        return this.colour.equals(s.colour);
     }
 
     public boolean isLive() {

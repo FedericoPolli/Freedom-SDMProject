@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Board {
 
-    private Map<Position, Stone> board = new HashMap<>();
+    private final Map<Position, Stone> board = new HashMap<>();
 
     public Board(int boardSize) {
         for (int i = 1; i <= boardSize; ++i) {
@@ -15,16 +15,27 @@ public class Board {
         }
     }
 
+    public Position positionAt(int x, int y) {
+        return board.keySet().stream().filter(p -> p.isAt(x, y)).findAny().orElse(null);
+    }
+
     public Stone getStoneAt(Position p) {
         return board.get(p);
     }
 
-    public long countLiveStones(Colour colour) {
-        return board.values().stream().filter(s -> s.isOfColour(colour)).filter(Stone::isLive).count();
-    }
-
     public void updateStoneAt(Position p, Colour c) {
         board.get(p).makeColoured(c);
+    }
+
+    public void setAllStonesDead(){
+        board.values().forEach(value -> value.changeLiveStatusTo(false));
+    }
+
+    public long countLiveStones(Colour colour) {
+        return board.values().stream()
+                             .filter(s -> s.isOfColour(colour))
+                             .filter(Stone::isLive)
+                             .count();
     }
 
     public boolean areAdjacentPositionOccupied(Position pos){
@@ -34,61 +45,68 @@ public class Board {
                 .findAny().isEmpty();
     }
 
-    public void check4(int xDirection, int yDirection){
-        Position next, previous;
+    public void check4InDirection(int xDir, int yDir){
+        Position previous;
         for (Map.Entry<Position, Stone> entry : board.entrySet()){
-            int counter = 1;
-            previous = positionAt(entry.getKey().getX() - xDirection, entry.getKey().getY() - yDirection);
-            if (previous != null && board.get(previous).isOfColour(entry.getValue().getColour())) {
+            previous = positionAt(entry.getKey().getX() - xDir, entry.getKey().getY() - yDir);
+            if (previous != null && isNextPositionOfSameColourAs(previous, entry)) {
                 continue;
             }
-            for (int i = 1; i < 5; ++i) {
-                next = positionAt(entry.getKey().getX() + i * xDirection,
-                                  entry.getKey().getY() + i * yDirection);
-                if (next == null) {
-                    break;
-                }
-                if (board.get(next).isOfColour(entry.getValue().getColour())){
-                    counter++;
-                } else {
-                    break;
-                }
-            }
+            int counter = countAdjacentEqualStones(xDir, yDir, entry);
             if (counter == 4){
-                entry.getValue().changeLiveStatusTo(true);
-                for (int i=1; i<4; ++i){
-                    next = positionAt(entry.getKey().getX() + i * xDirection,
-                                      entry.getKey().getY() + i * yDirection);
-                    board.get(next).changeLiveStatusTo(true);
-                }
+                setStonesLive(xDir, yDir, entry);
             }
         }
     }
 
-    public void checkAllDirections(){
-        // Check tiles in horizontal
-        check4(1, 0);
-        // Check tiles in vertical
-        check4(0, 1);
-        // Check tiles in diagonal
-        check4(1 ,1);
-        check4(-1 , 1);
+    private void setStonesLive(int xDir, int yDir, Map.Entry<Position, Stone> entry) {
+        Position next;
+        entry.getValue().changeLiveStatusTo(true);
+        for (int i = 1; i < 4; ++i){
+            // check message chain entry.getKey().getX()
+            next = positionAt(entry.getKey().getX() + i * xDir,
+                              entry.getKey().getY() + i * yDir);
+            board.get(next).changeLiveStatusTo(true);
+        }
     }
 
-    public Position positionAt(int x, int y) {
-        return board.keySet().stream().filter(p -> p.isAt(x, y)).findAny().orElse(null);
+    private int countAdjacentEqualStones(int xDir, int yDir, Map.Entry<Position, Stone> entry) {
+        int counter = 1;
+        Position next;
+        for (int i = 1; i < 5; ++i) {
+            next = positionAt(entry.getKey().getX() + i * xDir,
+                              entry.getKey().getY() + i * yDir);
+            if (isNextPositionNotInTheBoard(next))
+                break;
+            if (isNextPositionOfSameColourAs(next, entry))
+                counter++;
+            else
+                break;
+        }
+        return counter;
+    }
+
+    private boolean isNextPositionOfSameColourAs(Position next, Map.Entry<Position, Stone> entry) {
+        return board.get(next).isOfSameColourAs(entry.getValue());
+    }
+
+    private boolean isNextPositionNotInTheBoard(Position next) {
+        return next == null;
+    }
+
+    public void checkBoardAndMakeStonesLive(){
+        // Check tiles in horizontal
+        check4InDirection(1, 0);
+        // Check tiles in vertical
+        check4InDirection(0, 1);
+        // Check tiles in diagonal
+        check4InDirection(1 ,1);
+        check4InDirection(-1 , 1);
     }
 
     public void printBoard() {
         System.out.println((char)254);
         char a = 254;
         System.out.println(a);
-    }
-
-    public void setAllStonesDead(){
-        for(Stone value:board.values()){
-            value.changeLiveStatusTo(false);
-        }
-        // board.values().stream().forEach(stone -> stone.makeDead());
     }
 }
