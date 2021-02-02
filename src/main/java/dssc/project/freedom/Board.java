@@ -1,5 +1,6 @@
 package dssc.project.freedom;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -104,9 +105,10 @@ public class Board {
         check4InDirection(-1 , 1);
     }
 
-    public void printBoard() {
-        System.out.println((char)254);
-        char a = 254;
-        System.out.println(a);
+    public void printBoard(){
+        PrintWriter printWriter = new PrintWriter(System.out,true);
+        char white = '\u26AA';
+        char black = '\u26AB';
+        printWriter.println("White: " + white + "\tBlack: " + black);
     }
 }
