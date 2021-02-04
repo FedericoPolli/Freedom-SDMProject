@@ -3,8 +3,15 @@ package dssc.project.freedom;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class that controls the execution of the game.
+ */
 public class Main {
 
+    /**
+     * Main of the project.
+     * @param args The input arguments
+     */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the board size (minimum 4):");
@@ -49,6 +56,12 @@ public class Main {
         game.winner();
     }
 
+    /**
+     * Takes in input an effective integer. It keeps asking the user an integer
+     * until an integer value is inserted.
+     * @param in The Scanner on which reading the input.
+     * @return The integer taken in input.
+     */
     private static int getInteger(Scanner in) {
         boolean flag = false;
         int i = 0;
