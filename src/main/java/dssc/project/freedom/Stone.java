@@ -38,20 +38,20 @@ public class Stone {
     public boolean isOfColour(Colour colour) { return this.colour.equals(colour); }
 
     /**
-     * Changes the {@link Colour} of this {@link Stone} to the given one.
-     * @param colour The new Colour for this Stone.
-     */
-    public void makeColoured(Colour colour) {
-        this.colour = colour;
-    }
-
-    /**
      * Checks if this {@link Stone} is of the same {@link Colour} of the given {@link Stone}.
      * @param s The Stone to be used in the comparison.
      * @return true if the Colour is the same, false otherwise.
      */
     public boolean isOfSameColourAs(Stone s) {
         return this.colour.equals(s.colour);
+    }
+
+    /**
+     * Changes the {@link Colour} of this {@link Stone} to the given one.
+     * @param colour The new Colour for this Stone.
+     */
+    public void makeColoured(Colour colour) {
+        this.colour = colour;
     }
 
     /**

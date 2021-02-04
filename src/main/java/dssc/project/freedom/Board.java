@@ -111,23 +111,13 @@ public class Board {
     }
 
     /**
-     * Sets as "live" the {@link Stone}s that are part of some horizontal, vertical
-     * or diagonal row of exactly four {@link Stone}s of the same {@link Colour}. The
-     * direction in which performing the search is given by the input <code>xDir</code>
-     * and <code>yDir</code>.
-     * @param xDir The x-coordinate of the direction in which to move.
-     * @param yDir The y-coordinate of the direction in which to move.
-     * @param entry The starting Position.
+     * Checks if the next {@link Position} is of the same {@link Colour} of the current one.
+     * @param entry The current Position.
+     * @param next The Position next to the current one.
+     * @return true if the next Position is of the same Colour of the current one, false otherwise.
      */
-    private void setStonesLive(int xDir, int yDir, Map.Entry<Position, Stone> entry) {
-        Position next;
-        entry.getValue().changeLiveStatusTo(true);
-        for (int i = 1; i < 4; ++i){
-            // check message chain entry.getKey().getX()
-            next = positionAt(entry.getKey().getX() + i * xDir,
-                              entry.getKey().getY() + i * yDir);
-            board.get(next).changeLiveStatusTo(true);
-        }
+    private boolean isNextPositionOfSameColourAs(Map.Entry<Position, Stone> entry, Position next) {
+        return board.get(next).isOfSameColourAs(entry.getValue());
     }
 
     /**
@@ -157,22 +147,32 @@ public class Board {
     }
 
     /**
-     * Checks if the next {@link Position} is of the same {@link Colour} of the current one.
-     * @param entry The current Position.
-     * @param next The Position next to the current one.
-     * @return true if the next Position is of the same Colour of the current one, false otherwise.
-     */
-    private boolean isNextPositionOfSameColourAs(Map.Entry<Position, Stone> entry, Position next) {
-        return board.get(next).isOfSameColourAs(entry.getValue());
-    }
-
-    /**
      * Checks if the input {@link Position} is in the {@link Board} or not.
      * @param next The Position to be checked.
      * @return true if the Position is in the Board, false otherwise.
      */
     private boolean isNextPositionNotInTheBoard(Position next) {
         return next == null;
+    }
+
+    /**
+     * Sets as "live" the {@link Stone}s that are part of some horizontal, vertical
+     * or diagonal row of exactly four {@link Stone}s of the same {@link Colour}. The
+     * direction in which performing the search is given by the input <code>xDir</code>
+     * and <code>yDir</code>.
+     * @param xDir The x-coordinate of the direction in which to move.
+     * @param yDir The y-coordinate of the direction in which to move.
+     * @param entry The starting Position.
+     */
+    private void setStonesLive(int xDir, int yDir, Map.Entry<Position, Stone> entry) {
+        Position next;
+        entry.getValue().changeLiveStatusTo(true);
+        for (int i = 1; i < 4; ++i){
+            // check message chain entry.getKey().getX()
+            next = positionAt(entry.getKey().getX() + i * xDir,
+                    entry.getKey().getY() + i * yDir);
+            board.get(next).changeLiveStatusTo(true);
+        }
     }
 
     /**

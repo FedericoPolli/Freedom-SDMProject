@@ -13,6 +13,16 @@ public final class Position {
     private final int y;
 
     /**
+     * Creates a new {@link Position} at the specified coordinates.
+     * @param x The x-coordinate of the Position to be created.
+     * @param y The y-coordinate of the Position to be created.
+     * @return The Position created.
+     */
+    public static Position at(int x, int y) {
+        return new Position(x, y);
+    }
+
+    /**
      * Class constructor. Creates a {@link Position} with x coordinate `x` and
      * with y-coordinate `y`.
      *
@@ -22,16 +32,6 @@ public final class Position {
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    /**
-     * Creates a new {@link Position} at the specified coordinates.
-     * @param x The x-coordinate of the Position to be created.
-     * @param y The y-coordinate of the Position to be created.
-     * @return The Position created.
-     */
-    public static Position at(int x, int y) {
-        return new Position(x, y);
     }
 
     /**

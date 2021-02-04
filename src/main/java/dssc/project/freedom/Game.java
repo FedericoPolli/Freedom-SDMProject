@@ -55,12 +55,14 @@ public class Game {
     }
 
     /**
-     * Checks if the {@link Stone}'s {@link Position} is adjacent to the one of
-     * the previous played one.
-     * @return true if the Stone is adjacent to the previous played one, false otherwise.
+     * Checks if the given {@link Position} is inside the {@link Board}.
+     * It checks if every coordinate is between 1 and the size of the {@link Board}.
+     * @param current The Position to be checked.
+     * @return true if the Position is inside the Board, false otherwise.
      */
-    private boolean isStoneAdjacentToPreviousOne() {
-        return previous != null && !board.areAdjacentPositionOccupied(previous);
+    private boolean isPositionNotInsideBoard(Position current) {
+        return current.getX() < 1 || current.getX() > boardSize ||
+                current.getY() < 1 || current.getY() > boardSize;
     }
 
     /**
@@ -75,14 +77,12 @@ public class Game {
     }
 
     /**
-     * Checks if the given {@link Position} is inside the {@link Board}.
-     * It checks if every coordinate is between 1 and the size of the {@link Board}.
-     * @param current The Position to be checked.
-     * @return true if the Position is inside the Board, false otherwise.
+     * Checks if the {@link Stone}'s {@link Position} is adjacent to the one of
+     * the previous played one.
+     * @return true if the Stone is adjacent to the previous played one, false otherwise.
      */
-    private boolean isPositionNotInsideBoard(Position current) {
-        return current.getX() < 1 || current.getX() > boardSize ||
-                current.getY() < 1 || current.getY() > boardSize;
+    private boolean isStoneAdjacentToPreviousOne() {
+        return previous != null && !board.areAdjacentPositionOccupied(previous);
     }
 
     /**
