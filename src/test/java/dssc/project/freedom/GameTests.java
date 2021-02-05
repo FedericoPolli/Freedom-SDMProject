@@ -19,7 +19,7 @@ public class GameTests {
     public void positionOnAlreadyPlacedStone() {
         game = new Game(5);
         Position pos = at(1, 1);
-        game.play(pos, Colour.WHITE);
+        game.move(pos, Colour.WHITE);
         assertFalse(game.isMoveValid(pos));
     }
 
@@ -34,7 +34,7 @@ public class GameTests {
     public void positionNotAdjacentToPrevious() {
         game = new Game(5);
         Position pos = at(1, 1);
-        game.play(pos, Colour.WHITE);
+        game.move(pos, Colour.WHITE);
         assertFalse(game.isMoveValid(at(1, 3)));
     }
 
@@ -42,7 +42,7 @@ public class GameTests {
     public void positionAdjacentToPrevious() {
         game = new Game(5);
         Position pos = at(1, 1);
-        game.play(pos, Colour.WHITE);
+        game.move(pos, Colour.WHITE);
         assertTrue(game.isMoveValid(at(1, 2)));
     }
 
@@ -52,9 +52,9 @@ public class GameTests {
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
                 if (j <= 3)
-                    game.play(at(i,j), Colour.WHITE);
+                    game.move(at(i,j), Colour.WHITE);
                 else
-                    game.play(at(i,j), Colour.BLACK);
+                    game.move(at(i,j), Colour.BLACK);
             }
         }
         assertEquals(Colour.WHITE, game.winner());
@@ -66,9 +66,9 @@ public class GameTests {
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
                 if((i + j) % 2 == 0) {
-                    game.play(at(i, j), Colour.WHITE);
+                    game.move(at(i, j), Colour.WHITE);
                 } else {
-                    game.play(at(i, j), Colour.BLACK);
+                    game.move(at(i, j), Colour.BLACK);
                 }
             }
         }
@@ -84,9 +84,9 @@ public class GameTests {
                     continue;
                 }
                 if((i + j) % 2 == 0) {
-                    game.play(at(i, j), Colour.WHITE);
+                    game.move(at(i, j), Colour.WHITE);
                 } else {
-                    game.play(at(i, j), Colour.BLACK);
+                    game.move(at(i, j), Colour.BLACK);
                 }
             }
         }
@@ -102,9 +102,9 @@ public class GameTests {
                     continue;
                 }
                 if((i + j) % 2 == 0) {
-                    game.play(at(i, j), Colour.WHITE);
+                    game.move(at(i, j), Colour.WHITE);
                 } else {
-                    game.play(at(i, j), Colour.BLACK);
+                    game.move(at(i, j), Colour.BLACK);
                 }
             }
         }

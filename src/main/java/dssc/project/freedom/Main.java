@@ -51,7 +51,7 @@ public class Main {
                     }
                 }
             }
-            game.play(current, colour);
+            game.move(current, colour);
         }
         game.winner();
     }

@@ -55,7 +55,7 @@ public class Board {
      * @param c The Colour to be assigned to the Stone.
      */
     public void updateStoneAt(Position p, Colour c) {
-        board.get(p).makeColoured(c);
+        getStoneAt(p).makeColoured(c);
     }
 
     /**
@@ -85,7 +85,7 @@ public class Board {
     public boolean areAdjacentPositionOccupied(Position pos){
         return board.keySet().stream()
                 .filter(p -> p.isInSurroundingPositions(pos))
-                .filter(p -> board.get(p).isOfColour(Colour.NONE))
+                .filter(p -> getStoneAt(p).isOfColour(Colour.NONE))
                 .findAny().isEmpty();
     }
 
@@ -100,7 +100,7 @@ public class Board {
         Position previous;
         for (Map.Entry<Position, Stone> entry : board.entrySet()){
             previous = positionAt(entry.getKey().getX() - xDir, entry.getKey().getY() - yDir);
-            if (previous != null && isNextPositionOfSameColourAs(entry, previous)) {
+            if (!isPositionNotInTheBoard(previous) && isNextPositionOfSameColourAs(entry, previous)) {
                 continue;
             }
             int counter = countAdjacentEqualStones(xDir, yDir, entry);
@@ -117,7 +117,7 @@ public class Board {
      * @return true if the next Position is of the same Colour of the current one, false otherwise.
      */
     private boolean isNextPositionOfSameColourAs(Map.Entry<Position, Stone> entry, Position next) {
-        return board.get(next).isOfSameColourAs(entry.getValue());
+        return getStoneAt(next).isOfSameColourAs(entry.getValue());
     }
 
     /**
@@ -136,7 +136,7 @@ public class Board {
         for (int i = 1; i < 5; ++i) {
             next = positionAt(entry.getKey().getX() + i * xDir,
                               entry.getKey().getY() + i * yDir);
-            if (isNextPositionNotInTheBoard(next))
+            if (isPositionNotInTheBoard(next))
                 break;
             if (isNextPositionOfSameColourAs(entry, next))
                 counter++;
@@ -148,11 +148,11 @@ public class Board {
 
     /**
      * Checks if the input {@link Position} is in the {@link Board} or not.
-     * @param next The Position to be checked.
+     * @param p The Position to be checked.
      * @return true if the Position is in the Board, false otherwise.
      */
-    private boolean isNextPositionNotInTheBoard(Position next) {
-        return next == null;
+    private boolean isPositionNotInTheBoard(Position p) {
+        return p == null;
     }
 
     /**
@@ -171,7 +171,7 @@ public class Board {
             // check message chain entry.getKey().getX()
             next = positionAt(entry.getKey().getX() + i * xDir,
                     entry.getKey().getY() + i * yDir);
-            board.get(next).changeLiveStatusTo(true);
+            getStoneAt(next).changeLiveStatusTo(true);
         }
     }
 

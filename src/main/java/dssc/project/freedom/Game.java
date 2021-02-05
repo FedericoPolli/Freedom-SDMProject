@@ -27,7 +27,7 @@ public class Game {
      * @param current The Position in which adding the Stone.
      * @param colour  The Colour of the Stone to be added.
      */
-    public void play(Position current, Colour colour) {
+    public void move(Position current, Colour colour) {
         board.updateStoneAt(current, colour);
         previous = current;
     }
