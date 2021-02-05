@@ -1,6 +1,8 @@
 package dssc.project.freedom;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static dssc.project.freedom.Colour.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,91 +11,43 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StoneTests {
 
-    // isOfCoulor()
-    @Test
-    void checkWhite() {
-        Stone stone = new Stone(WHITE);
-        assertTrue(stone.isOfColour(WHITE));
+    @ParameterizedTest
+    @CsvSource({"WHITE, WHITE", "BLACK, BLACK", "NONE, NONE"})
+    void checkColours(Colour colour, Colour expectedColour){
+        Stone stone = new Stone(colour);
+        assertTrue(stone.isOfColour(expectedColour));
     }
 
-    @Test
-    void checkBlack() {
-        Stone stone = new Stone(BLACK);
-        assertTrue(stone.isOfColour(BLACK));
+    @ParameterizedTest
+    @CsvSource({"WHITE, BLACK", "BLACK, WHITE"})
+    void checkWrongColours(Colour colour, Colour expectedColour){
+        Stone stone = new Stone(colour);
+        assertFalse(stone.isOfColour(expectedColour));
     }
 
-    @Test
-    void checkNone() {
-        Stone stone = new Stone(NONE);
-        assertTrue(stone.isOfColour(NONE));
-    }
-
-    // !isOfCoulor()
-    @Test
-    void checkNotBlack() {
-        Stone stone = new Stone(WHITE);
-        assertFalse(stone.isOfColour(BLACK));
-    }
-
-    @Test
-    void checkNotWhite() {
-        Stone stone = new Stone(BLACK);
-        assertFalse(stone.isOfColour(WHITE));
-    }
-
-    // isOfSameColourAs
-    @Test
-    void checkBothWhite() {
-        Stone stone = new Stone(WHITE);
-        Stone other = new Stone(WHITE);
+    @ParameterizedTest
+    @CsvSource({"WHITE, WHITE", "BLACK, BLACK"})
+    void checkStonesOfTheSameColour(Colour firstColour, Colour otherColour){
+        Stone stone = new Stone(firstColour);
+        Stone other = new Stone(otherColour);
         assertTrue(stone.isOfSameColourAs(other));
     }
 
-    @Test
-    void checkBothBlack() {
-        Stone stone = new Stone(BLACK);
-        Stone other = new Stone(BLACK);
-        assertTrue(stone.isOfSameColourAs(other));
-    }
-
-    // !isOfSameColour
-    @Test
-    void checkBlackAndWhite() {
-        Stone stone = new Stone(WHITE);
-        Stone other = new Stone(BLACK);
+    @ParameterizedTest
+    @CsvSource({"WHITE, BLACK", "BLACK, NONE"})
+    void checkStonesOfDifferentColours(Colour firstColour, Colour otherColour){
+        Stone stone = new Stone(firstColour);
+        Stone other = new Stone(otherColour);
         assertFalse(stone.isOfSameColourAs(other));
     }
 
-    @Test
-    void checkBlackAndNone() {
-        Stone stone = new Stone(BLACK);
-        Stone other = new Stone(NONE);
-        assertFalse(stone.isOfSameColourAs(other));
+    @ParameterizedTest
+    @CsvSource({"WHITE, BLACK", "NONE, WHITE", "BLACK, NONE"})
+    void checkChangeOfColour(Colour originalColour, Colour changedColour){
+        Stone stone = new Stone(originalColour);
+        stone.makeOfColour(changedColour);
+        assertTrue(stone.isOfColour(changedColour));
     }
-
-    // makeColoured
-    @Test
-    void checkWhiteToBlack() {
-        Stone stone = new Stone(WHITE);
-        stone.makeOfColour(BLACK);
-        assertFalse(stone.isOfColour(BLACK));
-    }
-
-    @Test
-    void checkNoneToWhite() {
-        Stone stone = new Stone(NONE);
-        stone.makeOfColour(WHITE);
-        assertFalse(stone.isOfColour(WHITE));
-    }
-
-    @Test
-    void checkBlackToNone() {
-        Stone stone = new Stone(BLACK);
-        stone.makeOfColour(NONE);
-        assertFalse(stone.isOfColour(NONE));
-    }
-
-    // isLive
 
     @Test
     void checkIfLive() {
@@ -101,20 +55,10 @@ public class StoneTests {
         assertFalse(stone.isLive());
     }
 
-    // changeLiveStatusTo
-
     @Test
     void checkChangeLiveStatus() {
         Stone stone = new Stone(WHITE);
         stone.changeLiveStatusTo(true);
         assertTrue(stone.isLive());
-    }
-    
-
-    @Test
-    void checkIfColoured() {
-        Stone stone = new Stone(Colour.NONE);
-        stone.makeOfColour(WHITE);
-        assertTrue(stone.isOfColour(WHITE));
     }
 }
