@@ -55,7 +55,7 @@ public class Board {
      * @param c The Colour to be assigned to the Stone.
      */
     public void updateStoneAt(Position p, Colour c) {
-        getStoneAt(p).makeColoured(c);
+        getStoneAt(p).makeOfColour(c);
     }
 
     /**

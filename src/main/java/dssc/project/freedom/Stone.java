@@ -50,7 +50,7 @@ public class Stone {
      * Changes the {@link Colour} of this {@link Stone} to the given one.
      * @param colour The new Colour for this Stone.
      */
-    public void makeColoured(Colour colour) {
+    public void makeOfColour(Colour colour) {
         this.colour = colour;
     }
 
