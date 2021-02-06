@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import static dssc.project.freedom.Position.at;
+
 /**
  * Class that represents the board of the game.
  *
@@ -24,23 +26,9 @@ public class Board {
     public Board(int boardSize) {
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
-                board.put(Position.at(i, j), Stone.createEmpty());
+                board.put(at(i, j), Stone.createEmpty());
             }
         }
-    }
-
-    /**
-     * Finds the {@link Stone} at the {@link Position} given by the input parameters.
-     * @param x The x-coordinate of the Stone's Position.
-     * @param y The y-coordinate of the Stone's Position.
-     * @return The Position of the Stone to be retrieved.
-     */
-    public Position positionAt(int x, int y) {
-        return board.keySet()
-                .stream()
-                .filter(p -> p.isAt(x, y))
-                .findAny()
-                .orElse(null);
     }
 
     /**
@@ -105,13 +93,13 @@ public class Board {
      */
     public void check4InDirection(int xDir, int yDir){
         for (Position current : board.keySet()){
-            Position previous = positionAt(current.getX() - xDir, current.getY() - yDir);
+            Position previous = at(current.getX() - xDir, current.getY() - yDir);
             if (!positionIsNotInTheBoard(previous) && arePositionsOfSameColour(current, previous)) {
                 continue;
             }
-            int counter = countStonesInARow(xDir, yDir, current);
+            int counter = countStonesInRow(xDir, yDir, current);
             if (counter == 4){
-                setStonesInARowLive(xDir, yDir, current);
+                setStonesInRowOf4Live(xDir, yDir, current);
             }
         }
     }
@@ -136,10 +124,10 @@ public class Board {
      * @param current The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
-    private int countStonesInARow(int xDir, int yDir, Position current) {
+    private int countStonesInRow(int xDir, int yDir, Position current) {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
-            Position next = positionAt(current.getX() + i * xDir, current.getY() + i * yDir);
+            Position next = at(current.getX() + i * xDir, current.getY() + i * yDir);
             if (positionIsNotInTheBoard(next) || !arePositionsOfSameColour(current, next))
                 break;
             else
@@ -154,7 +142,7 @@ public class Board {
      * @return true if the Position is in the Board, false otherwise.
      */
     private boolean positionIsNotInTheBoard(Position p) {
-        return p == null;
+        return !board.containsKey(p);
     }
 
     /**
@@ -165,10 +153,10 @@ public class Board {
      * @param yDir The y-coordinate of the direction in which to move.
      * @param current The starting Position.
      */
-    private void setStonesInARowLive(int xDir, int yDir, Position current) {
+    private void setStonesInRowOf4Live(int xDir, int yDir, Position current) {
         getStoneAt(current).changeLiveStatusTo(true);
         for (int i = 1; i < 4; ++i){
-            Position next = positionAt(current.getX() + i * xDir, current.getY() + i * yDir);
+            Position next = at(current.getX() + i * xDir, current.getY() + i * yDir);
             getStoneAt(next).changeLiveStatusTo(true);
         }
     }

@@ -51,17 +51,6 @@ public final class Position {
     }
 
     /**
-     * Checks if this Position is at coordinates (x, y).
-     * @param x The x-coordinate of the Position to be checked.
-     * @param y The y-coordinate of the Position to be checked.
-     * @return true if this Position is in the position indicated in input, false otherwise.
-     */
-    public boolean isAt(int x, int y){
-        return this.x == x && this.y == y;
-    }
-
-
-    /**
      * Checks if this {@link Position} is adjacent to the {@link Position} taken in input.
      * @param p The Position to which this Position must be adjacent.
      * @return true if this Position is adjacent to the given Position, false otherwise.
