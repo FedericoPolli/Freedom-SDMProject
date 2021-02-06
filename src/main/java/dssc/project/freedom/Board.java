@@ -74,8 +74,8 @@ public class Board {
      * @param colour The Colour of the player.
      * @return The number of "live" Stones for that player.
      */
-    public long countLiveStones(Colour colour) {
-        return board.values()
+    public int countLiveStones(Colour colour) {
+        return (int) board.values()
                 .stream()
                 .filter(s -> s.isOfColour(colour))
                 .filter(Stone::isLive)

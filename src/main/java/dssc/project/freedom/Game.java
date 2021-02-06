@@ -6,7 +6,7 @@ package dssc.project.freedom;
 public class Game {
 
     /** The board on which the game is played. */
-    private Board board;
+    private final Board board;
     /** The dimension of the board. */
     private final int boardSize;
     /** Auxiliary field to know the previous played position. */
@@ -43,12 +43,12 @@ public class Game {
      * @return true if the move of the player is valid, false otherwise.
      */
     public boolean isMoveValid(Position current) {
-        if (isPositionNotInsideBoard(current))
+        if (positionIsNotInsideBoard(current))
             return false;
-        if (isStoneAlreadyPlaced(current)) {
+        if (stoneIsAlreadyPlacedAt(current)) {
             return false;
         }
-        if (isStoneAdjacentToPreviousOne()) {
+        if (isAnyPositionAdjacentToPreviousFree()) {
             return current.isInSurroundingPositions(previous);
         }
         return true;
@@ -60,7 +60,7 @@ public class Game {
      * @param current The Position to be checked.
      * @return true if the Position is inside the Board, false otherwise.
      */
-    private boolean isPositionNotInsideBoard(Position current) {
+    private boolean positionIsNotInsideBoard(Position current) {
         return current.getX() < 1 || current.getX() > boardSize ||
                 current.getY() < 1 || current.getY() > boardSize;
     }
@@ -72,7 +72,7 @@ public class Game {
      * @param current The Position to be checked.
      * @return true if the Stone has already a Colour, false otherwise.
      */
-    private boolean isStoneAlreadyPlaced(Position current) {
+    private boolean stoneIsAlreadyPlacedAt(Position current) {
         return !board.getStoneAt(current).isOfColour(Colour.NONE);
     }
 
@@ -81,7 +81,7 @@ public class Game {
      * the previous played one.
      * @return true if the Stone is adjacent to the previous played one, false otherwise.
      */
-    private boolean isStoneAdjacentToPreviousOne() {
+    private boolean isAnyPositionAdjacentToPreviousFree() {
         return previous != null && !board.areAdjacentPositionOccupied(previous);
     }
 
@@ -94,8 +94,8 @@ public class Game {
      */
     public Colour winner() {
         board.checkBoardAndMakeStonesLive();
-        long whiteLiveStones = board.countLiveStones(Colour.WHITE);
-        long blackLiveStones = board.countLiveStones(Colour.BLACK);
+        int whiteLiveStones = board.countLiveStones(Colour.WHITE);
+        int blackLiveStones = board.countLiveStones(Colour.BLACK);
         if (whiteLiveStones > blackLiveStones) {
             System.out.println("White won with " + whiteLiveStones + " live stones against Black's " + blackLiveStones);
             return Colour.WHITE;
@@ -117,9 +117,9 @@ public class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        long beforeLastMove = getPointsAndResetAllStonesDead(colour);
+        long beforeLastMove = getPointsAndSetAllStonesDead(colour);
         board.updateStoneAt(position, colour);
-        long afterLastMove = getPointsAndResetAllStonesDead(colour);
+        long afterLastMove = getPointsAndSetAllStonesDead(colour);
         board.updateStoneAt(position, Colour.NONE);
         return afterLastMove >= beforeLastMove;
     }
@@ -130,9 +130,9 @@ public class Game {
      * @param colour The Colour of the player.
      * @return The number of "live" Stones of the given player.
      */
-    private long getPointsAndResetAllStonesDead(Colour colour) {
+    private int getPointsAndSetAllStonesDead(Colour colour) {
         board.checkBoardAndMakeStonesLive();
-        long counter = board.countLiveStones(colour);
+        int counter = board.countLiveStones(colour);
         board.setAllStonesDead();
         return counter;
     }
