@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -34,12 +35,12 @@ public class BoardTests {
     }
 
     @ParameterizedTest
-    @MethodSource("PositionToBeChecked")
+    @MethodSource("positionToBeChecked")
     void areAdjacentPositionsOccupied(Board board, int x, int y, boolean expected){
         assertEquals(expected, board.areAdjacentPositionOccupied(at(x,y)));
     }
 
-    private static Stream<Arguments> PositionToBeChecked() {
+    private static Stream<Arguments> positionToBeChecked() {
         Board board = new Board(3);
         board.updateStoneAt(at(1, 2), WHITE);
         board.updateStoneAt(at(2, 1), BLACK);
@@ -83,20 +84,11 @@ public class BoardTests {
         assertEquals(4, board.countLiveStones(WHITE));
     }
 
-    @Test
-    void fiveStonesInARowAreNotLive(){
-        Board board = new Board(5);
-        for (int i = 1; i <= 5; ++i) {
-            board.updateStoneAt(at(i, 1), WHITE);
-        }
-        board.checkBoardAndMakeStonesLive();
-        assertEquals(0, board.countLiveStones(WHITE));
-    }
-
-    @Test
-    void sixStonesOfSameColourInARowAreNotLive(){
-        Board board = new Board(6);
-        for (int i = 1; i <= 6; ++i) {
+    @ParameterizedTest
+    @ValueSource(ints = {5, 6})
+    void moreThanFiveStonesOfSameColourInARowAreNotLive(int row){
+        Board board = new Board(row);
+        for (int i = 1; i <= row; ++i) {
             board.updateStoneAt(at(i, 1), WHITE);
         }
         board.checkBoardAndMakeStonesLive();
@@ -107,51 +99,35 @@ public class BoardTests {
     void notEnoughStonesOfSameColourToBeLive(){
         Board board = new Board(5);
         for (int i = 1; i <= 5; ++i) {
-            if (i != 3)
-                board.updateStoneAt(at(i, 1), WHITE);
+            board.updateStoneAt(at(i, 1), i == 3 ? WHITE : BLACK);
         }
-        board.updateStoneAt(at(3, 1), BLACK);
         board.checkBoardAndMakeStonesLive();
         assertEquals(0, board.countLiveStones(WHITE));
     }
 
-    @Test
-    void CountLiveStones(){
-        int size = 4;
-        Board board = new Board(size);
-        for(int x = 1; x <= size; ++x) {
-            for(int y = 1; y <= size; ++y) {
-                if(x*y % 2 == 0) {
-                    board.updateStoneAt(at(x, y), WHITE);
-                } else {
-                    board.updateStoneAt(at(x, y), BLACK);
-                }
-            }
-        }
+    @ParameterizedTest
+    @MethodSource("generateFullBoard")
+    void CountLiveStones(Board board, int expectedWhite, int expectedBlack) {
         board.checkBoardAndMakeStonesLive();
         assertAll(
-            () -> assertEquals(12, board.countLiveStones(WHITE)),
-            () -> assertEquals(0, board.countLiveStones(BLACK))
+                () -> assertEquals(expectedWhite, board.countLiveStones(WHITE)),
+                () -> assertEquals(expectedBlack, board.countLiveStones(BLACK))
         );
     }
 
-    @Test
-    void CountLiveStonesPart2(){
+    private static Stream<Arguments> generateFullBoard() {
         int size = 4;
-        Board board = new Board(size);
+        Board board1 = new Board(size);
+        Board board2 = new Board(size);
         for(int x = 1; x <= size; ++x) {
             for(int y = 1; y <= size; ++y) {
-                if((x+y) % 2 == 0) {
-                    board.updateStoneAt(at(x, y), WHITE);
-                } else {
-                    board.updateStoneAt(at(x, y), BLACK);
-                }
+                board1.updateStoneAt(at(x, y), (x * y) % 2 == 0 ? WHITE : BLACK);
+                board2.updateStoneAt(at(x, y), (x + y) % 2 == 0 ? WHITE : BLACK);
             }
         }
-        board.checkBoardAndMakeStonesLive();
-        assertAll(
-            () -> assertEquals(4, board.countLiveStones(WHITE)),
-            () -> assertEquals(4, board.countLiveStones(BLACK))
+        return Stream.of(
+                Arguments.of(board1, 12, 0),
+                Arguments.of(board2, 4, 4)
         );
     }
 
