@@ -13,7 +13,7 @@ public class StoneTests {
 
     @ParameterizedTest
     @CsvSource({"WHITE, WHITE", "BLACK, BLACK", "NONE, NONE"})
-    void checkColours(Colour colour, Colour expectedColour){
+    void checkSameColours(Colour colour, Colour expectedColour){
         Stone stone = new Stone(colour);
         assertTrue(stone.isOfColour(expectedColour));
     }
