@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import static dssc.project.freedom.Colour.BLACK;
+import static dssc.project.freedom.Colour.WHITE;
 import static dssc.project.freedom.Position.at;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,7 @@ public class GameTests {
     public void positionOnAlreadyPlacedStone() {
         game = new Game(5);
         Position pos = at(1, 1);
-        game.move(pos, Colour.WHITE);
+        game.move(pos, WHITE);
         assertFalse(game.isMoveValid(pos));
     }
 
@@ -34,7 +36,7 @@ public class GameTests {
     public void positionNotAdjacentToPrevious() {
         game = new Game(5);
         Position pos = at(1, 1);
-        game.move(pos, Colour.WHITE);
+        game.move(pos, WHITE);
         assertFalse(game.isMoveValid(at(1, 3)));
     }
 
@@ -42,7 +44,7 @@ public class GameTests {
     public void positionAdjacentToPrevious() {
         game = new Game(5);
         Position pos = at(1, 1);
-        game.move(pos, Colour.WHITE);
+        game.move(pos, WHITE);
         assertTrue(game.isMoveValid(at(1, 2)));
     }
 
@@ -51,13 +53,10 @@ public class GameTests {
         game = new Game(4);
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
-                if (j <= 3)
-                    game.move(at(i,j), Colour.WHITE);
-                else
-                    game.move(at(i,j), Colour.BLACK);
+                game.move(at(i,j), j <= 3 ? WHITE : BLACK);
             }
         }
-        assertEquals(Colour.WHITE, game.winner());
+        assertEquals(WHITE, game.winner());
     }
 
     @Test
@@ -65,11 +64,7 @@ public class GameTests {
         game = new Game(4);
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
-                if((i + j) % 2 == 0) {
-                    game.move(at(i, j), Colour.WHITE);
-                } else {
-                    game.move(at(i, j), Colour.BLACK);
-                }
+                game.move(at(i, j), (i + j) % 2 == 0 ? WHITE : BLACK);
             }
         }
         assertEquals(Colour.NONE, game.winner());
@@ -83,14 +78,10 @@ public class GameTests {
                 if((i + j) == 10){
                     continue;
                 }
-                if((i + j) % 2 == 0) {
-                    game.move(at(i, j), Colour.WHITE);
-                } else {
-                    game.move(at(i, j), Colour.BLACK);
-                }
+                game.move(at(i, j), (i + j) % 2 == 0 ? WHITE : BLACK);
             }
         }
-        assertFalse(game.isLastMoveConvenient(at(5,5), Colour.WHITE));
+        assertFalse(game.isLastMoveConvenient(at(5,5), WHITE));
     }
 
     @Test
@@ -101,13 +92,9 @@ public class GameTests {
                 if((i + j) == 8){
                     continue;
                 }
-                if((i + j) % 2 == 0) {
-                    game.move(at(i, j), Colour.WHITE);
-                } else {
-                    game.move(at(i, j), Colour.BLACK);
-                }
+                game.move(at(i, j), (i + j) % 2 == 0 ? WHITE : BLACK);
             }
         }
-        assertTrue(game.isLastMoveConvenient(at(4,4), Colour.WHITE));
+        assertTrue(game.isLastMoveConvenient(at(4,4), WHITE));
     }
 }
