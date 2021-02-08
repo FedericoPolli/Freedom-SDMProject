@@ -14,13 +14,12 @@ import static dssc.project.freedom.Position.at;
  */
 public class Board {
 
-    /** Dictionary that stores all the {@link Stone}s and their {@link Position} in the {@link Board}. */
+    /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
 
     /**
      * Class constructor. Creates a {@link Board} of the given size, then fills
-     * it with empty {@link Stone}s, thus with {@link Stone}s of {@link Colour}
-     * equal to {@link Colour#NONE}.
+     * it with empty {@link Stone}s.
      * @param boardSize The size of the Board.
      */
     public Board(int boardSize) {
@@ -41,7 +40,7 @@ public class Board {
     }
 
     /**
-     * Updates a {@link Stone} in a given {@link Position} in the {@link Board}
+     * Updates a {@link Stone} in a given {@link Position} in the {@link Board},
      * colouring it with the given {@link Colour}.
      * @param p The Position of the Stone to be updated.
      * @param c The Colour to be assigned to the Stone.
@@ -71,9 +70,9 @@ public class Board {
     }
 
     /**
-     * Checks if the {@link Position}s adjacent to the given one are all occupied.
+     * Checks if all the {@link Position}s adjacent to the given one are occupied.
      * @param pos The Position to be checked.
-     * @return true if the Positions adjacent to the given one are all occupied, false otherwise.
+     * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
      */
     public boolean areAdjacentPositionOccupied(Position pos){
         return board.keySet()
@@ -85,9 +84,9 @@ public class Board {
     }
 
     /**
-     * Checks if there are exactly four {@link Stone}s of the same {@link Colour}
-     * in the direction specified by the inputs <code>xDir</code> and <code>yDir</code>
-     * and makes them "live".
+     * Checks in the whole board for occurrences of exactly four {@link Stone}s of
+     * the same {@link Colour} in a row, in the direction specified by the inputs
+     * <code>xDir</code> and <code>yDir</code>, and makes the {@link Stone}s "live".
      * @param xDir The x-coordinate of the direction in which to move.
      * @param yDir The y-coordinate of the direction in which to move.
      */
@@ -105,20 +104,19 @@ public class Board {
     }
 
     /**
-     * Checks if the next {@link Position} is of the same {@link Colour} of the current one.
+     * Checks if the next {@link Position} is of the same {@link Colour} as the current one.
      * @param current The current Position.
      * @param next The Position next to the current one.
-     * @return true if the next Position is of the same Colour of the current one, false otherwise.
+     * @return true if the next Position is of the same Colour as the current one, false otherwise.
      */
     private boolean arePositionsOfSameColour(Position current, Position next) {
         return getStoneAt(next).isOfSameColourAs(getStoneAt(current));
     }
 
     /**
-     * Finds and counts the {@link Stone}s of the same {@link Colour} that are in
-     * an adjacent {@link Position} horizontally, vertically or diagonally,
-     * according to the direction specified by the inputs <code>xDir</code> and
-     * <code>yDir</code>.
+     * Counts the number of {@link Stone}s of the same {@link Colour} in a row
+     * starting from the <code>current</code> {@link Position}, according to the
+     * direction specified by the inputs <code>xDir</code> and <code>yDir</code>.
      * @param xDir  The x-coordinate of the direction in which to move.
      * @param yDir  The y-coordinate of the direction in which to move.
      * @param current The starting Position.
@@ -162,9 +160,9 @@ public class Board {
     }
 
     /**
-     * Checks the {@link Board} in all directions (horizontally, vertically and
-     * diagonally) to find the {@link Stone}s which are part of exactly four adjacent
-     * {@link Stone}s of the same {@link Colour}, then makes them "live".
+     * Checks the whole {@link Board} in all directions (horizontal, vertical and
+     * diagonal) to find the {@link Stone}s which are part of a row of exactly
+     * four {@link Stone}s of the same {@link Colour}, then makes them "live".
      */
     public void checkBoardAndMakeStonesLive(){
         // Check tiles horizontally

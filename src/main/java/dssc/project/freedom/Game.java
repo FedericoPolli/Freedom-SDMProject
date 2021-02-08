@@ -68,7 +68,7 @@ public class Game {
     /**
      * Checks if a {@link Stone} has already been placed in the {@link Position}
      * taken as input. This is done by checking the {@link Colour} of the {@link
-     * Stone}: it has to be `NONE`.
+     * Stone}: it has not been placed only if the {@link Colour} is <code>NONE</code>.
      * @param current The Position to be checked.
      * @return true if the Stone has already a Colour, false otherwise.
      */
@@ -77,9 +77,8 @@ public class Game {
     }
 
     /**
-     * Checks if the {@link Stone}'s {@link Position} is adjacent to the one of
-     * the previous played one.
-     * @return true if the Stone is adjacent to the previous played one, false otherwise.
+     * Checks if the {@link Stone}'s {@link Position} is adjacent to the previously played one.
+     * @return true if the Stone is adjacent to the previously played one, false otherwise.
      */
     private boolean isAnyPositionAdjacentToPreviousFree() {
         return previous != null && !board.areAdjacentPositionOccupied(previous);
@@ -109,7 +108,7 @@ public class Game {
     }
 
     /**
-     * Decides if in the last move of the entire game placing the {@link Stone}
+     * Decides if in the last move of the whole game placing the {@link Stone}
      * at the given {@link Position} is convenient or not for the player of the
      * given {@link Colour}.
      * @param position The Position of the last move.
@@ -117,9 +116,9 @@ public class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        long beforeLastMove = getPointsAndSetAllStonesDead(colour);
+        long beforeLastMove = getPointsAndResetAllStonesDead(colour);
         board.updateStoneAt(position, colour);
-        long afterLastMove = getPointsAndSetAllStonesDead(colour);
+        long afterLastMove = getPointsAndResetAllStonesDead(colour);
         board.updateStoneAt(position, Colour.NONE);
         return afterLastMove >= beforeLastMove;
     }
@@ -130,7 +129,7 @@ public class Game {
      * @param colour The Colour of the player.
      * @return The number of "live" Stones of the given player.
      */
-    private int getPointsAndSetAllStonesDead(Colour colour) {
+    private int getPointsAndResetAllStonesDead(Colour colour) {
         board.checkBoardAndMakeStonesLive();
         int counter = board.countLiveStones(colour);
         board.setAllStonesDead();

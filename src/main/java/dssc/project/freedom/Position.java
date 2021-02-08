@@ -1,7 +1,7 @@
 package dssc.project.freedom;
 
 /**
- * Class that represents a position in a cartesian space.
+ * Class that represents a position in a grid.
  *
  * This class will represent the position of a {@link Stone} in the {@link Board} of the {@link Game}.
  */
@@ -60,7 +60,7 @@ public final class Position {
     }
 
     /**
-     * Checks if this {@link java.lang.Object} is equal to the input one.
+     * Checks if this {@link java.lang.Object} is equal to the one in input.
      * @param o The object to be compared with.
      * @return true if this {@link Object} is equal to the input {@link Object}, false otherwise.
      * @see #hashCode()

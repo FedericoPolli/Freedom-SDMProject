@@ -3,8 +3,8 @@ package dssc.project.freedom;
 /**
  * Class that represents a stone on the board's tile in the game.
  *
- * It has a {@link Colour} and at the end of the game is made "live" if it is
- * part of 4 adjacent stones (horizontally, vertically or diagonally).
+ * It has a {@link Colour} and a "live" status: a stone is "live" if it is
+ * part of exactly four stones in a row (horizontal, vertical or diagonal).
  * All the Stones are stored in the {@link Board} of the {@link Game}.
  */
 public class Stone {
@@ -15,7 +15,7 @@ public class Stone {
     private boolean liveStatus = false;
 
     /**
-     * Creates an empty {@link Stone}, thus a {@link Stone} with {@link Colour} equal to {@link Colour#NONE}.
+     * Creates an empty {@link Stone}, thus it has {@link Colour} equal to <code>NONE</code>.
      * @return The Stone with Colour NONE created.
      */
     public static Stone createEmpty() {
@@ -33,12 +33,12 @@ public class Stone {
     /**
      * Checks if this {@link Stone} is of the given {@link Colour}.
      * @param colour The Colour to be used in the comparison.
-     * @return true if the Stone is of the same Colour of the input, false otherwise.
+     * @return true if the Stone is of the same Colour as the input, false otherwise.
      */
     public boolean isOfColour(Colour colour) { return this.colour.equals(colour); }
 
     /**
-     * Checks if this {@link Stone} is of the same {@link Colour} of the given {@link Stone}.
+     * Checks if this {@link Stone} is of the same {@link Colour} as the given {@link Stone}.
      * @param s The Stone to be used in the comparison.
      * @return true if the Colour is the same, false otherwise.
      */
