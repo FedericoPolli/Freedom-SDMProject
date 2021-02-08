@@ -6,6 +6,7 @@ import java.util.Map;
 
 import static dssc.project.freedom.Position.at;
 
+
 /**
  * Class that represents the board of the game.
  *
@@ -13,6 +14,24 @@ import static dssc.project.freedom.Position.at;
  * which are "live" and which not.
  */
 public class Board {
+
+    private enum Direction {
+        /** The horizontal direction. */
+        HORIZONTAL(1, 0),
+        /** The vertical direction. */
+        VERTICAL(0, 1),
+        /** The main diagonal direction. */
+        MAIN_DIAGONAL(1, 1),
+        /** The off diagonal direction. */
+        OFF_DIAGONAL(-1, 1);
+        private final int x;
+        private final int y;
+
+        Direction(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 
     /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
@@ -77,7 +96,7 @@ public class Board {
     public boolean areAdjacentPositionOccupied(Position pos){
         return board.keySet()
                 .stream()
-                .filter(p -> p.isInSurroundingPositions(pos))
+                .filter(p -> p.isInAdjacentPositions(pos))
                 .filter(p -> getStoneAt(p).isOfColour(Colour.NONE))
                 .findAny()
                 .isEmpty();
@@ -87,20 +106,28 @@ public class Board {
      * Checks in the whole board for occurrences of exactly four {@link Stone}s of
      * the same {@link Colour} in a row, in the direction specified by the inputs
      * <code>xDir</code> and <code>yDir</code>, and makes the {@link Stone}s "live".
-     * @param xDir The x-coordinate of the direction in which to move.
-     * @param yDir The y-coordinate of the direction in which to move.
+     * @param dir The direction in which to move.
      */
-    public void check4InDirection(int xDir, int yDir){
+    public void check4InDirection(Direction dir){
+        int xDir = dir.x, yDir = dir.y;
         for (Position current : board.keySet()){
             Position previous = at(current.getX() - xDir, current.getY() - yDir);
-            if (!positionIsNotInTheBoard(previous) && arePositionsOfSameColour(current, previous)) {
+            if (positionIsInsideTheBoard(previous) && arePositionsOfSameColour(current, previous)) {
                 continue;
             }
-            int counter = countStonesInRow(xDir, yDir, current);
-            if (counter == 4){
+            if (countStonesInRow(xDir, yDir, current) == 4){
                 setStonesInRowOf4Live(xDir, yDir, current);
             }
         }
+    }
+
+    /**
+     * Checks if the input {@link Position} is inside the {@link Board} or not.
+     * @param p The Position to be checked.
+     * @return true if the Position is in the Board, false otherwise.
+     */
+    public boolean positionIsInsideTheBoard(Position p) {
+        return board.containsKey(p);
     }
 
     /**
@@ -126,21 +153,12 @@ public class Board {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
             Position next = at(current.getX() + i * xDir, current.getY() + i * yDir);
-            if (positionIsNotInTheBoard(next) || !arePositionsOfSameColour(current, next))
+            if (!positionIsInsideTheBoard(next) || !arePositionsOfSameColour(current, next))
                 break;
             else
                 counter++;
         }
         return counter;
-    }
-
-    /**
-     * Checks if the input {@link Position} is in the {@link Board} or not.
-     * @param p The Position to be checked.
-     * @return true if the Position is in the Board, false otherwise.
-     */
-    private boolean positionIsNotInTheBoard(Position p) {
-        return !board.containsKey(p);
     }
 
     /**
@@ -165,13 +183,10 @@ public class Board {
      * four {@link Stone}s of the same {@link Colour}, then makes them "live".
      */
     public void checkBoardAndMakeStonesLive(){
-        // Check tiles horizontally
-        check4InDirection(1, 0);
-        // Check tiles vertically
-        check4InDirection(0, 1);
-        // Check tiles diagonally
-        check4InDirection(1 ,1);
-        check4InDirection(-1 , 1);
+        check4InDirection(Direction.HORIZONTAL);
+        check4InDirection(Direction.VERTICAL);
+        check4InDirection(Direction.MAIN_DIAGONAL);
+        check4InDirection(Direction.OFF_DIAGONAL);
     }
 
     /**
