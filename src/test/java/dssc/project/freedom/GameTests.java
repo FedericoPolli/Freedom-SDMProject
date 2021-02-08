@@ -58,6 +58,8 @@ public class GameTests {
         game = new Game(boardSize);
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
+                if (i + j == 2 * boardSize)
+                    continue;
                 game.move(at(i, j), (i + j) % 2 == 0 ? WHITE : BLACK);
             }
         }
@@ -66,20 +68,19 @@ public class GameTests {
     @Test
     public void draw() {
         playGame(4);
+        game.move(at(4,4), WHITE);
         assertEquals(Colour.NONE, game.winner());
     }
 
     @Test
     public void lastMoveNotConvenient(){
         playGame(5);
-        game.move(at(5,5), NONE);  // Not sure that this is ok: it is allowed to colour a Stone NONE?
         assertFalse(game.isLastMoveConvenient(at(5,5), WHITE));
     }
 
     @Test
     public void lastMoveConvenient(){
         playGame(4);
-        game.move(at(4,4), NONE);
         assertTrue(game.isLastMoveConvenient(at(4,4), WHITE));
     }
 }
