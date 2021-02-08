@@ -55,7 +55,7 @@ public final class Position {
      * @param p The Position to which this Position must be adjacent.
      * @return true if this Position is adjacent to the given Position, false otherwise.
      */
-    public boolean isInSurroundingPositions(Position p){
+    public boolean isInAdjacentPositions(Position p){
         return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
     }
 

@@ -43,26 +43,15 @@ public class Game {
      * @return true if the move of the player is valid, false otherwise.
      */
     public boolean isMoveValid(Position current) {
-        if (positionIsNotInsideBoard(current))
+        if (!board.positionIsInsideTheBoard(current))
             return false;
         if (stoneIsAlreadyPlacedAt(current)) {
             return false;
         }
         if (isAnyPositionAdjacentToPreviousFree()) {
-            return current.isInSurroundingPositions(previous);
+            return current.isInAdjacentPositions(previous);
         }
         return true;
-    }
-
-    /**
-     * Checks if the given {@link Position} is inside the {@link Board}.
-     * It checks if every coordinate is between 1 and the size of the {@link Board}.
-     * @param current The Position to be checked.
-     * @return true if the Position is inside the Board, false otherwise.
-     */
-    private boolean positionIsNotInsideBoard(Position current) {
-        return current.getX() < 1 || current.getX() > boardSize ||
-                current.getY() < 1 || current.getY() > boardSize;
     }
 
     /**
