@@ -35,19 +35,14 @@ public final class Position {
     }
 
     /**
-     * Getter for the x coordinate of this {@link Position} object.
-     * @return The x coordinate of this {@link Position} object.
+     * Returns a {@link Position} obtained by moving <code>x</code> steps in
+     * horizontal and <code>y</code> steps in vertical.
+     * @param x The horizontal steps.
+     * @param y The vertical steps.
+     * @return A Position with the new coordinates.
      */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * Getter for the y coordinate of this {@link Position} object.
-     * @return The y coordinate of this {@link Position} object.
-     */
-    public int getY() {
-        return y;
+    public Position moveInDirection(int x, int y) {
+        return at(this.x + x, this.y + y);
     }
 
     /**

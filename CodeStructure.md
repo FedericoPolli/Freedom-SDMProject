@@ -85,8 +85,8 @@ RandomPalyer and GreedyPlayer (see SML project TicTacToe or DotsAndBoxes) or use
 
 ## ToDo
 
-- usage of `at()` in `Position` OR of `isAt()` in `Position` + `positionAt` in `Board`
 - `printBoard()` method → find characters to be printed as White and Black
 - Refactoring of `Main`
 - Testing `Main`
-- Refactoring of tests
+- Check methods to be put `private`
+- Refactor name `moveInDirection()` in `Position`

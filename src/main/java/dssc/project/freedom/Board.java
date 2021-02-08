@@ -108,15 +108,14 @@ public class Board {
      * <code>xDir</code> and <code>yDir</code>, and makes the {@link Stone}s "live".
      * @param dir The direction in which to move.
      */
-    public void check4InDirection(Direction dir){
-        int xDir = dir.x, yDir = dir.y;
+    private void check4InDirection(Direction dir){
         for (Position current : board.keySet()){
-            Position previous = at(current.getX() - xDir, current.getY() - yDir);
+            Position previous = current.moveInDirection(-dir.x, -dir.y);
             if (positionIsInsideTheBoard(previous) && arePositionsOfSameColour(current, previous)) {
                 continue;
             }
-            if (countStonesInRow(xDir, yDir, current) == 4){
-                setStonesInRowOf4Live(xDir, yDir, current);
+            if (countStonesInRow(dir, current) == 4){
+                setStonesInRowOf4Live(dir, current);
             }
         }
     }
@@ -144,15 +143,14 @@ public class Board {
      * Counts the number of {@link Stone}s of the same {@link Colour} in a row
      * starting from the <code>current</code> {@link Position}, according to the
      * direction specified by the inputs <code>xDir</code> and <code>yDir</code>.
-     * @param xDir  The x-coordinate of the direction in which to move.
-     * @param yDir  The y-coordinate of the direction in which to move.
+     * @param dir  The direction in which to move.
      * @param current The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
-    private int countStonesInRow(int xDir, int yDir, Position current) {
+    private int countStonesInRow(Direction dir, Position current) {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
-            Position next = at(current.getX() + i * xDir, current.getY() + i * yDir);
+            Position next = current.moveInDirection(i * dir.x, i * dir.y);
             if (!positionIsInsideTheBoard(next) || !arePositionsOfSameColour(current, next))
                 break;
             else
@@ -165,14 +163,13 @@ public class Board {
      * Sets as "live" the {@link Stone}s that are part of a row of exactly four {@link Stone}s
      * of the same {@link Colour}, starting from the {@link Position} <code>current</code>,
      * in the direction given by the input <code>xDir</code> and <code>yDir</code>.
-     * @param xDir The x-coordinate of the direction in which to move.
-     * @param yDir The y-coordinate of the direction in which to move.
+     * @param dir The direction in which to move.
      * @param current The starting Position.
      */
-    private void setStonesInRowOf4Live(int xDir, int yDir, Position current) {
+    private void setStonesInRowOf4Live(Direction dir, Position current) {
         getStoneAt(current).changeLiveStatusTo(true);
         for (int i = 1; i < 4; ++i){
-            Position next = at(current.getX() + i * xDir, current.getY() + i * yDir);
+            Position next = current.moveInDirection(i * dir.x, i * dir.y);
             getStoneAt(next).changeLiveStatusTo(true);
         }
     }
