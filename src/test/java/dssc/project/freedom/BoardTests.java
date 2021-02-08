@@ -8,8 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static dssc.project.freedom.Colour.BLACK;
-import static dssc.project.freedom.Colour.WHITE;
+import static dssc.project.freedom.Colour.*;
 import static dssc.project.freedom.Position.at;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +17,7 @@ public class BoardTests {
     @Test
     void createEmptyBoard() {
         Board board = new Board(3);
-        assertFalse(board.getStoneAt(at(3,2)).isOfColour(WHITE));
+        assertFalse(board.stoneIsAlreadyPlacedAt(at(3,2)));
     }
 
     @Test
@@ -31,7 +30,7 @@ public class BoardTests {
     void changeStoneColour() {
         Board board = new Board(5);
         board.updateStoneAt(at(3, 2), WHITE);
-        assertTrue(board.getStoneAt(at(3,2)).isOfColour(WHITE));
+        assertTrue(board.stoneIsAlreadyPlacedAt(at(3,2)));
     }
 
     @ParameterizedTest

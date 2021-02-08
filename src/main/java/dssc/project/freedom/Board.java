@@ -44,7 +44,7 @@ public class Board {
     public Board(int boardSize) {
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
-                board.put(at(i, j), Stone.createEmpty());
+                board.put(at(i, j), new Stone(Colour.NONE));
             }
         }
     }
@@ -54,7 +54,7 @@ public class Board {
      * @param p The Position of the Stone to be retrieved.
      * @return The Stone at the given Position.
      */
-    public Stone getStoneAt(Position p) {
+    private Stone getStoneAt(Position p) {
         return board.get(p);
     }
 
@@ -103,15 +103,26 @@ public class Board {
     }
 
     /**
+     * Checks if a {@link Stone} has already been placed in the {@link Position}
+     * taken as input. This is done by checking the {@link Colour} of the {@link
+     * Stone}: it has not been placed only if the {@link Colour} is <code>NONE</code>.
+     * @param current The Position to be checked.
+     * @return true if the Stone has already a Colour, false otherwise.
+     */
+    public boolean stoneIsAlreadyPlacedAt(Position current) {
+        return !getStoneAt(current).isOfColour(Colour.NONE);
+    }
+
+    /**
      * Checks in the whole board for occurrences of exactly four {@link Stone}s of
      * the same {@link Colour} in a row, in the direction specified by the inputs
      * <code>xDir</code> and <code>yDir</code>, and makes the {@link Stone}s "live".
      * @param dir The direction in which to move.
      */
-    private void check4InDirection(Direction dir){
+    private void check4StonesInDirection(Direction dir){
         for (Position current : board.keySet()){
             Position previous = current.moveInDirection(-dir.x, -dir.y);
-            if (positionIsInsideTheBoard(previous) && arePositionsOfSameColour(current, previous)) {
+            if (positionIsInsideTheBoard(previous) && areStonesOfSameColourAt(current, previous)) {
                 continue;
             }
             if (countStonesInRow(dir, current) == 4){
@@ -130,12 +141,13 @@ public class Board {
     }
 
     /**
-     * Checks if the next {@link Position} is of the same {@link Colour} as the current one.
+     * Checks if the {@link Stone} in the next {@link Position} is of the same
+     * {@link Colour} as the {@link Stone} in the current one.
      * @param current The current Position.
      * @param next The Position next to the current one.
      * @return true if the next Position is of the same Colour as the current one, false otherwise.
      */
-    private boolean arePositionsOfSameColour(Position current, Position next) {
+    private boolean areStonesOfSameColourAt(Position current, Position next) {
         return getStoneAt(next).isOfSameColourAs(getStoneAt(current));
     }
 
@@ -151,7 +163,7 @@ public class Board {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
             Position next = current.moveInDirection(i * dir.x, i * dir.y);
-            if (!positionIsInsideTheBoard(next) || !arePositionsOfSameColour(current, next))
+            if (!positionIsInsideTheBoard(next) || !areStonesOfSameColourAt(current, next))
                 break;
             else
                 counter++;
@@ -180,10 +192,10 @@ public class Board {
      * four {@link Stone}s of the same {@link Colour}, then makes them "live".
      */
     public void checkBoardAndMakeStonesLive(){
-        check4InDirection(Direction.HORIZONTAL);
-        check4InDirection(Direction.VERTICAL);
-        check4InDirection(Direction.MAIN_DIAGONAL);
-        check4InDirection(Direction.OFF_DIAGONAL);
+        check4StonesInDirection(Direction.HORIZONTAL);
+        check4StonesInDirection(Direction.VERTICAL);
+        check4StonesInDirection(Direction.MAIN_DIAGONAL);
+        check4StonesInDirection(Direction.OFF_DIAGONAL);
     }
 
     /**

@@ -15,14 +15,6 @@ public class Stone {
     private boolean liveStatus = false;
 
     /**
-     * Creates an empty {@link Stone}, thus it has {@link Colour} equal to <code>NONE</code>.
-     * @return The Stone with Colour NONE created.
-     */
-    public static Stone createEmpty() {
-        return new Stone(Colour.NONE);
-    }
-
-    /**
      * Class constructor. Creates a {@link Stone} of the given {@link Colour}.
      * @param colour The Colour of the Stone.
      */

@@ -7,8 +7,6 @@ public class Game {
 
     /** The board on which the game is played. */
     private final Board board;
-    /** The dimension of the board. */
-    private final int boardSize;
     /** Auxiliary field to know the previous played position. */
     private Position previous = null;
 
@@ -17,7 +15,6 @@ public class Game {
      * @param boardSize The size of the Board to be created.
      */
     public Game(int boardSize) {
-        this.boardSize = boardSize;
         this.board = new Board(boardSize);
     }
 
@@ -45,31 +42,20 @@ public class Game {
     public boolean isMoveValid(Position current) {
         if (!board.positionIsInsideTheBoard(current))
             return false;
-        if (stoneIsAlreadyPlacedAt(current)) {
+        if (board.stoneIsAlreadyPlacedAt(current)) {
             return false;
         }
-        if (isAnyPositionAdjacentToPreviousFree()) {
+        if (anyPositionAdjacentToPreviousOneIsFree()) {
             return current.isInAdjacentPositions(previous);
         }
         return true;
     }
 
     /**
-     * Checks if a {@link Stone} has already been placed in the {@link Position}
-     * taken as input. This is done by checking the {@link Colour} of the {@link
-     * Stone}: it has not been placed only if the {@link Colour} is <code>NONE</code>.
-     * @param current The Position to be checked.
-     * @return true if the Stone has already a Colour, false otherwise.
-     */
-    private boolean stoneIsAlreadyPlacedAt(Position current) {
-        return !board.getStoneAt(current).isOfColour(Colour.NONE);
-    }
-
-    /**
      * Checks if the {@link Stone}'s {@link Position} is adjacent to the previously played one.
      * @return true if the Stone is adjacent to the previously played one, false otherwise.
      */
-    private boolean isAnyPositionAdjacentToPreviousFree() {
+    private boolean anyPositionAdjacentToPreviousOneIsFree() {
         return previous != null && !board.areAdjacentPositionOccupied(previous);
     }
 
@@ -105,11 +91,11 @@ public class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        long beforeLastMove = getPointsAndResetAllStonesDead(colour);
+        long pointsBeforeLastMove = getPointsAndResetAllStonesDead(colour);
         board.updateStoneAt(position, colour);
-        long afterLastMove = getPointsAndResetAllStonesDead(colour);
+        long pointsAfterLastMove = getPointsAndResetAllStonesDead(colour);
         board.updateStoneAt(position, Colour.NONE);
-        return afterLastMove >= beforeLastMove;
+        return pointsAfterLastMove >= pointsBeforeLastMove;
     }
 
     /**

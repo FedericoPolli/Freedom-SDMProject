@@ -6,8 +6,6 @@ Repository for the project of the course "Software Development Methods" of the m
 
 We worked on the [Freedom game](https://boardgamegeek.com/boardgame/100480/freedom) using Java, Gradle and Travis CI.
 
-The [Freedom project](???) presents the Freedom game in terms of issues. It's an example of the use of GitHub Projects and Issues to organize and manage the work on a repository.
-
 **<font color=#00ADEF>Freedom</font>** is a two-player abstract strategy board game invented by Veljko Cirovic and Nebojsa Sankovic in 2010. It is played with black and white stones on a square board. The game is related to [Go-Moku](https://boardgamegeek.com/boardgame/11929/go-moku) and [Slimetrail](https://boardgamegeek.com/boardgame/31467/slimetrail). It can be played with a [Go](https://boardgamegeek.com/boardgame/188/go) set or with pen and paper.
 
 #### Rules
