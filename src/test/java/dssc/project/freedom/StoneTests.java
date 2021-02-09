@@ -5,11 +5,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static dssc.project.freedom.Colour.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class StoneTests {
+
+    @ParameterizedTest
+    @CsvSource({"WHITE", "BLACK", "NONE"})
+    void checkGetColours(Colour colour){
+        Stone stone = new Stone(colour);
+        assertEquals(stone.getColour(), colour);
+    }
 
     @ParameterizedTest
     @CsvSource({"WHITE, WHITE", "BLACK, BLACK", "NONE, NONE"})
