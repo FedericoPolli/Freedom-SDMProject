@@ -209,10 +209,10 @@ public class Board {
         char black = '\u26AB';
         String line = "+---".repeat(boardSize) + "+";
         printWriter.println(line);
-        for (int i = boardSize; i>0; --i){
-            for (int j = 1; j<= boardSize; ++j){
+        for (int j = boardSize; j>0; --j){
+            for (int i = 1; i<= boardSize; ++i){
                 printWriter.print("| ");
-                switch (getStoneAt(at(i,j)).getColour()){
+                switch (getStoneAt(at(i, j)).getColour()){
                     case WHITE -> printWriter.print(white);
                     case BLACK -> printWriter.print(black);
                     case NONE -> printWriter.print(" ");
