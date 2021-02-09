@@ -1,6 +1,5 @@
 package dssc.project.freedom;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utility {
@@ -14,11 +13,12 @@ public class Utility {
         boolean flag;
         int i = 0;
         do {
-            try {
-                i = in.nextInt();
+            if (in.hasNextInt()) {
                 flag = false;
-            } catch (InputMismatchException e) {
+                i = in.nextInt();
+            } else {
                 System.out.println("You didn't enter an integer!");
+                in.next();
                 flag = true;
             }
         } while(flag);
