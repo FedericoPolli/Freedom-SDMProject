@@ -143,7 +143,7 @@ public class BoardTests {
                 "+---".repeat(4) + "+" + lineSeparator() +
                 "|   ".repeat(4) + "|" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator() +
-                "| " + '\u26AA' + " |  ".repeat(3) + " |" + lineSeparator() +
+                "| \u26AA |" + "   |".repeat(3) + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator();
         String boardAfterSecondMove = "+---".repeat(4) + "+" + lineSeparator() +
                 "|   ".repeat(4) + "|" + lineSeparator() +
@@ -154,6 +154,6 @@ public class BoardTests {
                 "+---".repeat(4) + "+" + lineSeparator() +
                 "| " + '\u26AA' + " | " +'\u26AB' + " |  ".repeat(2) + " |" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator();
-        application.showsMove(boardAfterFirstMove + boardAfterSecondMove);
+        application.testOutput(boardAfterFirstMove + boardAfterSecondMove);
     }
 }

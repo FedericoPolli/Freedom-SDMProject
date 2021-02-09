@@ -1,7 +1,11 @@
 package dssc.project.freedom;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 import static dssc.project.freedom.Colour.BLACK;
 import static dssc.project.freedom.Colour.WHITE;
@@ -19,8 +23,8 @@ public class ApplicationRunner {
         System.setOut(new PrintStream(outputStream));
     }
 
-    public void showsMove(String board) {
-        assertEquals(board, outputStream.toString());
+    public void testOutput(String expectedOutput) {
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
     public void parseBoard(Position current, Colour colour) {
@@ -38,5 +42,10 @@ public class ApplicationRunner {
         }
         commandLineGame.move(at(4,4), WHITE);
         commandLineGame.winner();
+    }
+
+    public void parsePlay() {
+        CommandLineGame fakeGame = new CommandLineGame(1);
+        fakeGame.play(new Scanner(new ByteArrayInputStream("1 1".getBytes(StandardCharsets.UTF_8))));
     }
 }

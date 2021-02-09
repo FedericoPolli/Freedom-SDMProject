@@ -17,6 +17,7 @@ public class Main {
         int boardSize = getBoardSize(in);
         CommandLineGame clGame = new CommandLineGame(boardSize);
         clGame.play(in);
+        in.close();
     }
 
     private static int getBoardSize(Scanner in) {
