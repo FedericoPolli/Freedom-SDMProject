@@ -6,7 +6,7 @@ package dssc.project.freedom;
 public class Game {
 
     /** The board on which the game is played. */
-    private final Board board;
+    protected final Board board;
     /** Auxiliary field to know the previous played position. */
     private Position previous = null;
 
@@ -27,7 +27,6 @@ public class Game {
     public void move(Position current, Colour colour) {
         board.updateStoneAt(current, colour);
         previous = current;
-        board.printBoard();;
     }
 
     /**
@@ -72,13 +71,10 @@ public class Game {
         int whiteLiveStones = board.countLiveStones(Colour.WHITE);
         int blackLiveStones = board.countLiveStones(Colour.BLACK);
         if (whiteLiveStones > blackLiveStones) {
-            System.out.println("White won with " + whiteLiveStones + " live stones against Black's " + blackLiveStones);
             return Colour.WHITE;
         } else if (blackLiveStones > whiteLiveStones) {
-            System.out.println("Black won with " + blackLiveStones + " live stones against White's " + whiteLiveStones);
             return Colour.BLACK;
         } else {
-            System.out.println("Draw: both players have the same number of live stones: " + whiteLiveStones);
             return Colour.NONE;
         }
     }
