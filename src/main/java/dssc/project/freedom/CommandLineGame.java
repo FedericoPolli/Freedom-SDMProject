@@ -20,14 +20,9 @@ public class CommandLineGame extends Game{
             Position current = getValidPosition(in);
             if (isLastMove(board.boardSize, i) && userDoesNotWantToDoLastMove(in, colour, current)) break;
             move(current, colour);
+            board.printBoard();
         }
         winner();
-    }
-
-    @Override
-    public void move(Position current, Colour colour) {
-        super.move(current, colour);
-        board.printBoard();
     }
 
     @Override
