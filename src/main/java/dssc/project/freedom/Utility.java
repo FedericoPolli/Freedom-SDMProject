@@ -17,7 +17,7 @@ public class Utility {
                 flag = false;
                 i = in.nextInt();
             } else {
-                System.out.println("You didn't enter an integer!");
+                System.out.println("You didn't enter an integer! Enter again an integer");
                 in.next();
                 flag = true;
             }

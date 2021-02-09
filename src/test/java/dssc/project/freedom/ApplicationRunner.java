@@ -44,8 +44,8 @@ public class ApplicationRunner {
         commandLineGame.winner();
     }
 
-    public void parsePlay() {
+    public void parsePlay(String input) {
         CommandLineGame fakeGame = new CommandLineGame(1);
-        fakeGame.play(new Scanner(new ByteArrayInputStream("1 1".getBytes(StandardCharsets.UTF_8))));
+        fakeGame.play(new Scanner(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8))));
     }
 }
