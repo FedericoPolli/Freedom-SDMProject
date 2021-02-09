@@ -27,6 +27,7 @@ public class Game {
     public void move(Position current, Colour colour) {
         board.updateStoneAt(current, colour);
         previous = current;
+        board.printBoard();;
     }
 
     /**

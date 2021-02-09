@@ -23,6 +23,12 @@ public class Stone {
     }
 
     /**
+     * Getter fot the {@link Colour} of this {@link Stone}
+     * @return the Colour of this Stone.
+     */
+    public Colour getColour(){return this.colour;}
+
+    /**
      * Checks if this {@link Stone} is of the given {@link Colour}.
      * @param colour The Colour to be used in the comparison.
      * @return true if the Stone is of the same Colour as the input, false otherwise.

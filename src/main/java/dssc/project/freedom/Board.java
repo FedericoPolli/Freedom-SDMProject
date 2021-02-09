@@ -35,6 +35,7 @@ public class Board {
 
     /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
+    private final int boardsize;
 
     /**
      * Class constructor. Creates a {@link Board} of the given size, then fills
@@ -42,6 +43,7 @@ public class Board {
      * @param boardSize The size of the Board.
      */
     public Board(int boardSize) {
+        this.boardsize = boardSize;
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
                 board.put(at(i, j), new Stone(Colour.NONE));
@@ -205,6 +207,20 @@ public class Board {
         PrintWriter printWriter = new PrintWriter(System.out,true);
         char white = '\u26AA';
         char black = '\u26AB';
-        printWriter.println("White: " + white + "\tBlack: " + black);
+        String line = "+---".repeat(boardsize) + "+";
+        printWriter.println(line);
+        for (int i=boardsize; i>0; --i){
+            for (int j=1; j<=boardsize; ++j){
+                printWriter.print("| ");
+                switch (getStoneAt(at(i,j)).getColour()){
+                    case WHITE -> printWriter.print(white);
+                    case BLACK -> printWriter.print(black);
+                    case NONE -> printWriter.print(" ");
+                }
+                printWriter.print(" ");
+            }
+            printWriter.println("|");
+            printWriter.println(line);
+        }
     }
 }

@@ -1,11 +1,13 @@
 package dssc.project.freedom;
 
-import static dssc.project.freedom.Colour.*;
-import static dssc.project.freedom.Position.at;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static dssc.project.freedom.Colour.BLACK;
+import static dssc.project.freedom.Colour.WHITE;
+import static dssc.project.freedom.Position.at;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class GameTests {
