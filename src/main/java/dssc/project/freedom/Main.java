@@ -9,9 +9,8 @@ public class Main {
 
     /**
      * Main of the project.
-     * @param args The input arguments
      */
-    public static void main(String[] args) {
+    public static void main() {
         System.out.println("Game Start:");
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the board size (minimum 4):");
