@@ -18,7 +18,7 @@ public class CommandLineGame extends Game{
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
             Colour colour = getPlayerColour(i);
             Position current = getValidPosition(in);
-            if (isLastMove(board.boardSize, i) && userWantToDoLastMove(in, colour, current)) break;
+            if (isLastMove(board.boardSize, i) && userDoesNotWantToDoLastMove(in, colour, current)) break;
             move(current, colour);
         }
         winner();
@@ -47,7 +47,7 @@ public class CommandLineGame extends Game{
         }
     }
 
-    private boolean userWantToDoLastMove(Scanner in, Colour colour, Position current) {
+    private boolean userDoesNotWantToDoLastMove(Scanner in, Colour colour, Position current) {
         if (!isLastMoveConvenient(current, colour)){
             System.out.println("Do you want to do the last move? (0 = yes, 1 = no)");
             int d = getInteger(in);
@@ -63,12 +63,11 @@ public class CommandLineGame extends Game{
     private Position getValidPosition(Scanner in) {
         Position current;
         int i = 0;
-
         do {
             if (i>0){
-                System.out.println("You have inserted a wrong position! Try again");
+                System.out.print("You have inserted a wrong position!");
             }
-            System.out.println("Enter the x and y coordinates of the stone:");
+            System.out.println(" Enter the x and y coordinates of the stone:");
             int x = getInteger(in);
             int y = getInteger(in);
             current = Position.at(x, y);
@@ -80,10 +79,10 @@ public class CommandLineGame extends Game{
     private Colour getPlayerColour(int i) {
         Colour colour;
         if (i % 2 != 0){
-            System.out.println("White it's your turn!");
+            System.out.print("White it's your turn!");
             colour = Colour.WHITE;
         } else {
-            System.out.println("Black it's your turn!");
+            System.out.print("Black it's your turn!");
             colour = Colour.BLACK;
         }
         return colour;
