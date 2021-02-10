@@ -134,25 +134,29 @@ public class BoardTests {
     @Test
     public void testPrintBoard(){
         ApplicationRunner application = new ApplicationRunner();
+        String white = Utility.getWhite();
+        String black = Utility.getBlack();
         application.parseBoard(Position.at(1, 1), Colour.WHITE);
         application.parseBoard(Position.at(2, 1), Colour.BLACK);
-        String boardAfterFirstMove = "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
+        String boardAfterFirstMove =
                 "+---".repeat(4) + "+" + lineSeparator() +
                 "|   ".repeat(4) + "|" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator() +
                 "|   ".repeat(4) + "|" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator() +
-                "| \u26AA |" + "   |".repeat(3) + lineSeparator() +
+                "|   ".repeat(4) + "|" + lineSeparator() +
+                "+---".repeat(4) + "+" + lineSeparator() +
+                "| " + white + " |" + "   |".repeat(3) + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator();
-        String boardAfterSecondMove = "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
+        String boardAfterSecondMove =
                 "+---".repeat(4) + "+" + lineSeparator() +
                 "|   ".repeat(4) + "|" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator() +
                 "|   ".repeat(4) + "|" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator() +
-                "| " + '\u26AA' + " | " +'\u26AB' + " |  ".repeat(2) + " |" + lineSeparator() +
+                "|   ".repeat(4) + "|" + lineSeparator() +
+                "+---".repeat(4) + "+" + lineSeparator() +
+                "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
                 "+---".repeat(4) + "+" + lineSeparator();
         application.testOutput(boardAfterFirstMove + boardAfterSecondMove);
     }

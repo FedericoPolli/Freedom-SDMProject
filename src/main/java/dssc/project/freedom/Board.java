@@ -205,8 +205,8 @@ public class Board {
      */
     public void printBoard(){
         PrintWriter printWriter = new PrintWriter(System.out,true);
-        char white = '\u26AA';
-        char black = '\u26AB';
+        String white = Utility.getWhite();
+        String black = Utility.getBlack();
         String line = "+---".repeat(boardSize) + "+";
         printWriter.println(line);
         for (int j = boardSize; j>0; --j){

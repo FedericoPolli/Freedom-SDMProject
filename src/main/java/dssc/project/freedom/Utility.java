@@ -24,4 +24,19 @@ public class Utility {
         } while(flag);
         return i;
     }
+
+
+    private static String getOS() {
+        String os = System.getProperty("os.name");
+        if (os.contains("Windows")) return "Windows";
+        else return "Not Windows";
+    }
+
+    public static String getWhite() {
+        return getOS().equals("Windows") ? "w" : "\u26AA";
+    }
+
+    public static String getBlack() {
+        return getOS().equals("Windows") ? "b" : "\u26AB";
+    }
 }
