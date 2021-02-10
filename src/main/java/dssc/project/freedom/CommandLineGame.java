@@ -1,9 +1,14 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.players.Player;
+
 import java.util.Scanner;
 import static dssc.project.freedom.Utility.getInteger;
 
 public class CommandLineGame extends Game{
+
+    Player player1;
+    Player player2;
 
     /**
      * Class constructor. A {@link Game} has a {@link Board} on which the players play.
