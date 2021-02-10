@@ -15,12 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ApplicationRunner {
 
     private ByteArrayOutputStream outputStream;
-    private final int boardSize = 4;
-    private CommandLineGame commandLineGame = new CommandLineGame(boardSize);
+    private final int boardSize;
+    private CommandLineGame commandLineGame;
 
-    public ApplicationRunner() {
+    public ApplicationRunner(int boardSize) {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
+        this.boardSize = boardSize;
+        this.commandLineGame = new CommandLineGame(boardSize);
     }
 
     public void testOutput(String expectedOutput) {
@@ -33,6 +35,15 @@ public class ApplicationRunner {
     }
 
     public void parseWinner() {
+        for(int x = 1; x <= boardSize; ++x) {
+            for(int y = 1; y <= boardSize; ++y) {
+                commandLineGame.move(at(x, y), (x * y) % 2 == 0 ? WHITE : BLACK);
+            }
+        }
+        commandLineGame.winner();
+    }
+
+    public void parseDraw() {
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
                 if (i + j == 2 * boardSize)
@@ -45,7 +56,7 @@ public class ApplicationRunner {
     }
 
     public void parsePlay(String input) {
-        CommandLineGame fakeGame = new CommandLineGame(1);
-        fakeGame.play(new Scanner(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8))));
+        commandLineGame.play(new Scanner(new ByteArrayInputStream(
+                input.getBytes(StandardCharsets.UTF_8))));
     }
 }

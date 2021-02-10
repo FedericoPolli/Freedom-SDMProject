@@ -57,18 +57,44 @@ public class CommandLineGame extends Game{
 
     private Position getValidPosition(Scanner in) {
         Position current;
-        int i = 0;
         do {
-            if (i>0){
-                System.out.print("You have inserted a wrong position!");
-            }
             System.out.println(" Enter the x and y coordinates of the stone:");
             int x = getInteger(in);
             int y = getInteger(in);
             current = Position.at(x, y);
-            ++i;
         } while (!isMoveValid(current));
         return current;
+    }
+
+    /**
+     * Checks if the move of the player is valid and prints a message to the user.
+     * A move is valid if the {@link Position} in which the {@link Stone} is
+     * placed is inside the {@link Board}, if it is not on an already occupied
+     * {@link Position} and if it is adjacent to the previous played {@link Stone}
+     * in the case in which the adjacent {@link Position}s of the previous
+     * played {@link Stone} are not all occupied, otherwise the player has the freedom
+     * of placing it in any non-occupied {@link Position}.
+     * @param current The Position of the Stone placed in the move that has to be checked.
+     * @return true if the move of the player is valid, false otherwise.
+     */
+    public boolean isMoveValid(Position current) {
+        if (!board.positionIsInsideTheBoard(current)) {
+            System.out.print("The position is not inside the board!");
+            return false;
+        }
+        if (board.stoneIsAlreadyPlacedAt(current)) {
+            System.out.print("The position is already occupied!");
+            return false;
+        }
+        if (anyPositionAdjacentToPreviousOneIsFree()) {
+            if (current.isInAdjacentPositions(previous)) {
+                return true;
+            } else {
+                System.out.print("The position is not adjacent to the previous one!");
+                return false;
+            }
+        }
+        return true;
     }
 
     private Colour getPlayerColour(int i) {

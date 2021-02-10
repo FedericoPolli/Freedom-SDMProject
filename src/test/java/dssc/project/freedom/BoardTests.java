@@ -133,7 +133,7 @@ public class BoardTests {
 
     @Test
     public void testPrintBoard(){
-        ApplicationRunner application = new ApplicationRunner();
+        ApplicationRunner application = new ApplicationRunner(4);
         String white = Utility.getWhite();
         String black = Utility.getBlack();
         application.parseBoard(Position.at(1, 1), Colour.WHITE);

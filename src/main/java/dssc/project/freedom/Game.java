@@ -8,7 +8,7 @@ public class Game {
     /** The board on which the game is played. */
     protected final Board board;
     /** Auxiliary field to know the previous played position. */
-    private Position previous = null;
+    protected Position previous = null;
 
     /**
      * Class constructor. A {@link Game} has a {@link Board} on which the players play.
@@ -55,7 +55,7 @@ public class Game {
      * Checks if the {@link Stone}'s {@link Position} is adjacent to the previously played one.
      * @return true if the Stone is adjacent to the previously played one, false otherwise.
      */
-    private boolean anyPositionAdjacentToPreviousOneIsFree() {
+    protected boolean anyPositionAdjacentToPreviousOneIsFree() {
         return previous != null && !board.areAdjacentPositionOccupied(previous);
     }
 
