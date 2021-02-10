@@ -4,7 +4,7 @@ import dssc.project.freedom.Position;
 
 public interface Player {
 
-    void move(Position curent);
+    Position move();
 
 
 }

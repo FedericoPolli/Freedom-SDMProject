@@ -1,6 +1,9 @@
 package dssc.project.freedom;
 
 import dssc.project.freedom.players.Player;
+import dssc.project.freedom.players.HumanPlayer;
+import dssc.project.freedom.players.RandomPlayer;
+import dssc.project.freedom.players.GreedyPlayer;
 
 import java.util.Scanner;
 import static dssc.project.freedom.Utility.getInteger;
@@ -17,12 +20,27 @@ public class CommandLineGame extends Game{
      */
     public CommandLineGame(int boardSize) {
         super(boardSize);
+        char player1 = 'h', player2 = 'h';
+        String name = "Alberto";
+        switch (player1) {
+            case 'h' -> this.player1 = new HumanPlayer(name, Colour.WHITE);
+            case 'r' -> this.player1 = new RandomPlayer();
+            case 'g' -> this.player1 = new GreedyPlayer();
+        }
+        switch (player2) {
+            case 'h': this.player2 = new HumanPlayer(name, Colour.BLACK);
+            case 'r': this.player2 = new RandomPlayer();
+            case 'g': this.player2 = new GreedyPlayer();
+        }
     }
 
     public void play(Scanner in) {
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
             Colour colour = getPlayerColour(i);
-            Position current = getValidPosition(in);
+            Position current;
+            do {
+                current = player1.move();
+            } while (!isMoveValid(current));
             if (isLastMove(board.boardSize, i) && userDoesNotWantToDoLastMove(in, colour, current)) break;
             move(current, colour);
             board.printBoard();
@@ -61,14 +79,7 @@ public class CommandLineGame extends Game{
     }
 
     private Position getValidPosition(Scanner in) {
-        Position current;
-        do {
-            System.out.println(" Enter the x and y coordinates of the stone:");
-            int x = getInteger(in);
-            int y = getInteger(in);
-            current = Position.at(x, y);
-        } while (!isMoveValid(current));
-        return current;
+        return Position.at(1, 1);
     }
 
     /**
