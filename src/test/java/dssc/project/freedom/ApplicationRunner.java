@@ -29,6 +29,13 @@ public class ApplicationRunner {
         assertEquals(expectedOutput, outputStream.toString());
     }
 
+    public void testOutput2(String expectedOutput) {
+        int a = outputStream.toString().indexOf("+");
+        System.err.println(a);
+        System.err.println(outputStream.toString().substring(a, a+50));
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
     public void parseBoard(Position current, Colour colour) {
         commandLineGame.move(current, colour);
         commandLineGame.board.printBoard();

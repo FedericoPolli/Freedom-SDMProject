@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static java.lang.System.lineSeparator;
 
-public class CLGameTest {
+public class CLGameTests {
 
     String white = Utility.getWhite();
     String black = Utility.getBlack();
@@ -86,7 +86,7 @@ public class CLGameTest {
                 "+---+---+" + lineSeparator() +
                 "| " + white + " | " + white + " |" + lineSeparator() +
                 "+---+---+" + lineSeparator();
-        application.testOutput("White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+        String output = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 boardAfterFirstMove +
                 "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 "The position is already occupied!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
@@ -95,7 +95,18 @@ public class CLGameTest {
                 boardAfterThirdMove +
                 "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 boardAfterFourthMove +
-                "Draw: both players have the same number of live stones: " + 0 + lineSeparator());
+                "Draw: both players have the same number of live stones: " + 0 + lineSeparator();
+        int a = output.indexOf("+");
+        System.err.println(a);
+        System.err.println(output.substring(a, a+50));
+        StringBuffer text = new StringBuffer(output);
+        System.err.println(text);
+        while(text.toString().contains("+")) {
+            a = text.indexOf("+");
+            text = text.replace(a, a + 50, "");
+            System.err.println(text);
+        }
+        application.testOutput2(output);
     }
 
     @Test
