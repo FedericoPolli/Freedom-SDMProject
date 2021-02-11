@@ -30,10 +30,14 @@ public class ApplicationRunner {
     }
 
     public void testOutput2(String expectedOutput) {
-        int a = outputStream.toString().indexOf("+");
-        System.err.println(a);
-        System.err.println(outputStream.toString().substring(a, a+50));
-        assertEquals(expectedOutput, outputStream.toString());
+        String output = outputStream.toString();
+        StringBuffer text = new StringBuffer(output);
+        while(output.contains("+")) {
+            int i = text.indexOf("+");
+            text = text.replace(i, i + 50, "");
+            output = text.toString();
+        }
+        assertEquals(expectedOutput, output);
     }
 
     public void parseBoard(Position current, Colour colour) {

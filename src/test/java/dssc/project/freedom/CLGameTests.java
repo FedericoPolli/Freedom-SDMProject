@@ -66,46 +66,12 @@ public class CLGameTests {
         String input = "1 1" + lineSeparator() + "1 1" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2";
         application.parsePlay(input);
-        String boardAfterFirstMove = "+---+---+" + lineSeparator() +
-                "|   |   |" + lineSeparator() +
-                "+---+---+" + lineSeparator() +
-                "| "+ white + " |   |" + lineSeparator() +
-                "+---+---+" + lineSeparator();
-        String boardAfterSecondMove = "+---+---+" + lineSeparator() +
-                "| " + black + " |   |" + lineSeparator() +
-                "+---+---+" + lineSeparator() +
-                "| "+ white + " |   |" + lineSeparator() +
-                "+---+---+" + lineSeparator();
-        String boardAfterThirdMove = "+---+---+" + lineSeparator() +
-                "| " + black + " |   |" + lineSeparator() +
-                "+---+---+" + lineSeparator() +
-                "| " + white + " | " + white + " |" + lineSeparator() +
-                "+---+---+" + lineSeparator();
-        String boardAfterFourthMove = "+---+---+" + lineSeparator() +
-                "| "+ black + " | " + black + " |" + lineSeparator() +
-                "+---+---+" + lineSeparator() +
-                "| " + white + " | " + white + " |" + lineSeparator() +
-                "+---+---+" + lineSeparator();
         String output = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                boardAfterFirstMove +
                 "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 "The position is already occupied!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                boardAfterSecondMove +
                 "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                boardAfterThirdMove +
                 "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                boardAfterFourthMove +
                 "Draw: both players have the same number of live stones: " + 0 + lineSeparator();
-        int a = output.indexOf("+");
-        System.err.println(a);
-        System.err.println(output.substring(a, a+50));
-        StringBuffer text = new StringBuffer(output);
-        System.err.println(text);
-        while(text.toString().contains("+")) {
-            a = text.indexOf("+");
-            text = text.replace(a, a + 50, "");
-            System.err.println(text);
-        }
         application.testOutput2(output);
     }
 
