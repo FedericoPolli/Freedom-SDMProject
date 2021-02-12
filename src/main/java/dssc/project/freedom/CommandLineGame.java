@@ -1,12 +1,9 @@
 package dssc.project.freedom;
 
-import dssc.project.freedom.players.Player;
-import dssc.project.freedom.players.HumanPlayer;
-import dssc.project.freedom.players.RandomPlayer;
 import dssc.project.freedom.players.GreedyPlayer;
-
-import java.util.Scanner;
-import static dssc.project.freedom.Utility.getInteger;
+import dssc.project.freedom.players.HumanPlayer;
+import dssc.project.freedom.players.Player;
+import dssc.project.freedom.players.RandomPlayer;
 
 public class CommandLineGame extends Game{
 
@@ -33,11 +30,17 @@ public class CommandLineGame extends Game{
         }
     }
 
-    public void play(Scanner in) {
+    public void play() {
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
             Player currentPlayer = getCurrentPlayer(i);
             Position current = getValidPosition(currentPlayer);
-            if (isLastMove(board.boardSize, i) && userDoesNotWantToDoLastMove(in, currentPlayer.getColour(), current)) break;
+            if (isLastMove(board.boardSize, i) && !isLastMoveConvenient(current, currentPlayer.getColour())){
+                if (currentPlayer instanceof HumanPlayer){
+                    if (((HumanPlayer) currentPlayer).doesNotWantToDoLastMove()) break;
+                } else {
+                    break;
+                }
+            }
             move(current, currentPlayer.getColour());
             board.printBoard();
         }
@@ -63,15 +66,6 @@ public class CommandLineGame extends Game{
             System.out.println("Draw: both players have the same number of live stones: " + whiteLiveStones);
             return Colour.NONE;
         }
-    }
-
-    private boolean userDoesNotWantToDoLastMove(Scanner in, Colour colour, Position current) {
-        if (!isLastMoveConvenient(current, colour)){
-            System.out.println("Do you want to do the last move? (0 = yes, 1 = no)");
-            int d = getInteger(in);
-            return d != 0;
-        }
-        return false;
     }
 
     private boolean isLastMove(int boardSize, int i) {

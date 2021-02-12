@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.players.HumanPlayer;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -67,7 +69,8 @@ public class ApplicationRunner {
     }
 
     public void parsePlay(String input) {
-        commandLineGame.play(new Scanner(new ByteArrayInputStream(
+        HumanPlayer.setScanner(new Scanner(new ByteArrayInputStream(
                 input.getBytes(StandardCharsets.UTF_8))));
+        commandLineGame.play();
     }
 }
