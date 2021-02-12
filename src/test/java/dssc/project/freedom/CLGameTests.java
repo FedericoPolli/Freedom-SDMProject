@@ -72,16 +72,38 @@ public class CLGameTests {
                 "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 "Draw: both players have the same number of live stones: " + 0 + lineSeparator();
-        application.testOutput2(output);
+        application.testOutputWithoutBoardPrints(output);
     }
 
     @Test
     public void testPlayWithNotAdjacentPosition() {
-
+        ApplicationRunner application = new ApplicationRunner(3);
+        String input = "1 1" + lineSeparator() + "1 3" + lineSeparator() +
+                "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() + " 1 3" + lineSeparator() +
+                "2 3" + lineSeparator() + "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1" ;
+        application.parsePlay(input);
+        String getCoordinatesPlayers = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+                "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
+        String output = getCoordinatesPlayers +
+                "The position is not adjacent to the previous one!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+                getCoordinatesPlayers.repeat(3) +
+                "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+                "Draw: both players have the same number of live stones: " + 0 + lineSeparator();
+        application.testOutputWithoutBoardPrints(output);
     }
 
     @Test
     public void testPlayWithFreedomChoice() {
-
+        ApplicationRunner application = new ApplicationRunner(3);
+        String input = "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() +
+                " 1 1" + lineSeparator() + "1 3" + lineSeparator()+ "2 3" + lineSeparator() +
+                "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1" ;
+        application.parsePlay(input);
+        String getCoordinatesPlayers = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+                "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
+        String output = getCoordinatesPlayers.repeat(4) +
+                "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+                "Draw: both players have the same number of live stones: " + 0 + lineSeparator();
+        application.testOutputWithoutBoardPrints(output);
     }
 }
