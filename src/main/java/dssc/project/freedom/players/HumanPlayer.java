@@ -7,17 +7,14 @@ import java.util.Scanner;
 
 import static dssc.project.freedom.Utility.getInteger;
 
-public class HumanPlayer implements Player{
-
-    String name;
-    Colour colour;
+public class HumanPlayer extends Player{
 
     public HumanPlayer(String name, Colour colour) {
-        this.name = name;
-        this.colour = colour;
+        super(name, colour);
     }
 
-    public Position move() {
+    @Override
+    public Position getPlayerPosition() {
         Scanner in = new Scanner(System.in);
         Position current;
         System.out.println(" Enter the x and y coordinates of the stone:");

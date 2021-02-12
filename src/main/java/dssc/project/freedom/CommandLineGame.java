@@ -21,31 +21,31 @@ public class CommandLineGame extends Game{
     public CommandLineGame(int boardSize) {
         super(boardSize);
         char player1 = 'h', player2 = 'h';
-        String name = "Alberto";
         switch (player1) {
-            case 'h' -> this.player1 = new HumanPlayer(name, Colour.WHITE);
-            case 'r' -> this.player1 = new RandomPlayer();
-            case 'g' -> this.player1 = new GreedyPlayer();
+            case 'h' -> this.player1 = new HumanPlayer("White", Colour.WHITE);
+            case 'r' -> this.player1 = new RandomPlayer("White", Colour.WHITE);
+            case 'g' -> this.player1 = new GreedyPlayer("White", Colour.WHITE);
         }
         switch (player2) {
-            case 'h': this.player2 = new HumanPlayer(name, Colour.BLACK);
-            case 'r': this.player2 = new RandomPlayer();
-            case 'g': this.player2 = new GreedyPlayer();
+            case 'h' -> this.player2 = new HumanPlayer("Black", Colour.BLACK);
+            case 'r' -> this.player2 = new RandomPlayer("Black", Colour.BLACK);
+            case 'g' -> this.player2 = new GreedyPlayer("Black", Colour.BLACK);
         }
     }
 
     public void play(Scanner in) {
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
-            Colour colour = getPlayerColour(i);
-            Position current;
-            do {
-                current = player1.move();
-            } while (!isMoveValid(current));
-            if (isLastMove(board.boardSize, i) && userDoesNotWantToDoLastMove(in, colour, current)) break;
-            move(current, colour);
+            Player currentPlayer = getCurrentPlayer(i);
+            Position current = getValidPosition(currentPlayer);
+            if (isLastMove(board.boardSize, i) && userDoesNotWantToDoLastMove(in, currentPlayer.getColour(), current)) break;
+            move(current, currentPlayer.getColour());
             board.printBoard();
         }
         winner();
+    }
+
+    private Player getCurrentPlayer(int i){
+        return i % 2 == 1 ? player1 : player2;
     }
 
     @Override
@@ -78,8 +78,13 @@ public class CommandLineGame extends Game{
         return i == boardSize * boardSize;
     }
 
-    private Position getValidPosition(Scanner in) {
-        return Position.at(1, 1);
+    private Position getValidPosition(Player currentPlayer) {
+        System.out.print(currentPlayer.getName() + " it's your turn!");
+        Position current;
+        do {
+            current = currentPlayer.getPlayerPosition();
+        } while (!isMoveValid(current));
+        return current;
     }
 
     /**
@@ -113,16 +118,5 @@ public class CommandLineGame extends Game{
         return true;
     }
 
-    private Colour getPlayerColour(int i) {
-        Colour colour;
-        if (i % 2 != 0){
-            System.out.print("White it's your turn!");
-            colour = Colour.WHITE;
-        } else {
-            System.out.print("Black it's your turn!");
-            colour = Colour.BLACK;
-        }
-        return colour;
-    }
 }
 
