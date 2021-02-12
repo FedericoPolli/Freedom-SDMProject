@@ -15,9 +15,8 @@ public class CommandLineGame extends Game{
      *
      * @param boardSize The size of the Board to be created.
      */
-    public CommandLineGame(int boardSize) {
+    public CommandLineGame(int boardSize, char player1, char player2) {
         super(boardSize);
-        char player1 = 'h', player2 = 'r';
         switch (player1) {
             case 'h' -> this.player1 = new HumanPlayer("White", Colour.WHITE);
             case 'r' -> this.player1 = new RandomPlayer("White", Colour.WHITE, boardSize);
@@ -77,7 +76,10 @@ public class CommandLineGame extends Game{
         Position current;
         do {
             current = currentPlayer.getPlayerPosition();
-        } while (!isMoveValid(current));
+        } while (!isMoveValid(current, currentPlayer));
+        if (!(currentPlayer instanceof HumanPlayer)){
+            System.out.println();
+        }
         return current;
     }
 
@@ -92,20 +94,23 @@ public class CommandLineGame extends Game{
      * @param current The Position of the Stone placed in the move that has to be checked.
      * @return true if the move of the player is valid, false otherwise.
      */
-    public boolean isMoveValid(Position current) {
+    public boolean isMoveValid(Position current, Player currentPlayer) {
         if (!board.positionIsInsideTheBoard(current)) {
-            System.out.print("The position is not inside the board!");
+            if (currentPlayer instanceof HumanPlayer)
+                System.out.print("The position is not inside the board!");
             return false;
         }
         if (board.stoneIsAlreadyPlacedAt(current)) {
-            System.out.print("The position is already occupied!");
+            if (currentPlayer instanceof HumanPlayer)
+                System.out.print("The position is already occupied!");
             return false;
         }
         if (anyPositionAdjacentToPreviousOneIsFree()) {
             if (current.isInAdjacentPositions(previous)) {
                 return true;
             } else {
-                System.out.print("The position is not adjacent to the previous one!");
+                if (currentPlayer instanceof HumanPlayer)
+                    System.out.print("The position is not adjacent to the previous one!");
                 return false;
             }
         }
