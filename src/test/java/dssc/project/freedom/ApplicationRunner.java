@@ -2,7 +2,6 @@ package dssc.project.freedom;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -27,6 +26,18 @@ public class ApplicationRunner {
 
     public void testOutput(String expectedOutput) {
         assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    public void testOutputWithoutBoardPrints(String expectedOutput) {
+        String output = outputStream.toString();
+        StringBuffer text = new StringBuffer(output);
+        int boardLength = (4*boardSize+2)*(2*boardSize+1);
+        while(output.contains("+")) {
+            int i = text.indexOf("+");
+            text = text.replace(i, i + boardLength, "");
+            output = text.toString();
+        }
+        assertEquals(expectedOutput, output);
     }
 
     public void parseBoard(Position current, Colour colour) {
