@@ -1,7 +1,5 @@
 package dssc.project.freedom;
 
-import dssc.project.freedom.players.HumanPlayer;
-
 import java.util.Scanner;
 
 /**
@@ -12,15 +10,15 @@ public class Main {
     /**
      * Main of the project.
      */
-    public static void main() {
+    public static void main(String[] args) {
         System.out.println("Game Start:");
         Scanner in = new Scanner(System.in);
-        HumanPlayer.setScanner(in);
         System.out.println("Enter the board size (minimum 4):");
         int boardSize = getBoardSize(in);
         CommandLineGame clGame = new CommandLineGame(boardSize);
         clGame.play();
         in.close();
+
     }
 
     private static int getBoardSize(Scanner in) {

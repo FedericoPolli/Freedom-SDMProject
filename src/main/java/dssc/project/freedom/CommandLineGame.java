@@ -17,15 +17,15 @@ public class CommandLineGame extends Game{
      */
     public CommandLineGame(int boardSize) {
         super(boardSize);
-        char player1 = 'h', player2 = 'h';
+        char player1 = 'h', player2 = 'r';
         switch (player1) {
             case 'h' -> this.player1 = new HumanPlayer("White", Colour.WHITE);
-            case 'r' -> this.player1 = new RandomPlayer("White", Colour.WHITE);
+            case 'r' -> this.player1 = new RandomPlayer("White", Colour.WHITE, boardSize);
             case 'g' -> this.player1 = new GreedyPlayer("White", Colour.WHITE);
         }
         switch (player2) {
             case 'h' -> this.player2 = new HumanPlayer("Black", Colour.BLACK);
-            case 'r' -> this.player2 = new RandomPlayer("Black", Colour.BLACK);
+            case 'r' -> this.player2 = new RandomPlayer("Black", Colour.BLACK, boardSize);
             case 'g' -> this.player2 = new GreedyPlayer("Black", Colour.BLACK);
         }
     }
