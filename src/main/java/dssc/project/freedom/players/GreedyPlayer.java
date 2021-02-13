@@ -6,6 +6,7 @@ import dssc.project.freedom.Direction;
 import dssc.project.freedom.Position;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -36,6 +37,7 @@ public class GreedyPlayer extends Player{
 
     private Position findPositionToPlayIn(List<Position> freePositions) {
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
+        List<Integer> indexes = new ArrayList<>();
         for (Position p : freePositions) {
             board.updateStoneAt(p, colour);
             int i = 0;
@@ -49,11 +51,15 @@ public class GreedyPlayer extends Player{
                 return p;
             if (i == 5)
                 freePositionsCopy.remove(p);
+            else
+                indexes.add(i);
         }
         if (freePositionsCopy.isEmpty())
             return freePositions.get(new Random().nextInt(freePositions.size()));
-        else
-            return freePositionsCopy.get(new Random().nextInt(freePositionsCopy.size()));
+        else {
+            int j = indexes.stream().max(Comparator.naturalOrder()).get();
+            return freePositionsCopy.get(indexes.indexOf(j));
+        }
 
     }
 

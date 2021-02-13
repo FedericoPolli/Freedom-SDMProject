@@ -13,6 +13,7 @@ public class RandomPlayer extends Player{
         super(name, colour);
         this.boardSize = boardSize;
     }
+
     public Position getPlayerPosition() {
         Random random = new Random();
         int x = random.nextInt(boardSize) +1;
