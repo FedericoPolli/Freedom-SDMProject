@@ -6,7 +6,7 @@ import dssc.project.freedom.Position;
 public abstract class Player {
 
     private final String name;
-    private  final Colour colour;
+    protected final Colour colour;
 
     public Player(String name, Colour colour) {
         this.name = name;

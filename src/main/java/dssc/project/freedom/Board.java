@@ -4,7 +4,9 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static dssc.project.freedom.Position.at;
 
@@ -182,10 +184,10 @@ public class Board {
      * four {@link Stone}s of the same {@link Colour}, then makes them "live".
      */
     public void checkBoardAndMakeStonesLive(){
-        check4StonesInDirection(Direction.HORIZONTAL);
-        check4StonesInDirection(Direction.VERTICAL);
-        check4StonesInDirection(Direction.MAIN_DIAGONAL);
-        check4StonesInDirection(Direction.OFF_DIAGONAL);
+        check4StonesInDirection(Direction.RIGHT);
+        check4StonesInDirection(Direction.UP);
+        check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
+        check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
     }
 
     /**
@@ -210,5 +212,9 @@ public class Board {
             printWriter.println("|");
             printWriter.println(line);
         }
+    }
+
+    public List<Position> getFreePositions() {
+        return board.keySet().stream().filter(p -> getStoneAt(p).isOfColour(Colour.NONE)).collect(Collectors.toList());
     }
 }

@@ -5,7 +5,9 @@ import dssc.project.freedom.Colour;
 import dssc.project.freedom.Direction;
 import dssc.project.freedom.Position;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GreedyPlayer extends Player{
 
@@ -27,14 +29,32 @@ public class GreedyPlayer extends Player{
     public Position getPlayerPosition() {
         List<Position> freePositions = board.getAdjacentPositions(previous);
         if (freePositions.isEmpty())
-            checkWholeBoard();
+            return findPositionToPlayIn(board.getFreePositions());
         else
-            checkAdjacentPositions(freePositions);
+            return findPositionToPlayIn(freePositions);
     }
 
-    private void checkAdjacentPositions(List<Position> freePositions) {
+    private Position findPositionToPlayIn(List<Position> freePositions) {
+        List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         for (Position p : freePositions) {
-            board.countStonesInRow(Direction.HORIZONTAL, p);
+            board.updateStoneAt(p, colour);
+            int i = 0;
+            for (Direction dir : Direction.values()) {
+                i = Math.max(i, board.countStonesInRow(dir, p));
+                if (i == 5)
+                    break;
+            }
+            board.updateStoneAt(p, Colour.NONE);
+            if (i == 4)
+                return p;
+            if (i == 5)
+                freePositionsCopy.remove(p);
         }
+        if (freePositionsCopy.isEmpty())
+            return freePositions.get(new Random().nextInt(freePositions.size()));
+        else
+            return freePositionsCopy.get(new Random().nextInt(freePositionsCopy.size()));
+
     }
+
 }

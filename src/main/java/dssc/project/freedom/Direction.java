@@ -3,13 +3,22 @@ package dssc.project.freedom;
 public enum Direction {
 
     /** The horizontal direction. */
-    HORIZONTAL(1, 0),
+    RIGHT(1, 0),
     /** The vertical direction. */
-    VERTICAL(0, 1),
+    UP(0, 1),
     /** The main diagonal direction. */
-    MAIN_DIAGONAL(1, 1),
+    UP_MAIN_DIAGONAL(1, 1),
     /** The off diagonal direction. */
-    OFF_DIAGONAL(-1, 1);
+    UP_ANTI_DIAGONAL(-1, 1),
+    /** The horizontal direction. */
+    LEFT(-1, 0),
+    /** The vertical direction. */
+    DOWN(0, -1),
+    /** The main diagonal direction. */
+    DOWN_MAIN_DIAGONAL(-1, -1),
+    /** The off diagonal direction. */
+    DOWN_ANTI_DIAGONAL(1, -1);
+
     public final int x;
     public final int y;
 
