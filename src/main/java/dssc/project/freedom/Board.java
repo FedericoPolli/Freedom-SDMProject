@@ -17,23 +17,6 @@ import static dssc.project.freedom.Position.at;
  */
 public class Board {
 
-    private enum Direction {
-        /** The horizontal direction. */
-        HORIZONTAL(1, 0),
-        /** The vertical direction. */
-        VERTICAL(0, 1),
-        /** The main diagonal direction. */
-        MAIN_DIAGONAL(1, 1),
-        /** The off diagonal direction. */
-        OFF_DIAGONAL(-1, 1);
-        private final int x;
-        private final int y;
-
-        Direction(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
 
     /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
@@ -166,7 +149,7 @@ public class Board {
      * @param current The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
-    private int countStonesInRow(Direction dir, Position current) {
+    public int countStonesInRow(Direction dir, Position current) {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
             Position next = current.moveInDirection(i * dir.x, i * dir.y);

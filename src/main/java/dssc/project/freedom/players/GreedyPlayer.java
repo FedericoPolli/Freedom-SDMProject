@@ -2,7 +2,10 @@ package dssc.project.freedom.players;
 
 import dssc.project.freedom.Board;
 import dssc.project.freedom.Colour;
+import dssc.project.freedom.Direction;
 import dssc.project.freedom.Position;
+
+import java.util.List;
 
 public class GreedyPlayer extends Player{
 
@@ -22,6 +25,16 @@ public class GreedyPlayer extends Player{
     }
 
     public Position getPlayerPosition() {
-        return null;
+        List<Position> freePositions = board.getAdjacentPositions(previous);
+        if (freePositions.isEmpty())
+            checkWholeBoard();
+        else
+            checkAdjacentPositions(freePositions);
+    }
+
+    private void checkAdjacentPositions(List<Position> freePositions) {
+        for (Position p : freePositions) {
+            board.countStonesInRow(Direction.HORIZONTAL, p);
+        }
     }
 }
