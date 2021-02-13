@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApplicationRunner {
 
-    private ByteArrayOutputStream outputStream;
+    private final ByteArrayOutputStream outputStream;
     private final int boardSize;
-    private CommandLineGame commandLineGame;
+    private final CommandLineGame commandLineGame;
 
     public ApplicationRunner(int boardSize) {
         outputStream = new ByteArrayOutputStream();

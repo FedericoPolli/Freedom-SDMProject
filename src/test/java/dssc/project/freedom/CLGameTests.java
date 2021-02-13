@@ -6,8 +6,7 @@ import static java.lang.System.lineSeparator;
 
 public class CLGameTests {
 
-    String white = Utility.getWhite();
-    String black = Utility.getBlack();
+    final String white = Utility.getWhite();
 
     @Test
     public void testWhiteWinner () {
