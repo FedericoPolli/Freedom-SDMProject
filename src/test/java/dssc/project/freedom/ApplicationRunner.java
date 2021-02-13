@@ -34,6 +34,8 @@ public class ApplicationRunner {
         String output = outputStream.toString();
         StringBuffer text = new StringBuffer(output);
         int boardLength = (4*boardSize+2)*(2*boardSize+1);
+        if (Utility.getOS().equals("Windows"))
+            boardLength += boardSize*2 + 1;
         while(output.contains("+")) {
             int i = text.indexOf("+");
             text = text.replace(i, i + boardLength, "");

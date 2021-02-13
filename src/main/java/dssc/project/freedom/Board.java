@@ -2,7 +2,9 @@ package dssc.project.freedom;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static dssc.project.freedom.Position.at;
 
@@ -90,18 +92,21 @@ public class Board {
                 .count();
     }
 
+    public List<Position> getAdjacentPositions(Position pos) {
+        return board.keySet()
+                .stream()
+                .filter(p -> p.isInAdjacentPositions(pos))
+                .filter(p -> getStoneAt(p).isOfColour(Colour.NONE))
+                .collect(Collectors.toList());
+    }
+
     /**
      * Checks if all the {@link Position}s adjacent to the given one are occupied.
      * @param pos The Position to be checked.
      * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
      */
     public boolean areAdjacentPositionOccupied(Position pos){
-        return board.keySet()
-                .stream()
-                .filter(p -> p.isInAdjacentPositions(pos))
-                .filter(p -> getStoneAt(p).isOfColour(Colour.NONE))
-                .findAny()
-                .isEmpty();
+        return getAdjacentPositions(pos).isEmpty();
     }
 
     /**

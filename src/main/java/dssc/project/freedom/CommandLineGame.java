@@ -32,6 +32,10 @@ public class CommandLineGame extends Game{
     public void play() {
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
             Player currentPlayer = getCurrentPlayer(i);
+            if (currentPlayer instanceof GreedyPlayer) {
+                GreedyPlayer.setBoard(board);
+                GreedyPlayer.setPrevious(previous);
+            }
             Position current = getValidPosition(currentPlayer);
             if (isLastMove(board.boardSize, i) && !isLastMoveConvenient(current, currentPlayer.getColour())){
                 if (currentPlayer instanceof HumanPlayer){

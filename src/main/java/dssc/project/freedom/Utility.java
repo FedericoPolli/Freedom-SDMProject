@@ -26,7 +26,7 @@ public class Utility {
     }
 
 
-    private static String getOS() {
+    public static String getOS() {
         String os = System.getProperty("os.name");
         if (os.contains("Windows")) return "Windows";
         else return "Not Windows";
