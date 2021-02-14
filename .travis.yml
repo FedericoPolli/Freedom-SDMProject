@@ -1,5 +1,23 @@
 language: java
-before_install:
-  - chmod +x gradlew
+
 jdk:
   -openjdk15
+
+os:
+  - linux
+  - osx
+  - windows
+
+before_install:
+- |-
+    case $TRAVIS_OS_NAME in
+      linux)
+  		chmod +x gradlew
+		;;
+	esac
+- |-
+    case $TRAVIS_OS_NAME in
+      windows)
+		choco install openjdk
+		;;
+	esac
