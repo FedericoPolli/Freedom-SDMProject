@@ -214,7 +214,7 @@ public class Board {
         printWriter.print("  ");
         for (int i = 1; i<= boardSize; ++i)
             printWriter.print("  " + i + " ");
-        printWriter.println();
+        printWriter.println(" ");
     }
 
     public List<Position> getFreePositions() {

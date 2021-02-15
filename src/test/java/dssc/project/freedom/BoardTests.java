@@ -144,14 +144,14 @@ public class BoardTests {
                 line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
                 line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
                 line + "1 " + "| " + white + " |" + "   |".repeat(3) + lineSeparator() +
-                line + "    1   2   3   4 " + lineSeparator();
+                line + "    1   2   3   4  " + lineSeparator();
         String boardAfterSecondMove =
                 line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
                 line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
                 line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
                 line +
                 "1 " + "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
-                line + "    1   2   3   4 " + lineSeparator();
+                line + "    1   2   3   4  " + lineSeparator();
         application.testOutput(boardAfterFirstMove + boardAfterSecondMove);
     }
 }

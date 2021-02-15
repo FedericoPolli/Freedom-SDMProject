@@ -33,11 +33,11 @@ public class ApplicationRunner {
     public void testOutputWithoutBoardPrints(String expectedOutput) {
         String output = outputStream.toString();
         StringBuffer text = new StringBuffer(output);
-        int boardLength = (4*boardSize+2)*(2*boardSize+1);
+        int boardLength = (4*boardSize+4)*(2*boardSize+2);
         if (Utility.getOS().equals("Windows"))
-            boardLength += boardSize*2 + 1;
+            boardLength += boardSize*2 + 2;
         while(output.contains("+")) {
-            int i = text.indexOf("+");
+            int i = text.indexOf("+") - 2;
             text = text.replace(i, i + boardLength, "");
             output = text.toString();
         }

@@ -30,21 +30,15 @@ public class CLGameTests {
     @Test
     public void testPlay() {
         ApplicationRunner application = new ApplicationRunner(1);
-        application.parsePlay("1 1");/*
-        String initialBoard =
-                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line + "1 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line + "    1   2   3   4  " + lineSeparator();*/
+        application.parsePlay("1 1");
         String initialBoard = "  +---+" + lineSeparator() +
                 "1 |   |" + lineSeparator() +
                 "  +---+" + lineSeparator() +
-                "    1 " + lineSeparator();
+                "    1  " + lineSeparator();
         String board = "  +---+" + lineSeparator() +
                 "1 | "+ white + " |" + lineSeparator() +
                 "  +---+" + lineSeparator() +
-                "    1 " + lineSeparator();
+                "    1  " + lineSeparator();
         application.testOutput(initialBoard + "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
             board + "Draw: both players have the same number of live stones: " + 0 + lineSeparator());
     }
@@ -57,11 +51,11 @@ public class CLGameTests {
         String initialBoard = "  +---+" + lineSeparator() +
                 "1 |   |" + lineSeparator() +
                 "  +---+" + lineSeparator() +
-                "    1 " + lineSeparator();
+                "    1  " + lineSeparator();
         String board = "  +---+" + lineSeparator() +
                 "1 | "+ white + " |" + lineSeparator() +
                 "  +---+" + lineSeparator() +
-                "    1 " + lineSeparator();
+                "    1  " + lineSeparator();
         application.testOutput(initialBoard + "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 "You didn't enter an integer! Enter again an integer" + lineSeparator() +
                 board + "Draw: both players have the same number of live stones: " + 0 + lineSeparator());
@@ -75,11 +69,11 @@ public class CLGameTests {
         String initialBoard = "  +---+" + lineSeparator() +
                 "1 |   |" + lineSeparator() +
                 "  +---+" + lineSeparator() +
-                "    1 " + lineSeparator();
+                "    1  " + lineSeparator();
         String board = "  +---+" + lineSeparator() +
                 "1 | "+ white + " |" + lineSeparator() +
                 "  +---+" + lineSeparator() +
-                "    1 " + lineSeparator();
+                "    1  " + lineSeparator();
         application.testOutput(initialBoard + "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 "The position is not inside the board!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 board + "Draw: both players have the same number of live stones: " + 0 + lineSeparator());
