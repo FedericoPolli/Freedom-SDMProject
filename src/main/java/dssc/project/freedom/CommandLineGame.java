@@ -30,6 +30,7 @@ public class CommandLineGame extends Game{
     }
 
     public void play() {
+        board.printBoard();
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
             Player currentPlayer = getCurrentPlayer(i);
             if (currentPlayer instanceof GreedyPlayer) {
@@ -54,16 +55,16 @@ public class CommandLineGame extends Game{
     @Override
     public Colour winner(){
         board.checkBoardAndMakeStonesLive();
-        int whiteLiveStones = board.countLiveStones(Colour.WHITE);
-        int blackLiveStones = board.countLiveStones(Colour.BLACK);
-        if (whiteLiveStones > blackLiveStones) {
-            System.out.println("White won with " + whiteLiveStones + " live stones against Black's " + blackLiveStones);
-            return Colour.WHITE;
-        } else if (blackLiveStones > whiteLiveStones) {
-            System.out.println("Black won with " + blackLiveStones + " live stones against White's " + whiteLiveStones);
-            return Colour.BLACK;
+        int player1LiveStones = board.countLiveStones(player1.getColour());
+        int player2LiveStones = board.countLiveStones(player2.getColour());
+        if (player1LiveStones > player2LiveStones) {
+            System.out.println(player1.getName() + " won with " + player1LiveStones + " live stones against " + player2.getName() + "'s " + player2LiveStones);
+            return player1.getColour();
+        } else if (player2LiveStones > player1LiveStones) {
+            System.out.println(player2.getName() + " won with " + player2LiveStones + " live stones against " + player1.getName() + "'s " + player1LiveStones);
+            return player2.getColour();
         } else {
-            System.out.println("Draw: both players have the same number of live stones: " + whiteLiveStones);
+            System.out.println("Draw: both players have the same number of live stones: " + player1LiveStones);
             return Colour.NONE;
         }
     }

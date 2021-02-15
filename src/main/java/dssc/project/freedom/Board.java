@@ -195,10 +195,11 @@ public class Board {
         PrintWriter printWriter = new PrintWriter(System.out,true);
         String white = Utility.getWhite();
         String black = Utility.getBlack();
-        String line = "+---".repeat(boardSize) + "+";
+        String line = "  " + "+---".repeat(boardSize) + "+";
         printWriter.println(line);
-        for (int j = boardSize; j>0; --j){
-            for (int i = 1; i<= boardSize; ++i){
+        for (int j = boardSize; j>0; --j) {
+            printWriter.print(j + " ");
+            for (int i = 1; i<= boardSize; ++i) {
                 printWriter.print("| ");
                 switch (getStoneAt(at(i, j)).getColour()){
                     case WHITE -> printWriter.print(white);
@@ -210,6 +211,10 @@ public class Board {
             printWriter.println("|");
             printWriter.println(line);
         }
+        printWriter.print("  ");
+        for (int i = 1; i<= boardSize; ++i)
+            printWriter.print("  " + i + " ");
+        printWriter.println();
     }
 
     public List<Position> getFreePositions() {
