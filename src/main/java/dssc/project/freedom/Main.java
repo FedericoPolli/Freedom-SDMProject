@@ -20,7 +20,6 @@ public class Main {
         CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
         clGame.play();
         in.close();
-
     }
 
     private static int getBoardSize(Scanner in) {

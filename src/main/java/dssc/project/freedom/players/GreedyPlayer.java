@@ -28,11 +28,21 @@ public class GreedyPlayer extends Player{
     }
 
     public Position getPlayerPosition() {
+        if (previous == null) {
+            return getRandomPosition();
+        }
         List<Position> freePositions = board.getAdjacentPositions(previous);
         if (freePositions.isEmpty())
             return findPositionToPlayIn(board.getFreePositions());
         else
             return findPositionToPlayIn(freePositions);
+    }
+
+    private Position getRandomPosition() {
+        Random random = new Random();
+        int x = random.nextInt(board.boardSize) + 1;
+        int y = random.nextInt(board.boardSize) + 1;
+        return Position.at(x, y);
     }
 
     private Position findPositionToPlayIn(List<Position> freePositions) {

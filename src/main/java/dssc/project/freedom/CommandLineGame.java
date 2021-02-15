@@ -80,7 +80,7 @@ public class CommandLineGame extends Game{
             current = currentPlayer.getPlayerPosition();
         } while (!isMoveValid(current, currentPlayer));
         if (!(currentPlayer instanceof HumanPlayer)){
-            System.out.println();
+            System.out.println(" Moved in " + current.toString());
         }
         return current;
     }
