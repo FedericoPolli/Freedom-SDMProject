@@ -138,26 +138,20 @@ public class BoardTests {
         String black = Utility.getBlack();
         application.parseBoard(Position.at(1, 1), Colour.WHITE);
         application.parseBoard(Position.at(2, 1), Colour.BLACK);
+        String line = "  " + "+---".repeat(4) + "+" + lineSeparator();
         String boardAfterFirstMove =
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "| " + white + " |" + "   |".repeat(3) + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator();
+                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                line + "1 " + "| " + white + " |" + "   |".repeat(3) + lineSeparator() +
+                line + "    1   2   3   4 " + lineSeparator();
         String boardAfterSecondMove =
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "|   ".repeat(4) + "|" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator() +
-                "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
-                "+---".repeat(4) + "+" + lineSeparator();
+                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                line +
+                "1 " + "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
+                line + "    1   2   3   4 " + lineSeparator();
         application.testOutput(boardAfterFirstMove + boardAfterSecondMove);
     }
 }
