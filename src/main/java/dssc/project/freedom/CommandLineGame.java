@@ -38,11 +38,8 @@ public class CommandLineGame extends Game{
             }
             Position current = getValidPosition(currentPlayer);
             if (isLastMove(board.boardSize, i) && !isLastMoveConvenient(current, currentPlayer.getColour())){
-                if (currentPlayer instanceof HumanPlayer){
-                    if (((HumanPlayer) currentPlayer).doesNotWantToDoLastMove()) break;
-                } else {
+                if (currentPlayer.doesNotWantToDoLastMove())
                     break;
-                }
             }
             move(current, currentPlayer.getColour());
             board.printBoard();

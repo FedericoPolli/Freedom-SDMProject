@@ -13,8 +13,6 @@ public abstract class Player {
         this.colour = colour;
     }
 
-    public abstract Position getPlayerPosition();
-
     public String getName() {
         return name;
     }
@@ -23,5 +21,9 @@ public abstract class Player {
         return colour;
     }
 
+    public abstract Position getPlayerPosition();
 
+    public boolean doesNotWantToDoLastMove() {
+        return true;
+    }
 }

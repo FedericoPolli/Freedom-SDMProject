@@ -29,6 +29,7 @@ public class HumanPlayer extends Player{
         return current;
     }
 
+    @Override
     public boolean doesNotWantToDoLastMove() {
         System.out.println("Do you want to do the last move? (0 = yes, 1 = no)");
         int d = getInteger(in);

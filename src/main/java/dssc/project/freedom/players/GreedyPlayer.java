@@ -62,5 +62,4 @@ public class GreedyPlayer extends Player{
         }
 
     }
-
 }
