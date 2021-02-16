@@ -5,7 +5,7 @@ import dssc.project.freedom.Position;
 
 import static dssc.project.freedom.Utility.getRandomInteger;
 
-public class RandomPlayer extends Player{
+public class RandomPlayer extends Player {
 
     private final int boardSize;
 

@@ -5,9 +5,10 @@ package dssc.project.freedom;
  *
  * This {@link Enum} represents the colours of a {@link Stone}: it can be white, black
  * or empty, thus without colour.
- * It is used to avoid using and working with a {@link String} all the time.
+ * It is used to avoid working with a {@link String} all the time.
  */
 public enum Colour {
+
     /** White {@link Stone}s. */
     WHITE,
     /** Black {@link Stone}s. */

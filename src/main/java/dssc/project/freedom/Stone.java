@@ -23,17 +23,21 @@ public class Stone {
     }
 
     /**
-     * Getter fot the {@link Colour} of this {@link Stone}
-     * @return the Colour of this Stone.
+     * Getter for the {@link Colour} of this {@link Stone}.
+     * @return The Colour of this Stone.
      */
-    public Colour getColour(){return this.colour;}
+    public Colour getColour() {
+        return this.colour;
+    }
 
     /**
      * Checks if this {@link Stone} is of the given {@link Colour}.
      * @param colour The Colour to be used in the comparison.
      * @return true if the Stone is of the same Colour as the input, false otherwise.
      */
-    public boolean isOfColour(Colour colour) { return this.colour.equals(colour); }
+    public boolean isOfColour(Colour colour) {
+        return this.colour.equals(colour);
+    }
 
     /**
      * Checks if this {@link Stone} is of the same {@link Colour} as the given {@link Stone}.
@@ -53,8 +57,8 @@ public class Stone {
     }
 
     /**
-     * Getter for the "live" status of the {@link Stone}.
-     * @return true if the Stone is "live", false otherwise.
+     * Getter for the "live" status of this {@link Stone}.
+     * @return true if this Stone is "live", false otherwise.
      */
     public boolean isLive() {
         return liveStatus;
@@ -64,7 +68,9 @@ public class Stone {
      * Changes the "live" status of this {@link Stone} to the value in input.
      * @param status The status to which update the "live" status of this Stone.
      */
-    public void changeLiveStatusTo(boolean status){ liveStatus = status; }
+    public void changeLiveStatusTo(boolean status) {
+        liveStatus = status;
+    }
 
     /**
      * Returns a {@link String} representation of this object.

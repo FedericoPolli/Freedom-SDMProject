@@ -5,14 +5,14 @@ import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
 import dssc.project.freedom.players.RandomPlayer;
 
-public class CommandLineGame extends Game{
+public class CommandLineGame extends Game {
 
     Player player1;
     Player player2;
 
     /**
-     * Class constructor. A {@link Game} has a {@link Board} on which the players play.
-     *
+     * Class constructor. A {@link Game} has a {@link Board} on which the players
+     * play, then it has two players.
      * @param boardSize The size of the Board to be created.
      */
     public CommandLineGame(int boardSize, char player1, String name1, char player2, String name2) {
@@ -33,14 +33,14 @@ public class CommandLineGame extends Game{
         System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
         System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
         board.printBoard();
-        for (int i = 1; i <= board.getBoardSize() * board.getBoardSize(); ++i){
+        for (int i = 1; i <= board.getBoardSize() * board.getBoardSize(); ++i) {
             Player currentPlayer = getCurrentPlayer(i);
             if (currentPlayer instanceof GreedyPlayer) {
                 GreedyPlayer.setBoard(board);
                 GreedyPlayer.setPrevious(previous);
             }
             Position current = getValidPosition(currentPlayer);
-            if (isLastMove(board.getBoardSize(), i) && !isLastMoveConvenient(current, currentPlayer.getColour())){
+            if (isLastMove(board.getBoardSize(), i) && !isLastMoveConvenient(current, currentPlayer.getColour())) {
                 if (currentPlayer.doesNotWantToDoLastMove())
                     break;
             }
@@ -50,29 +50,8 @@ public class CommandLineGame extends Game{
         winner();
     }
 
-    private Player getCurrentPlayer(int i){
+    private Player getCurrentPlayer(int i) {
         return i % 2 == 1 ? player1 : player2;
-    }
-
-    @Override
-    public Colour winner(){
-        board.checkBoardAndMakeStonesLive();
-        int player1LiveStones = board.countLiveStones(player1.getColour());
-        int player2LiveStones = board.countLiveStones(player2.getColour());
-        if (player1LiveStones > player2LiveStones) {
-            System.out.println(player1.getName() + " won with " + player1LiveStones + " live stones against " + player2.getName() + "'s " + player2LiveStones);
-            return player1.getColour();
-        } else if (player2LiveStones > player1LiveStones) {
-            System.out.println(player2.getName() + " won with " + player2LiveStones + " live stones against " + player1.getName() + "'s " + player1LiveStones);
-            return player2.getColour();
-        } else {
-            System.out.println("Draw: both players have the same number of live stones: " + player1LiveStones);
-            return Colour.NONE;
-        }
-    }
-
-    private boolean isLastMove(int boardSize, int i) {
-        return i == boardSize * boardSize;
     }
 
     private Position getValidPosition(Player currentPlayer) {
@@ -81,10 +60,14 @@ public class CommandLineGame extends Game{
         do {
             current = currentPlayer.getPlayerPosition();
         } while (!isMoveValid(current, currentPlayer));
-        if (!(currentPlayer instanceof HumanPlayer)){
+        if (!(currentPlayer instanceof HumanPlayer)) {
             System.out.println(" Moved in " + current.toString());
         }
         return current;
+    }
+
+    private boolean isLastMove(int boardSize, int i) {
+        return i == boardSize * boardSize;
     }
 
     /**
@@ -121,5 +104,21 @@ public class CommandLineGame extends Game{
         return true;
     }
 
+    @Override
+    public Colour winner() {
+        board.checkBoardAndMakeStonesLive();
+        int player1LiveStones = board.countLiveStones(player1.getColour());
+        int player2LiveStones = board.countLiveStones(player2.getColour());
+        if (player1LiveStones > player2LiveStones) {
+            System.out.println(player1.getName() + " won with " + player1LiveStones + " live stones against " + player2.getName() + "'s " + player2LiveStones);
+            return player1.getColour();
+        } else if (player2LiveStones > player1LiveStones) {
+            System.out.println(player2.getName() + " won with " + player2LiveStones + " live stones against " + player1.getName() + "'s " + player1LiveStones);
+            return player2.getColour();
+        } else {
+            System.out.println("Draw: both players have the same number of live stones: " + player1LiveStones);
+            return Colour.NONE;
+        }
+    }
 }
 

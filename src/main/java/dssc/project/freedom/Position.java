@@ -7,9 +7,9 @@ package dssc.project.freedom;
  */
 public final class Position {
 
-    /** x coordinate of this {@link Position}. */
+    /** The x-coordinate of this {@link Position}. */
     private final int x;
-    /** y coordinate of this {@link Position}. */
+    /** The y-coordinate of this {@link Position}. */
     private final int y;
 
     /**
@@ -23,11 +23,10 @@ public final class Position {
     }
 
     /**
-     * Class constructor. Creates a {@link Position} with x coordinate `x` and
-     * with y-coordinate `y`.
-     *
-     * @param x The x coordinate of the Position.
-     * @param y The y coordinate of the Position.
+     * Class constructor. Creates a {@link Position} with x-coordinate <code>x</code>
+     * and with y-coordinate <code>y</code>.
+     * @param x The x-coordinate of the Position.
+     * @param y The y-coordinate of the Position.
      */
     public Position(int x, int y) {
         this.x = x;
@@ -50,8 +49,8 @@ public final class Position {
      * @param p The Position to which this Position must be adjacent.
      * @return true if this Position is adjacent to the given Position, false otherwise.
      */
-    public boolean isInAdjacentPositions(Position p){
-        return x <= p.x +1 && y <= p.y +1 && x >= p.x -1 && y >= p.y -1 && !this.equals(p);
+    public boolean isInAdjacentPositions(Position p) {
+        return x <= p.x + 1 && y <= p.y + 1 && x >= p.x - 1 && y >= p.y - 1 && !this.equals(p);
     }
 
     /**
@@ -76,10 +75,10 @@ public final class Position {
      */
     @Override
     public int hashCode() {
-        final int prime=31;
-        int result=17;
-        result = result*prime+x;
-        result = result*prime+y;
+        final int prime = 31;
+        int result = 17;
+        result = result * prime + x;
+        result = result * prime + y;
         return result;
     }
 

@@ -60,26 +60,6 @@ public class Game {
     }
 
     /**
-     * Decides the winner of the game.
-     * Checks the {@link Stone}s that are "live" and changes its status, then
-     * computes the number of "live" {@link Stone}s for each player: the one
-     * with more "live" {@link Stone}s wins the game.
-     * @return The Colour of the player who wins the game.
-     */
-    public Colour winner() {
-        board.checkBoardAndMakeStonesLive();
-        int whiteLiveStones = board.countLiveStones(Colour.WHITE);
-        int blackLiveStones = board.countLiveStones(Colour.BLACK);
-        if (whiteLiveStones > blackLiveStones) {
-            return Colour.WHITE;
-        } else if (blackLiveStones > whiteLiveStones) {
-            return Colour.BLACK;
-        } else {
-            return Colour.NONE;
-        }
-    }
-
-    /**
      * Decides if in the last move of the whole game placing the {@link Stone}
      * at the given {@link Position} is convenient or not for the player of the
      * given {@link Colour}.
@@ -106,5 +86,25 @@ public class Game {
         int counter = board.countLiveStones(colour);
         board.setAllStonesDead();
         return counter;
+    }
+
+    /**
+     * Decides the winner of the game.
+     * Checks the {@link Stone}s that are "live" and changes its status, then
+     * computes the number of "live" {@link Stone}s for each player: the one
+     * with more "live" {@link Stone}s wins the game.
+     * @return The Colour of the player who wins the game.
+     */
+    public Colour winner() {
+        board.checkBoardAndMakeStonesLive();
+        int whiteLiveStones = board.countLiveStones(Colour.WHITE);
+        int blackLiveStones = board.countLiveStones(Colour.BLACK);
+        if (whiteLiveStones > blackLiveStones) {
+            return Colour.WHITE;
+        } else if (blackLiveStones > whiteLiveStones) {
+            return Colour.BLACK;
+        } else {
+            return Colour.NONE;
+        }
     }
 }

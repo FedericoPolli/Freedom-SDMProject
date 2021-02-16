@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import static dssc.project.freedom.Utility.getInteger;
 
-public class HumanPlayer extends Player{
+public class HumanPlayer extends Player {
 
     private static Scanner in = new Scanner(System.in);
 
@@ -15,7 +15,7 @@ public class HumanPlayer extends Player{
         super(name, colour);
     }
 
-    public static void setScanner(Scanner in){
+    public static void setScanner(Scanner in) {
         HumanPlayer.in = in;
     }
 

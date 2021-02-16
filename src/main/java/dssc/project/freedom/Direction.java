@@ -1,27 +1,41 @@
 package dssc.project.freedom;
 
+/**
+ * Enum that represents the direction in which to move.
+ *
+ * This {@link Enum} represents the colours of a {@link Stone}: it can be white, black
+ * or empty, thus without colour.
+ * It is used to avoid working with two integers like `(1, 0)` to move right.
+ */
 public enum Direction {
 
-    /** The horizontal direction. */
+    /** The right direction. */
     RIGHT(1, 0),
-    /** The vertical direction. */
-    UP(0, 1),
-    /** The main diagonal direction. */
-    UP_MAIN_DIAGONAL(1, 1),
-    /** The off diagonal direction. */
-    UP_ANTI_DIAGONAL(-1, 1),
-    /** The horizontal direction. */
+    /** The left direction. */
     LEFT(-1, 0),
-    /** The vertical direction. */
+    /** The up direction. */
+    UP(0, 1),
+    /** The down direction. */
     DOWN(0, -1),
-    /** The main diagonal direction. */
+    /** The up main diagonal direction. */
+    UP_MAIN_DIAGONAL(1, 1),
+    /** The down main diagonal direction. */
     DOWN_MAIN_DIAGONAL(-1, -1),
-    /** The off diagonal direction. */
+    /** The up anti-diagonal direction. */
+    UP_ANTI_DIAGONAL(-1, 1),
+    /** The down anti-diagonal direction. */
     DOWN_ANTI_DIAGONAL(1, -1);
 
+    /** The x-coordinate of the direction. */
     public final int x;
+    /** The y-coordinate of the direction. */
     public final int y;
 
+    /**
+     * Constructor. It creates a direction given a pair of integers.
+     * @param x The x-coordinate of the direction.
+     * @param y The y-coordinate of the direction.
+     */
     Direction(int x, int y) {
         this.x = x;
         this.y = y;

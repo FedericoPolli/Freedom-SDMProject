@@ -8,7 +8,7 @@ import java.util.List;
 
 import static dssc.project.freedom.Utility.getRandomInteger;
 
-public class GreedyPlayer extends Player{
+public class GreedyPlayer extends Player {
 
     private static Board board;
     private static Position previous;
@@ -29,7 +29,7 @@ public class GreedyPlayer extends Player{
         if (previous == null) {
             return getRandomPosition();
         }
-        List<Position> freeAdjacentPositions = board.getAdjacentPositions(previous);
+        List<Position> freeAdjacentPositions = board.getFreeAdjacentPositions(previous);
         if (freeAdjacentPositions.isEmpty())
             return findPositionToPlayIn(board.getFreePositions());
         else

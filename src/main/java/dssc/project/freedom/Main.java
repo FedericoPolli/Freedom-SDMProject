@@ -62,20 +62,20 @@ public class Main {
         return boardSize;
     }
 
-    private static char getTypeOfPlayer(Scanner in){
+    private static char getTypeOfPlayer(Scanner in) {
         System.out.print("Choose the player: h for a Human Player, r for a Random Player or g for a Greedy Player. ");
         char player;
-        do{
+        do {
             player = in.next().charAt(0);
             in.nextLine(); //throw away the \n not consumed by nextInt()
             if (player == 'h' || player == 'r' || player == 'g')
                 break;
             System.out.print("Wrong type of player! Reenter it! ");
-        } while(true);
+        } while (true);
         return player;
     }
 
-    private static String getHumanPlayerName(Scanner in){
+    private static String getHumanPlayerName(Scanner in) {
         System.out.print("Enter the name of Human Player: ");
         return in.nextLine();
     }

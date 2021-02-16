@@ -17,9 +17,9 @@ import static dssc.project.freedom.Position.at;
  */
 public class Board {
 
-
     /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
+    /** The size of the board. */
     private final int boardSize;
 
     /**
@@ -45,8 +45,12 @@ public class Board {
         return board.get(p);
     }
 
-    public int getBoardSize(){
-        return  boardSize;
+    /**
+     * Getter for the size of this {@link Board}.
+     * @return The size of this Board.
+     */
+    public int getBoardSize() {
+        return boardSize;
     }
 
     /**
@@ -62,7 +66,7 @@ public class Board {
     /**
      * Sets all the {@link Stone}s of the {@link Board} as not "live".
      */
-    public void setAllStonesDead(){
+    public void setAllStonesDead() {
         board.values().forEach(value -> value.changeLiveStatusTo(false));
     }
 
@@ -79,7 +83,23 @@ public class Board {
                 .count();
     }
 
-    public List<Position> getAdjacentPositions(Position pos) {
+    /**
+     * Finds all the free {@link Position}s in the {@link Board} and returns them in a {@link List}.
+     * @return A List with all the free Positions.
+     */
+    public List<Position> getFreePositions() {
+        return board.keySet()
+                .stream()
+                .filter(p -> getStoneAt(p).isOfColour(Colour.NONE))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds all the free {@link Position}s that are adjacent to the given {@link Position}.
+     * @param pos The Position to be checked.
+     * @return The free Positions adjacent to the given one.
+     */
+    public List<Position> getFreeAdjacentPositions(Position pos) {
         return board.keySet()
                 .stream()
                 .filter(p -> p.isInAdjacentPositions(pos))
@@ -92,8 +112,8 @@ public class Board {
      * @param pos The Position to be checked.
      * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
      */
-    public boolean areAdjacentPositionOccupied(Position pos){
-        return getAdjacentPositions(pos).isEmpty();
+    public boolean areAdjacentPositionOccupied(Position pos) {
+        return getFreeAdjacentPositions(pos).isEmpty();
     }
 
     /**
@@ -109,17 +129,17 @@ public class Board {
 
     /**
      * Checks in the whole board for occurrences of exactly four {@link Stone}s of
-     * the same {@link Colour} in a row, in the direction specified by the inputs
-     * <code>xDir</code> and <code>yDir</code>, and makes the {@link Stone}s "live".
+     * the same {@link Colour} in a row, in the direction specified by the input
+     * {@link Direction}, and makes the {@link Stone}s "live".
      * @param dir The direction in which to move.
      */
-    private void check4StonesInDirection(Direction dir){
-        for (Position current : board.keySet()){
+    private void check4StonesInDirection(Direction dir) {
+        for (Position current : board.keySet()) {
             Position previous = current.moveInDirection(-dir.x, -dir.y);
             if (positionIsInsideTheBoard(previous) && areStonesOfSameColourAt(current, previous)) {
                 continue;
             }
-            if (countStonesInRow(dir, current) == 4){
+            if (countStonesInRow(dir, current) == 4) {
                 setStonesInRowOf4Live(dir, current);
             }
         }
@@ -138,7 +158,7 @@ public class Board {
      * Checks if the {@link Stone} in the next {@link Position} is of the same
      * {@link Colour} as the {@link Stone} in the current one.
      * @param current The current Position.
-     * @param next The Position next to the current one.
+     * @param next    The Position next to the current one.
      * @return true if the next Position is of the same Colour as the current one, false otherwise.
      */
     private boolean areStonesOfSameColourAt(Position current, Position next) {
@@ -148,8 +168,8 @@ public class Board {
     /**
      * Counts the number of {@link Stone}s of the same {@link Colour} in a row
      * starting from the <code>current</code> {@link Position}, according to the
-     * direction specified by the inputs <code>xDir</code> and <code>yDir</code>.
-     * @param dir  The direction in which to move.
+     * direction specified by the input {@link Direction}.
+     * @param dir     The direction in which to move.
      * @param current The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
@@ -169,23 +189,23 @@ public class Board {
      * Sets as "live" the {@link Stone}s that are part of a row of exactly four {@link Stone}s
      * of the same {@link Colour}, starting from the {@link Position} <code>current</code>,
      * in the direction given by the input <code>xDir</code> and <code>yDir</code>.
-     * @param dir The direction in which to move.
+     * @param dir     The direction in which to move.
      * @param current The starting Position.
      */
     private void setStonesInRowOf4Live(Direction dir, Position current) {
         getStoneAt(current).changeLiveStatusTo(true);
-        for (int i = 1; i < 4; ++i){
+        for (int i = 1; i < 4; ++i) {
             Position next = current.moveInDirection(i * dir.x, i * dir.y);
             getStoneAt(next).changeLiveStatusTo(true);
         }
     }
 
     /**
-     * Checks the whole {@link Board} in all directions (horizontal, vertical and
-     * diagonal) to find the {@link Stone}s which are part of a row of exactly
-     * four {@link Stone}s of the same {@link Colour}, then makes them "live".
+     * Checks the whole {@link Board} in the horizontal, vertical and diagonal
+     * {@link Direction}s to find the {@link Stone}s which are part of a row of
+     * exactly four {@link Stone}s of the same {@link Colour}, then makes them "live".
      */
-    public void checkBoardAndMakeStonesLive(){
+    public void checkBoardAndMakeStonesLive() {
         check4StonesInDirection(Direction.RIGHT);
         check4StonesInDirection(Direction.UP);
         check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
@@ -195,17 +215,17 @@ public class Board {
     /**
      * Prints the {@link Board} in a graphical way.
      */
-    public void printBoard(){
-        PrintWriter printWriter = new PrintWriter(System.out,true);
+    public void printBoard() {
+        PrintWriter printWriter = new PrintWriter(System.out, true);
         String white = Utility.getWhite();
         String black = Utility.getBlack();
         String line = "  " + "+---".repeat(boardSize) + "+";
         printWriter.println(line);
-        for (int j = boardSize; j>0; --j) {
+        for (int j = boardSize; j > 0; --j) {
             printWriter.print(j + " ");
-            for (int i = 1; i<= boardSize; ++i) {
+            for (int i = 1; i <= boardSize; ++i) {
                 printWriter.print("| ");
-                switch (getStoneAt(at(i, j)).getColour()){
+                switch (getStoneAt(at(i, j)).getColour()) {
                     case WHITE -> printWriter.print(white);
                     case BLACK -> printWriter.print(black);
                     case NONE -> printWriter.print(" ");
@@ -216,12 +236,8 @@ public class Board {
             printWriter.println(line);
         }
         printWriter.print("  ");
-        for (int i = 1; i<= boardSize; ++i)
+        for (int i = 1; i <= boardSize; ++i)
             printWriter.print("  " + i + " ");
         printWriter.println(" ");
-    }
-
-    public List<Position> getFreePositions() {
-        return board.keySet().stream().filter(p -> getStoneAt(p).isOfColour(Colour.NONE)).collect(Collectors.toList());
     }
 }
