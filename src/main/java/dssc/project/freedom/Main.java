@@ -11,24 +11,39 @@ public class Main {
      * Main of the project.
      */
     public static void main(String[] args) {
-        System.out.println("Game Start:");
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter the board size (minimum 4): ");
-        int boardSize = getBoardSize(in);
-        char player1 = getTypeOfPlayer(in);
-        String name1;
-        if (player1 == 'h')
-            name1 = getHumanPlayerName(in);
-        else
-            name1 = "Computer Player1";
-        char player2 = getTypeOfPlayer(in);
-        String name2;
-        if (player2 == 'h')
-            name2 = getHumanPlayerName(in);
-        else
-            name2 = "Computer Player2";
-        CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
-        clGame.play();
+
+        do {
+            System.out.println("Game Start:");
+            System.out.print("Enter the board size (minimum 4): ");
+            int boardSize = getBoardSize(in);
+            char player1 = getTypeOfPlayer(in);
+            String name1;
+            if (player1 == 'h')
+                name1 = getHumanPlayerName(in);
+            else
+                name1 = "Computer Player1";
+            char player2 = getTypeOfPlayer(in);
+            String name2;
+            if (player2 == 'h')
+                name2 = getHumanPlayerName(in);
+            else
+                name2 = "Computer Player2";
+            do {
+                CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
+                clGame.play();
+                System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
+                if (Utility.getInteger(in) == 1) {
+                    System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
+                    if (Utility.getInteger(in) == 1) {
+                        String temp = name1;
+                        name1 = name2;
+                        name2 = temp;
+                    }
+                } else break;
+            } while (true);
+            System.out.print("Do you want to start a new game? (0 = no, 1 = yes) ");
+        } while (Utility.getInteger(in) != 0);
         in.close();
     }
 
