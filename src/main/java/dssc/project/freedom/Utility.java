@@ -1,5 +1,6 @@
 package dssc.project.freedom;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Utility {
@@ -38,5 +39,9 @@ public class Utility {
 
     public static String getBlack() {
         return getOS().equals("Windows") ? "b" : "\u26AB";
+    }
+
+    public static int getRandomInteger(int upperBound){
+        return new Random().nextInt(upperBound);
     }
 }

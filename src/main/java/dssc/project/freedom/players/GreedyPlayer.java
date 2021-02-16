@@ -1,14 +1,12 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.Board;
-import dssc.project.freedom.Colour;
-import dssc.project.freedom.Direction;
-import dssc.project.freedom.Position;
+import dssc.project.freedom.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
+
+import static dssc.project.freedom.Utility.getRandomInteger;
 
 public class GreedyPlayer extends Player{
 
@@ -31,45 +29,47 @@ public class GreedyPlayer extends Player{
         if (previous == null) {
             return getRandomPosition();
         }
-        List<Position> freePositions = board.getAdjacentPositions(previous);
-        if (freePositions.isEmpty())
+        List<Position> freeAdjacentPositions = board.getAdjacentPositions(previous);
+        if (freeAdjacentPositions.isEmpty())
             return findPositionToPlayIn(board.getFreePositions());
         else
-            return findPositionToPlayIn(freePositions);
+            return findPositionToPlayIn(freeAdjacentPositions);
     }
 
-    private Position getRandomPosition() {
-        Random random = new Random();
-        int x = random.nextInt(board.boardSize) + 1;
-        int y = random.nextInt(board.boardSize) + 1;
-        return Position.at(x, y);
+    public Position getRandomPosition() {
+        return Position.at(getRandomInteger(board.getBoardSize()) + 1, getRandomInteger(board.getBoardSize()) + 1);
     }
 
     private Position findPositionToPlayIn(List<Position> freePositions) {
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
-        List<Integer> indexes = new ArrayList<>();
+        List<Integer> maxStonesInARowForPositions = new ArrayList<>();
         for (Position p : freePositions) {
             board.updateStoneAt(p, colour);
-            int i = 0;
-            for (Direction dir : Direction.values()) {
-                i = Math.max(i, board.countStonesInRow(dir, p));
-                if (i == 5)
-                    break;
-            }
+            int maximumNumberOfStonesInARow = getMaximumNumberOfStonesInARow(p);
             board.updateStoneAt(p, Colour.NONE);
-            if (i == 4)
+            if (maximumNumberOfStonesInARow == 4)
                 return p;
-            if (i == 5)
+            if (maximumNumberOfStonesInARow == 5)
                 freePositionsCopy.remove(p);
             else
-                indexes.add(i);
+                maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
         }
         if (freePositionsCopy.isEmpty())
-            return freePositions.get(new Random().nextInt(freePositions.size()));
+            return freePositions.get(Utility.getRandomInteger(freePositions.size()));
         else {
-            int j = indexes.stream().max(Comparator.naturalOrder()).get();
-            return freePositionsCopy.get(indexes.indexOf(j));
+            int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
+            return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
         }
 
+    }
+
+    private int getMaximumNumberOfStonesInARow(Position p) {
+        int maximumNumberOfStonesInARow = 0;
+        for (Direction dir : Direction.values()) {
+            maximumNumberOfStonesInARow = Math.max(maximumNumberOfStonesInARow, board.countStonesInRow(dir, p));
+            if (maximumNumberOfStonesInARow == 5)
+                break;
+        }
+        return maximumNumberOfStonesInARow;
     }
 }

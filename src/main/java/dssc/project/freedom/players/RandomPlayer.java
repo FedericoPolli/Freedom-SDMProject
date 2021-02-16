@@ -3,7 +3,7 @@ package dssc.project.freedom.players;
 import dssc.project.freedom.Colour;
 import dssc.project.freedom.Position;
 
-import java.util.Random;
+import static dssc.project.freedom.Utility.getRandomInteger;
 
 public class RandomPlayer extends Player{
 
@@ -15,9 +15,6 @@ public class RandomPlayer extends Player{
     }
 
     public Position getPlayerPosition() {
-        Random random = new Random();
-        int x = random.nextInt(boardSize) +1;
-        int y = random.nextInt(boardSize) +1;
-        return Position.at(x, y);
+        return Position.at(getRandomInteger(boardSize) + 1, getRandomInteger(boardSize) + 1);
     }
 }

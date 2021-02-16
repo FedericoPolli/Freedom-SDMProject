@@ -20,7 +20,7 @@ public class Board {
 
     /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
-    public final int boardSize;
+    private final int boardSize;
 
     /**
      * Class constructor. Creates a {@link Board} of the given size, then fills
@@ -43,6 +43,10 @@ public class Board {
      */
     private Stone getStoneAt(Position p) {
         return board.get(p);
+    }
+
+    public int getBoardSize(){
+        return  boardSize;
     }
 
     /**

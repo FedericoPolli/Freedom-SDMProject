@@ -33,14 +33,14 @@ public class CommandLineGame extends Game{
         System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
         System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
         board.printBoard();
-        for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
+        for (int i = 1; i <= board.getBoardSize() * board.getBoardSize(); ++i){
             Player currentPlayer = getCurrentPlayer(i);
             if (currentPlayer instanceof GreedyPlayer) {
                 GreedyPlayer.setBoard(board);
                 GreedyPlayer.setPrevious(previous);
             }
             Position current = getValidPosition(currentPlayer);
-            if (isLastMove(board.boardSize, i) && !isLastMoveConvenient(current, currentPlayer.getColour())){
+            if (isLastMove(board.getBoardSize(), i) && !isLastMoveConvenient(current, currentPlayer.getColour())){
                 if (currentPlayer.doesNotWantToDoLastMove())
                     break;
             }
