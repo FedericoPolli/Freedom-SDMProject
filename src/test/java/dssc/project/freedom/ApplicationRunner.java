@@ -23,7 +23,7 @@ public class ApplicationRunner {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         this.boardSize = boardSize;
-        this.commandLineGame = new CommandLineGame(boardSize, 'h', 'h');
+        this.commandLineGame = new CommandLineGame(boardSize, 'h', "White",'h', "Black");
     }
 
     public void testOutput(String expectedOutput) {

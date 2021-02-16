@@ -15,17 +15,17 @@ public class CommandLineGame extends Game{
      *
      * @param boardSize The size of the Board to be created.
      */
-    public CommandLineGame(int boardSize, char player1, char player2) {
+    public CommandLineGame(int boardSize, char player1, String name1, char player2, String name2) {
         super(boardSize);
         switch (player1) {
-            case 'h' -> this.player1 = new HumanPlayer("White", Colour.WHITE);
-            case 'r' -> this.player1 = new RandomPlayer("White", Colour.WHITE, boardSize);
-            case 'g' -> this.player1 = new GreedyPlayer("White", Colour.WHITE);
+            case 'h' -> this.player1 = new HumanPlayer(name1, Colour.WHITE);
+            case 'r' -> this.player1 = new RandomPlayer(name1, Colour.WHITE, boardSize);
+            case 'g' -> this.player1 = new GreedyPlayer(name1, Colour.WHITE);
         }
         switch (player2) {
-            case 'h' -> this.player2 = new HumanPlayer("Black", Colour.BLACK);
-            case 'r' -> this.player2 = new RandomPlayer("Black", Colour.BLACK, boardSize);
-            case 'g' -> this.player2 = new GreedyPlayer("Black", Colour.BLACK);
+            case 'h' -> this.player2 = new HumanPlayer(name2, Colour.BLACK);
+            case 'r' -> this.player2 = new RandomPlayer(name2, Colour.BLACK, boardSize);
+            case 'g' -> this.player2 = new GreedyPlayer(name2, Colour.BLACK);
         }
     }
 

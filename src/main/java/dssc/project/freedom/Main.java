@@ -16,8 +16,18 @@ public class Main {
         System.out.println("Enter the board size (minimum 4):");
         int boardSize = getBoardSize(in);
         char player1 = getTypeOfPlayer(in);
+        String name1;
+        if (player1 == 'h')
+            name1 = getHumanPlayerName(in);
+        else
+            name1 = "Computer Player1";
         char player2 = getTypeOfPlayer(in);
-        CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
+        String name2;
+        if (player2 == 'h')
+            name2 = getHumanPlayerName(in);
+        else
+            name2 = "Computer Player2";
+        CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
         clGame.play();
         in.close();
     }
@@ -42,6 +52,7 @@ public class Main {
         String player;
         do{
             player = in.next();
+            in.nextLine(); //throw away the \n not consumed by nextInt()
             flag = false;
             switch (player){
                 case "h" : return 'h';
@@ -51,5 +62,10 @@ public class Main {
             }
         } while(flag);
         return 'h';
+    }
+
+    private static String getHumanPlayerName(Scanner in){
+        System.out.println("Enter the name of Human Player:");
+        return in.nextLine();
     }
 }
