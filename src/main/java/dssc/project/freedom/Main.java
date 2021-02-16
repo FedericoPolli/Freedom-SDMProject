@@ -31,6 +31,7 @@ public class Main {
                 name2 = "Computer Player2";
             do {
                 CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
+
                 clGame.play();
                 System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {

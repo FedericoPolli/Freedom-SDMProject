@@ -30,6 +30,8 @@ public class CommandLineGame extends Game{
     }
 
     public void play() {
+        System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
+        System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
         board.printBoard();
         for (int i = 1; i <= board.boardSize * board.boardSize; ++i){
             Player currentPlayer = getCurrentPlayer(i);
