@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Game Start:");
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter the board size (minimum 4):");
+        System.out.print("Enter the board size (minimum 4): ");
         int boardSize = getBoardSize(in);
         char player1 = getTypeOfPlayer(in);
         String name1;
@@ -40,32 +40,27 @@ public class Main {
             boardSize = Utility.getInteger(in);
             if (boardSize < 4) {
                 flag = true;
-                System.out.println("The size of the board must be an integer >= 4");
+                System.out.print("The size of the board must be an integer >= 4. ");
             }
         } while (flag);
         return boardSize;
     }
 
     private static char getTypeOfPlayer(Scanner in){
-        System.out.println("Choose the player: h for a Human Player, r for a Random Player or g for a Greedy Player");
-        boolean flag;
-        String player;
+        System.out.print("Choose the player: h for a Human Player, r for a Random Player or g for a Greedy Player. ");
+        char player;
         do{
-            player = in.next();
+            player = in.next().charAt(0);
             in.nextLine(); //throw away the \n not consumed by nextInt()
-            flag = false;
-            switch (player){
-                case "h" : return 'h';
-                case "r" : return 'r';
-                case "g" : return  'g';
-                default : flag = true;
-            }
-        } while(flag);
-        return 'h';
+            if (player == 'h' || player == 'r' || player == 'g')
+                break;
+            System.out.print("Wrong type of player! Reenter it! ");
+        } while(true);
+        return player;
     }
 
     private static String getHumanPlayerName(Scanner in){
-        System.out.println("Enter the name of Human Player:");
+        System.out.print("Enter the name of Human Player: ");
         return in.nextLine();
     }
 }
