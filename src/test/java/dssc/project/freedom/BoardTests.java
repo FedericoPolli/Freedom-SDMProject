@@ -1,5 +1,8 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Board;
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.Position;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,8 +11,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static dssc.project.freedom.Colour.*;
-import static dssc.project.freedom.Position.at;
+import static dssc.project.freedom.basis.Colour.*;
+import static dssc.project.freedom.basis.Position.at;
 import static java.lang.System.lineSeparator;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,6 @@
-package dssc.project.freedom;
+package dssc.project.freedom.basis;
+
+import dssc.project.freedom.games.Game;
 
 /**
  * Class that represents a position in a grid.

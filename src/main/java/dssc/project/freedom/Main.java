@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.games.CommandLineGame;
+
 import java.util.Scanner;
 
 /**
@@ -12,7 +14,6 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
         do {
             System.out.println("Game Start:");
             System.out.print("Enter the board size (minimum 4): ");
@@ -31,7 +32,6 @@ public class Main {
                 name2 = "Computer Player2";
             do {
                 CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
-
                 clGame.play();
                 System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {

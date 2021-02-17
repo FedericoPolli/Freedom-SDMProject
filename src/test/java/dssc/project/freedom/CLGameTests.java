@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.Position;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.System.lineSeparator;
@@ -8,9 +10,9 @@ public class CLGameTests {
 
     final String white = Utility.getWhite();
     final String black = Utility.getBlack();
-    String getCoordinatesPlayers = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
+    final String getCoordinatesPlayers = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
             "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
-    String playersColours = "White has colour WHITE and his symbol is " + white + lineSeparator() +
+    final String playersColours = "White has colour WHITE and his symbol is " + white + lineSeparator() +
                             "Black has colour BLACK and his symbol is " + black + lineSeparator();
 
     @Test

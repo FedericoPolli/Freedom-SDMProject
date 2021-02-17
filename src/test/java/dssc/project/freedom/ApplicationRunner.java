@@ -1,5 +1,8 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.games.CommandLineGame;
 import dssc.project.freedom.players.HumanPlayer;
 
 import java.io.ByteArrayInputStream;
@@ -8,9 +11,9 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import static dssc.project.freedom.Colour.BLACK;
-import static dssc.project.freedom.Colour.WHITE;
-import static dssc.project.freedom.Position.at;
+import static dssc.project.freedom.basis.Colour.BLACK;
+import static dssc.project.freedom.basis.Colour.WHITE;
+import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApplicationRunner {
@@ -61,12 +64,9 @@ public class ApplicationRunner {
     public void parseDraw() {
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
-                if (i + j == 2 * boardSize)
-                    continue;
                 commandLineGame.move(at(i, j), (i + j) % 2 == 0 ? WHITE : BLACK);
             }
         }
-        commandLineGame.move(at(4,4), WHITE);
         commandLineGame.winner();
     }
 

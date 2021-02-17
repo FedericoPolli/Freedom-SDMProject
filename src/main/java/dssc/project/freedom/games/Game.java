@@ -1,6 +1,9 @@
-package dssc.project.freedom;
+package dssc.project.freedom.games;
 
-import static java.lang.System.lineSeparator;
+import dssc.project.freedom.basis.Board;
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.basis.Stone;
 
 /**
  * Class that represents the game itself.
@@ -46,7 +49,6 @@ public abstract class Game {
      * of placing it in any non-occupied {@link Position}.
      *
      * @param current The Position of the Stone placed in the move that has to be checked.
-     * @return true if the move of the player is valid, false otherwise.
      */
     public void isMoveValid(Position current) throws Exception {
         if (!board.positionIsInsideTheBoard(current))

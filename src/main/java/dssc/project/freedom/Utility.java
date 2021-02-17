@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Stone;
+
 import java.util.Random;
 import java.util.Scanner;
 

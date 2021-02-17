@@ -1,4 +1,4 @@
-package dssc.project.freedom;
+package dssc.project.freedom.basis;
 
 /**
  * Enum that represents the colours of a {@link Stone}.

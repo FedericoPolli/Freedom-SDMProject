@@ -1,7 +1,7 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.Colour;
-import dssc.project.freedom.Position;
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.Position;
 
 public abstract class Player {
 

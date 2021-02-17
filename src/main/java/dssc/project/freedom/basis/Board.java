@@ -1,11 +1,14 @@
-package dssc.project.freedom;
+package dssc.project.freedom.basis;
+
+import dssc.project.freedom.*;
+import dssc.project.freedom.games.Game;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static dssc.project.freedom.Position.at;
+import static dssc.project.freedom.basis.Position.at;
 import static java.lang.System.lineSeparator;
 
 
