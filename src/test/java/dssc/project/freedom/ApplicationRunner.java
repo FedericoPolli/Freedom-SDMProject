@@ -46,7 +46,7 @@ public class ApplicationRunner {
 
     public void parseBoard(Position current, Colour colour) {
         commandLineGame.move(current, colour);
-        commandLineGame.board.printBoard();
+        commandLineGame.printBoard();
     }
 
     public void parseWinner() {

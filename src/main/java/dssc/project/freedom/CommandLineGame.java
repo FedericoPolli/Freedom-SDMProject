@@ -32,7 +32,7 @@ public class CommandLineGame extends Game {
     public void play() {
         System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
         System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
-        board.printBoard();
+        printBoard();
         for (int i = 1; i <= board.getBoardSize() * board.getBoardSize(); ++i) {
             Player currentPlayer = getCurrentPlayer(i);
             if (currentPlayer instanceof GreedyPlayer) {
@@ -45,9 +45,16 @@ public class CommandLineGame extends Game {
                     break;
             }
             move(current, currentPlayer.getColour());
-            board.printBoard();
+            printBoard();
         }
         winner();
+    }
+
+    /**
+     * Prints the {@link Board} in a graphical way.
+     */
+    public void printBoard() {
+        System.out.print(board.toString());
     }
 
     private Player getCurrentPlayer(int i) {
@@ -81,7 +88,7 @@ public class CommandLineGame extends Game {
      * @param current The Position of the Stone placed in the move that has to be checked.
      * @return true if the move of the player is valid, false otherwise.
      */
-    public boolean isMoveValid(Position current, Player currentPlayer) {
+    private boolean isMoveValid(Position current, Player currentPlayer) {
         if (!board.positionIsInsideTheBoard(current)) {
             if (currentPlayer instanceof HumanPlayer)
                 System.out.print("The position is not inside the board!");

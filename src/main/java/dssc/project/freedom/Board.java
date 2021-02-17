@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static dssc.project.freedom.Position.at;
+import static java.lang.System.lineSeparator;
 
 
 /**
@@ -100,10 +101,8 @@ public class Board {
      * @return The free Positions adjacent to the given one.
      */
     public List<Position> getFreeAdjacentPositions(Position pos) {
-        return board.keySet()
-                .stream()
+        return getFreePositions().stream()
                 .filter(p -> p.isInAdjacentPositions(pos))
-                .filter(p -> getStoneAt(p).isOfColour(Colour.NONE))
                 .collect(Collectors.toList());
     }
 
@@ -177,10 +176,10 @@ public class Board {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
             Position next = current.moveInDirection(i * dir.x, i * dir.y);
-            if (!positionIsInsideTheBoard(next) || !areStonesOfSameColourAt(current, next))
-                break;
-            else
+            if (positionIsInsideTheBoard(next) && areStonesOfSameColourAt(current, next))
                 counter++;
+            else
+                break;
         }
         return counter;
     }
@@ -213,31 +212,32 @@ public class Board {
     }
 
     /**
-     * Prints the {@link Board} in a graphical way.
+     * Returns a {@link String} representation of this object.
+     * @return A String representing this object.
      */
-    public void printBoard() {
-        PrintWriter printWriter = new PrintWriter(System.out, true);
+    @Override
+    public String toString() {
         String white = Utility.getWhite();
         String black = Utility.getBlack();
         String line = "  " + "+---".repeat(boardSize) + "+";
-        printWriter.println(line);
+        String boardString = line + lineSeparator();
         for (int j = boardSize; j > 0; --j) {
-            printWriter.print(j + " ");
+            boardString += j + " ";
             for (int i = 1; i <= boardSize; ++i) {
-                printWriter.print("| ");
+                boardString += "| ";
                 switch (getStoneAt(at(i, j)).getColour()) {
-                    case WHITE -> printWriter.print(white);
-                    case BLACK -> printWriter.print(black);
-                    case NONE -> printWriter.print(" ");
+                    case WHITE -> boardString += white;
+                    case BLACK -> boardString += black;
+                    case NONE -> boardString += " ";
                 }
-                printWriter.print(" ");
+                boardString += " ";
             }
-            printWriter.println("|");
-            printWriter.println(line);
+            boardString += "|" + lineSeparator() + line + lineSeparator();
         }
-        printWriter.print("  ");
+        boardString += "  ";
         for (int i = 1; i <= boardSize; ++i)
-            printWriter.print("  " + i + " ");
-        printWriter.println(" ");
+            boardString += "  " + i + " ";
+        boardString += " " + lineSeparator();
+        return boardString;
     }
 }

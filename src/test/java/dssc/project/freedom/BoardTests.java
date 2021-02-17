@@ -132,19 +132,13 @@ public class BoardTests {
     }
 
     @Test
-    public void testPrintBoard(){
-        ApplicationRunner application = new ApplicationRunner(4);
+    public void testBoardToString(){
         String white = Utility.getWhite();
         String black = Utility.getBlack();
-        application.parseBoard(Position.at(1, 1), Colour.WHITE);
-        application.parseBoard(Position.at(2, 1), Colour.BLACK);
+        Board board = new Board(4);
+        board.updateStoneAt(Position.at(1, 1), Colour.WHITE);
+        board.updateStoneAt(Position.at(2, 1), Colour.BLACK);
         String line = "  " + "+---".repeat(4) + "+" + lineSeparator();
-        String boardAfterFirstMove =
-                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                line + "1 " + "| " + white + " |" + "   |".repeat(3) + lineSeparator() +
-                line + "    1   2   3   4  " + lineSeparator();
         String boardAfterSecondMove =
                 line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
                 line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
@@ -152,6 +146,6 @@ public class BoardTests {
                 line +
                 "1 " + "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
                 line + "    1   2   3   4  " + lineSeparator();
-        application.testOutput(boardAfterFirstMove + boardAfterSecondMove);
+        assertEquals(boardAfterSecondMove, board.toString());
     }
 }

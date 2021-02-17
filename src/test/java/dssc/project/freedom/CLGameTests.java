@@ -144,4 +144,28 @@ public class CLGameTests {
                 "Black won with 12 live stones against White's 4" + lineSeparator();
         application.testOutputWithoutBoardPrints(output);
     }
+    
+    @Test
+    public void testPrintBoard(){
+        ApplicationRunner application = new ApplicationRunner(4);
+        String white = Utility.getWhite();
+        String black = Utility.getBlack();
+        application.parseBoard(Position.at(1, 1), Colour.WHITE);
+        application.parseBoard(Position.at(2, 1), Colour.BLACK);
+        String line = "  " + "+---".repeat(4) + "+" + lineSeparator();
+        String boardAfterFirstMove =
+                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                        line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                        line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                        line + "1 " + "| " + white + " |" + "   |".repeat(3) + lineSeparator() +
+                        line + "    1   2   3   4  " + lineSeparator();
+        String boardAfterSecondMove =
+                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                        line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                        line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
+                        line +
+                        "1 " + "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
+                        line + "    1   2   3   4  " + lineSeparator();
+        application.testOutput(boardAfterFirstMove + boardAfterSecondMove);
+    }
 }
