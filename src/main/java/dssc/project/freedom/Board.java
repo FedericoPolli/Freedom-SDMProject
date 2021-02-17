@@ -1,6 +1,5 @@
 package dssc.project.freedom;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,7 +133,7 @@ public class Board {
      */
     private void check4StonesInDirection(Direction dir) {
         for (Position current : board.keySet()) {
-            Position previous = current.moveInDirection(-dir.x, -dir.y);
+            Position previous = current.moveInDirectionWithStep(dir, -1);
             if (positionIsInsideTheBoard(previous) && areStonesOfSameColourAt(current, previous)) {
                 continue;
             }
@@ -175,7 +174,7 @@ public class Board {
     public int countStonesInRow(Direction dir, Position current) {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
-            Position next = current.moveInDirection(i * dir.x, i * dir.y);
+            Position next = current.moveInDirectionWithStep(dir, i);
             if (positionIsInsideTheBoard(next) && areStonesOfSameColourAt(current, next))
                 counter++;
             else
@@ -194,7 +193,7 @@ public class Board {
     private void setStonesInRowOf4Live(Direction dir, Position current) {
         getStoneAt(current).changeLiveStatusTo(true);
         for (int i = 1; i < 4; ++i) {
-            Position next = current.moveInDirection(i * dir.x, i * dir.y);
+            Position next = current.moveInDirectionWithStep(dir, i);
             getStoneAt(next).changeLiveStatusTo(true);
         }
     }

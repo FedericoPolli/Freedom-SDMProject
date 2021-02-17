@@ -36,12 +36,12 @@ public final class Position {
     /**
      * Returns a {@link Position} obtained by moving <code>x</code> steps in
      * horizontal and <code>y</code> steps in vertical.
-     * @param x The horizontal steps.
-     * @param y The vertical steps.
+     * @param dir The direction in which to move.
+     * @param step The number of steps.
      * @return A Position with the new coordinates.
      */
-    public Position moveInDirection(int x, int y) {
-        return at(this.x + x, this.y + y);
+    public Position moveInDirectionWithStep(Direction dir, int step) {
+        return at(this.x + step * dir.getX(), this.y + step * dir.getY());
     }
 
     /**

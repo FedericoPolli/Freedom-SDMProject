@@ -12,18 +12,16 @@ public class Utility {
      * @return The integer taken in input.
      */
     public static int getInteger(Scanner in) {
-        boolean flag;
-        int i = 0;
+        int i;
         do {
             if (in.hasNextInt()) {
-                flag = false;
                 i = in.nextInt();
+                break;
             } else {
                 System.out.println("You didn't enter an integer! Enter again an integer");
                 in.next();
-                flag = true;
             }
-        } while (flag);
+        } while (true);
         return i;
     }
 

@@ -4,25 +4,27 @@ import dssc.project.freedom.players.*;
 
 public class CommandLineGame extends Game {
 
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
 
     /**
      * Class constructor. A {@link Game} has a {@link Board} on which the players
      * play, then it has two players.
      * @param boardSize The size of the Board to be created.
      */
-    public CommandLineGame(int boardSize, char player1, String name1, char player2, String name2) {
+    public CommandLineGame(int boardSize, char player1, String name1, char player2, String name2) throws IllegalArgumentException{
         super(boardSize);
         switch (player1) {
             case 'h' -> this.player1 = new HumanPlayer(name1, Colour.WHITE);
             case 'r' -> this.player1 = new RandomPlayer(name1, Colour.WHITE, boardSize);
             case 'g' -> this.player1 = new GreedyPlayer(name1, Colour.WHITE);
+            default -> throw new IllegalArgumentException("Wrong type of player!");
         }
         switch (player2) {
             case 'h' -> this.player2 = new HumanPlayer(name2, Colour.BLACK);
             case 'r' -> this.player2 = new RandomPlayer(name2, Colour.BLACK, boardSize);
             case 'g' -> this.player2 = new GreedyPlayer(name2, Colour.BLACK);
+            default -> throw new IllegalArgumentException("Wrong type of player!");
         }
     }
 
@@ -60,22 +62,25 @@ public class CommandLineGame extends Game {
 
     private Position getValidPosition(Player currentPlayer) {
         System.out.print(currentPlayer.getName() + " it's your turn!");
+        Position current = getPositionFromPlayer(currentPlayer);
+        if (!(currentPlayer instanceof HumanPlayer)) {
+            System.out.println(" Moved in " + current.toString());
+        }
+        return current;
+    }
+
+    private Position getPositionFromPlayer(Player currentPlayer) {
         Position current;
-        boolean flag;
         do {
             current = currentPlayer.getPlayerPosition();
             try {
                 isMoveValid(current);
-                flag = false;
+                break;
             } catch (Exception e) {
                 if (currentPlayer instanceof HumanPlayer)
                     System.out.print(e.getMessage());
-                flag = true;
             }
-        } while (flag);
-        if (!(currentPlayer instanceof HumanPlayer)) {
-            System.out.println(" Moved in " + current.toString());
-        }
+        } while (true);
         return current;
     }
 

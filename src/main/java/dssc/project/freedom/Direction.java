@@ -27,9 +27,9 @@ public enum Direction {
     DOWN_ANTI_DIAGONAL(1, -1);
 
     /** The x-coordinate of the direction. */
-    public final int x;
+    private final int x;
     /** The y-coordinate of the direction. */
-    public final int y;
+    private final int y;
 
     /**
      * Constructor. It creates a direction given a pair of integers.
@@ -39,5 +39,21 @@ public enum Direction {
     Direction(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * Getter for the x-coordinate.
+     * @return The x-coordinate.
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * Getter for the y-coordinate.
+     * @return The y-coordinate.
+     */
+    public int getY() {
+        return y;
     }
 }
