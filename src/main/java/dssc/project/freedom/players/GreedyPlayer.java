@@ -1,10 +1,7 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.*;
-import dssc.project.freedom.basis.Board;
-import dssc.project.freedom.basis.Colour;
-import dssc.project.freedom.basis.Direction;
-import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.Utility;
+import dssc.project.freedom.basis.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -1,13 +1,8 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.basis.Board;
-import dssc.project.freedom.basis.Colour;
-import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.basis.*;
 import dssc.project.freedom.Utility;
-import dssc.project.freedom.players.GreedyPlayer;
-import dssc.project.freedom.players.HumanPlayer;
-import dssc.project.freedom.players.Player;
-import dssc.project.freedom.players.RandomPlayer;
+import dssc.project.freedom.players.*;
 
 public class CommandLineGame extends Game {
 

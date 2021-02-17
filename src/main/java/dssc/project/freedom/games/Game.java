@@ -1,9 +1,6 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.basis.Board;
-import dssc.project.freedom.basis.Colour;
-import dssc.project.freedom.basis.Position;
-import dssc.project.freedom.basis.Stone;
+import dssc.project.freedom.basis.*;
 
 /**
  * Class that represents the game itself.

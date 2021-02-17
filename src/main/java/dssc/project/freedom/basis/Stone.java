@@ -1,13 +1,11 @@
 package dssc.project.freedom.basis;
 
-import dssc.project.freedom.games.Game;
-
 /**
  * Class that represents a stone on the board's tile in the game.
  *
  * It has a {@link Colour} and a "live" status: a stone is "live" if it is
  * part of exactly four stones in a row (horizontal, vertical or diagonal).
- * All the Stones are stored in the {@link Board} of the {@link Game}.
+ * All the Stones are stored in the {@link Board} of the game.
  */
 public class Stone {
 

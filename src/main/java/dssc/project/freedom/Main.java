@@ -9,46 +9,48 @@ import java.util.Scanner;
  */
 public class Main {
 
+    private final static Scanner in = new Scanner(System.in);
+
     /**
      * Main of the project.
      */
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
         do {
             System.out.println("Game Start:");
             System.out.print("Enter the board size (minimum 4): ");
-            int boardSize = getBoardSize(in);
-            char player1 = getTypeOfPlayer(in);
-            String name1;
+            int boardSize = getBoardSize();
+            char player1 = getTypeOfPlayer();
+            String name1 = "ComputerPlayer1";
             if (player1 == 'h')
-                name1 = getHumanPlayerName(in);
-            else
-                name1 = "Computer Player1";
-            char player2 = getTypeOfPlayer(in);
-            String name2;
+                name1 = getHumanPlayerName();
+            char player2 = getTypeOfPlayer();
+            String name2 = "ComputerPlayer2";
             if (player2 == 'h')
-                name2 = getHumanPlayerName(in);
-            else
-                name2 = "Computer Player2";
-            do {
-                CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
-                clGame.play();
-                System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
-                if (Utility.getInteger(in) == 1) {
-                    System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
-                    if (Utility.getInteger(in) == 1) {
-                        String temp = name1;
-                        name1 = name2;
-                        name2 = temp;
-                    }
-                } else break;
-            } while (true);
-            System.out.print("Do you want to start a new game? (0 = no, 1 = yes) ");
+                name2 = getHumanPlayerName();
+            playGameWithGivenSettings(boardSize, player1, name1, player2, name2);
+            System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
         } while (Utility.getInteger(in) != 0);
         in.close();
     }
 
-    private static int getBoardSize(Scanner in) {
+    private static void playGameWithGivenSettings(int boardSize, char player1, String name1, char player2, String name2) {
+        do {
+            CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
+            clGame.play();
+            System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
+            if (Utility.getInteger(in) == 1) {
+                System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
+                if (Utility.getInteger(in) == 1) {
+                    String temp = name1;
+                    name1 = name2;
+                    name2 = temp;
+                }
+            } else
+                break;
+        } while (true);
+    }
+
+    private static int getBoardSize() {
         int boardSize;
         boolean flag;
         do {
@@ -62,12 +64,12 @@ public class Main {
         return boardSize;
     }
 
-    private static char getTypeOfPlayer(Scanner in) {
+    private static char getTypeOfPlayer() {
         System.out.print("Choose the player: h for a Human Player, r for a Random Player or g for a Greedy Player. ");
         char player;
         do {
             player = in.next().charAt(0);
-            in.nextLine(); //throw away the \n not consumed by nextInt()
+            in.nextLine(); //throw away the \n not consumed by next()
             if (player == 'h' || player == 'r' || player == 'g')
                 break;
             System.out.print("Wrong type of player! Reenter it! ");
@@ -75,7 +77,7 @@ public class Main {
         return player;
     }
 
-    private static String getHumanPlayerName(Scanner in) {
+    private static String getHumanPlayerName() {
         System.out.print("Enter the name of Human Player: ");
         return in.nextLine();
     }

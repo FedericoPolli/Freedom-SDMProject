@@ -1,11 +1,9 @@
 package dssc.project.freedom.basis;
 
-import dssc.project.freedom.games.Game;
-
 /**
  * Class that represents a position in a grid.
  *
- * This class will represent the position of a {@link Stone} in the {@link Board} of the {@link Game}.
+ * This class will represent the position of a {@link Stone} in the {@link Board} of the game.
  */
 public final class Position {
 
