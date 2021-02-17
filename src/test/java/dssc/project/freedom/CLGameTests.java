@@ -136,15 +136,15 @@ public class CLGameTests {
                 }
             }
         }
-        input += "1";
+        input += "0";
         application.parsePlay(input);
         String output = playersColours + getCoordinatesPlayers.repeat(12) +
                 "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                "Do you want to do the last move? (0 = yes, 1 = no)" + lineSeparator() +
+                "Do you want to do the last move? (0 = no, 1 = yes)" + lineSeparator() +
                 "Black won with 12 live stones against White's 4" + lineSeparator();
         application.testOutputWithoutBoardPrints(output);
     }
-    
+
     @Test
     public void testPrintBoard(){
         ApplicationRunner application = new ApplicationRunner(4);

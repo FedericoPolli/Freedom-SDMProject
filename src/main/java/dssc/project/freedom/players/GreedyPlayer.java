@@ -26,9 +26,8 @@ public class GreedyPlayer extends Player {
     }
 
     public Position getPlayerPosition() {
-        if (previous == null) {
+        if (previous == null)
             return getRandomPosition();
-        }
         List<Position> freeAdjacentPositions = board.getFreeAdjacentPositions(previous);
         if (freeAdjacentPositions.isEmpty())
             return findPositionToPlayIn(board.getFreePositions());
@@ -41,18 +40,16 @@ public class GreedyPlayer extends Player {
     }
 
     private Position findPositionToPlayIn(List<Position> freePositions) {
-        List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();
+        List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         for (Position p : freePositions) {
-            board.updateStoneAt(p, colour);
             int maximumNumberOfStonesInARow = getMaximumNumberOfStonesInARow(p);
-            board.updateStoneAt(p, Colour.NONE);
-            if (maximumNumberOfStonesInARow == 4)
-                return p;
-            if (maximumNumberOfStonesInARow == 5)
-                freePositionsCopy.remove(p);
-            else
-                maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
+            switch (maximumNumberOfStonesInARow) {
+                case 4: return p;
+                case 5: freePositionsCopy.remove(p);
+                        break;
+                default: maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
+            }
         }
         if (freePositionsCopy.isEmpty())
             return freePositions.get(Utility.getRandomInteger(freePositions.size()));
@@ -60,16 +57,17 @@ public class GreedyPlayer extends Player {
             int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
             return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
         }
-
     }
 
     private int getMaximumNumberOfStonesInARow(Position p) {
+        board.updateStoneAt(p, colour);
         int maximumNumberOfStonesInARow = 0;
         for (Direction dir : Direction.values()) {
             maximumNumberOfStonesInARow = Math.max(maximumNumberOfStonesInARow, board.countStonesInRow(dir, p));
             if (maximumNumberOfStonesInARow == 5)
                 break;
         }
+        board.updateStoneAt(p, Colour.NONE);
         return maximumNumberOfStonesInARow;
     }
 }

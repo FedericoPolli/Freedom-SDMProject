@@ -21,9 +21,9 @@ public abstract class Player {
         return colour;
     }
 
-    public abstract Position getPlayerPosition();
-
     public boolean doesNotWantToDoLastMove() {
         return true;
     }
+
+    public abstract Position getPlayerPosition();
 }
