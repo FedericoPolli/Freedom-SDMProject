@@ -1,8 +1,6 @@
 package dssc.project.freedom;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static dssc.project.freedom.Colour.*;
 import static dssc.project.freedom.Position.at;
@@ -23,28 +21,30 @@ public class GameTests {
     @Test
     public void positionValid() {
         Position pos = at(1, 1);
-        assertTrue(game.isMoveValid(pos));
+        assertDoesNotThrow( () -> game.isMoveValid(pos) );
     }
 
     @Test
     public void positionNotInsideBoard() {
         Position wrongPosition = at(0, 0);
-        assertFalse(game.isMoveValid(wrongPosition));
+        assertThrows(Exception.class, () -> game.isMoveValid(wrongPosition));
     }
 
     @Test
     public void positionOnAlreadyPlacedStone() {
         Position pos = at(1, 1);
         game.move(pos, WHITE);
-        assertFalse(game.isMoveValid(pos));
+        assertThrows(Exception.class, () -> game.isMoveValid(pos));
     }
 
-    @ParameterizedTest
-    @CsvSource({"3, false", "2, true"})
-    public void positionShouldBeAdjacentToPrevious(int y, boolean expected) {
+    @Test
+    public void positionShouldBeAdjacentToPrevious() {
         Position pos = at(1, 1);
         game.move(pos, WHITE);
-        assertEquals(expected, game.isMoveValid(at(1, y)));
+        assertAll(
+                () -> assertThrows(Exception.class, () -> game.isMoveValid(at(1, 3))),
+                () -> assertDoesNotThrow( () -> game.isMoveValid(at(1, 2)))
+        );
     }
 
     @Test

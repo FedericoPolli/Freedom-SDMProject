@@ -61,9 +61,18 @@ public class CommandLineGame extends Game {
     private Position getValidPosition(Player currentPlayer) {
         System.out.print(currentPlayer.getName() + " it's your turn!");
         Position current;
+        boolean flag;
         do {
             current = currentPlayer.getPlayerPosition();
-        } while (!isMoveValid(current, currentPlayer));
+            try {
+                isMoveValid(current);
+                flag = false;
+            } catch (Exception e) {
+                if (currentPlayer instanceof HumanPlayer)
+                    System.out.print(e.getMessage());
+                flag = true;
+            }
+        } while (flag);
         if (!(currentPlayer instanceof HumanPlayer)) {
             System.out.println(" Moved in " + current.toString());
         }
@@ -74,42 +83,8 @@ public class CommandLineGame extends Game {
         return i == boardSize * boardSize;
     }
 
-    /**
-     * Checks if the move of the player is valid and prints a message to the user.
-     * A move is valid if the {@link Position} in which the {@link Stone} is
-     * placed is inside the {@link Board}, if it is not on an already occupied
-     * {@link Position} and if it is adjacent to the previous played {@link Stone}
-     * in the case in which the adjacent {@link Position}s of the previous
-     * played {@link Stone} are not all occupied, otherwise the player has the freedom
-     * of placing it in any non-occupied {@link Position}.
-     * @param current The Position of the Stone placed in the move that has to be checked.
-     * @return true if the move of the player is valid, false otherwise.
-     */
-    private boolean isMoveValid(Position current, Player currentPlayer) {
-        if (!board.positionIsInsideTheBoard(current)) {
-            if (currentPlayer instanceof HumanPlayer)
-                System.out.print("The position is not inside the board!");
-            return false;
-        }
-        if (board.stoneIsAlreadyPlacedAt(current)) {
-            if (currentPlayer instanceof HumanPlayer)
-                System.out.print("The position is already occupied!");
-            return false;
-        }
-        if (anyPositionAdjacentToPreviousOneIsFree()) {
-            if (current.isInAdjacentPositions(previous)) {
-                return true;
-            } else {
-                if (currentPlayer instanceof HumanPlayer)
-                    System.out.print("The position is not adjacent to the previous one!");
-                return false;
-            }
-        }
-        return true;
-    }
-
     @Override
-    public void printWinner(int player1LiveStones, int player2LiveStones) {
+    protected void printWinner(int player1LiveStones, int player2LiveStones) {
         if (player1LiveStones > player2LiveStones)
             System.out.println(player1.getName() + " won with " + player1LiveStones + " live stones against " + player2.getName() + "'s " + player2LiveStones);
         else if (player2LiveStones > player1LiveStones)

@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import static java.lang.System.lineSeparator;
+
 /**
  * Class that represents the game itself.
  */
@@ -39,16 +41,13 @@ public abstract class Game {
      * @param current The Position of the Stone placed in the move that has to be checked.
      * @return true if the move of the player is valid, false otherwise.
      */
-    public boolean isMoveValid(Position current) {
+    public void isMoveValid(Position current) throws Exception {
         if (!board.positionIsInsideTheBoard(current))
-            return false;
-        if (board.stoneIsAlreadyPlacedAt(current)) {
-            return false;
-        }
-        if (anyPositionAdjacentToPreviousOneIsFree()) {
-            return current.isInAdjacentPositions(previous);
-        }
-        return true;
+            throw new Exception("The position is not inside the board!");
+        if (board.stoneIsAlreadyPlacedAt(current))
+            throw new Exception("The position is already occupied!");
+        if (anyPositionAdjacentToPreviousOneIsFree() && !(current.isInAdjacentPositions(previous)))
+            throw new Exception("The position is not adjacent to the previous one!");
     }
 
     /**
