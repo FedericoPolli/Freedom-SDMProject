@@ -34,8 +34,7 @@ public final class Position {
     }
 
     /**
-     * Returns a {@link Position} obtained by moving <code>x</code> steps in
-     * horizontal and <code>y</code> steps in vertical.
+     * Returns a {@link Position} obtained by moving in the given direction by the given steps.
      * @param dir The direction in which to move.
      * @param step The number of steps.
      * @return A Position with the new coordinates.

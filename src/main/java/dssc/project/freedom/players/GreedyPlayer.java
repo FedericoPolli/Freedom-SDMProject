@@ -46,10 +46,13 @@ public class GreedyPlayer extends Player {
         for (Position p : freePositions) {
             int maximumNumberOfStonesInARow = getMaximumNumberOfStonesInARow(p);
             switch (maximumNumberOfStonesInARow) {
-                case 4: return p;
-                case 5: freePositionsCopy.remove(p);
-                        break;
-                default: maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
+                case 4:
+                    return p;
+                case 5:
+                    freePositionsCopy.remove(p);
+                    break;
+                default:
+                    maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
             }
         }
         if (freePositionsCopy.isEmpty())

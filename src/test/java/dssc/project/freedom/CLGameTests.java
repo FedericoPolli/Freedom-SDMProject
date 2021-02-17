@@ -4,7 +4,6 @@ import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,19 +18,19 @@ public class CLGameTests {
             "  +---+" + lineSeparator() +
             "    1  " + lineSeparator();
     private final String finalBoardOfDim1 = "  +---+" + lineSeparator() +
-            "1 | "+ white + " |" + lineSeparator() +
+            "1 | " + white + " |" + lineSeparator() +
             "  +---+" + lineSeparator() +
             "    1  " + lineSeparator();
     private final String whiteTurn = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
     private final String blackTurn = "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
     private final String wholeNormalTurn = whiteTurn + blackTurn;
     private final String playersColours = "White has colour WHITE and his symbol is " + white + lineSeparator() +
-                            "Black has colour BLACK and his symbol is " + black + lineSeparator();
+            "Black has colour BLACK and his symbol is " + black + lineSeparator();
     private final String drawPrint = "Draw: both players have the same number of live stones: ";
 
 
     @Test
-    public void testWhiteWinner () {
+    public void testWhiteWinner() {
         ApplicationRunner application = new ApplicationRunner(4);
         application.parseWinner();
         application.testOutput("White won with " + 12 + " live stones against Black's " + 0 + lineSeparator());
@@ -89,7 +88,7 @@ public class CLGameTests {
         ApplicationRunner application = new ApplicationRunner(3);
         String input = "1 1" + lineSeparator() + "1 3" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() + " 1 3" + lineSeparator() +
-                "2 3" + lineSeparator() + "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1" ;
+                "2 3" + lineSeparator() + "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1";
         application.parsePlay(input);
         String output = playersColours + wholeNormalTurn +
                 "The position is not adjacent to the previous one!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
@@ -101,8 +100,8 @@ public class CLGameTests {
     public void testPlayWithFreedomChoice() {
         ApplicationRunner application = new ApplicationRunner(3);
         String input = "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() +
-                " 1 1" + lineSeparator() + "1 3" + lineSeparator()+ "2 3" + lineSeparator() +
-                "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1" ;
+                " 1 1" + lineSeparator() + "1 3" + lineSeparator() + "2 3" + lineSeparator() +
+                "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1";
         application.parsePlay(input);
         String output = playersColours + wholeNormalTurn.repeat(4) +
                 whiteTurn + drawPrint + 0 + lineSeparator();
@@ -138,11 +137,11 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPrintBoard(){
+    public void testPrintBoard() {
         ApplicationRunner application = new ApplicationRunner(4);
         String white = Utility.getWhite();
         String black = Utility.getBlack();
-        List<Position> positions = Arrays.asList(Position.at(1,1), Position.at(2,1));
+        List<Position> positions = Arrays.asList(Position.at(1, 1), Position.at(2, 1));
         List<Colour> colours = Arrays.asList(Colour.WHITE, Colour.BLACK);
         application.parseBoard(positions, colours);
         String line = "  " + "+---".repeat(4) + "+" + lineSeparator();

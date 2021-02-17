@@ -27,7 +27,7 @@ public class ApplicationRunner {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         this.boardSize = boardSize;
-        this.commandLineGame = new CommandLineGame(boardSize, 'h', "White",'h', "Black");
+        this.commandLineGame = new CommandLineGame(boardSize, 'h', "White", 'h', "Black");
     }
 
     public void testOutput(String expectedOutput) {
@@ -37,10 +37,10 @@ public class ApplicationRunner {
     public void testOutputWithoutBoardPrints(String expectedOutput) {
         String output = outputStream.toString();
         StringBuffer text = new StringBuffer(output);
-        int boardLength = (4*boardSize+4)*(2*boardSize+2);
+        int boardLength = (4 * boardSize + 4) * (2 * boardSize + 2);
         if (Utility.getOS().equals("Windows"))
-            boardLength += boardSize*2 + 2;
-        while(output.contains("+")) {
+            boardLength += boardSize * 2 + 2;
+        while (output.contains("+")) {
             int i = text.indexOf("+") - 2;
             text = text.replace(i, i + boardLength, "");
             output = text.toString();
@@ -56,8 +56,8 @@ public class ApplicationRunner {
     }
 
     public void parseWinner() {
-        for(int x = 1; x <= boardSize; ++x) {
-            for(int y = 1; y <= boardSize; ++y) {
+        for (int x = 1; x <= boardSize; ++x) {
+            for (int y = 1; y <= boardSize; ++y) {
                 commandLineGame.move(at(x, y), (x * y) % 2 == 0 ? WHITE : BLACK);
             }
         }
