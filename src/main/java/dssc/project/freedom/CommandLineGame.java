@@ -1,14 +1,11 @@
 package dssc.project.freedom;
 
-import dssc.project.freedom.players.GreedyPlayer;
-import dssc.project.freedom.players.HumanPlayer;
-import dssc.project.freedom.players.Player;
-import dssc.project.freedom.players.RandomPlayer;
+import dssc.project.freedom.players.*;
 
 public class CommandLineGame extends Game {
 
-    Player player1;
-    Player player2;
+    private Player player1;
+    private Player player2;
 
     /**
      * Class constructor. A {@link Game} has a {@link Board} on which the players
@@ -112,20 +109,13 @@ public class CommandLineGame extends Game {
     }
 
     @Override
-    public Colour winner() {
-        board.checkBoardAndMakeStonesLive();
-        int player1LiveStones = board.countLiveStones(player1.getColour());
-        int player2LiveStones = board.countLiveStones(player2.getColour());
-        if (player1LiveStones > player2LiveStones) {
+    public void printWinner(int player1LiveStones, int player2LiveStones) {
+        if (player1LiveStones > player2LiveStones)
             System.out.println(player1.getName() + " won with " + player1LiveStones + " live stones against " + player2.getName() + "'s " + player2LiveStones);
-            return player1.getColour();
-        } else if (player2LiveStones > player1LiveStones) {
+        else if (player2LiveStones > player1LiveStones)
             System.out.println(player2.getName() + " won with " + player2LiveStones + " live stones against " + player1.getName() + "'s " + player1LiveStones);
-            return player2.getColour();
-        } else {
+        else
             System.out.println("Draw: both players have the same number of live stones: " + player1LiveStones);
-            return Colour.NONE;
-        }
     }
 }
 

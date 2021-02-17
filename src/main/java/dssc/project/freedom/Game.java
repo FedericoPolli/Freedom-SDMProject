@@ -3,7 +3,7 @@ package dssc.project.freedom;
 /**
  * Class that represents the game itself.
  */
-public class Game {
+public abstract class Game {
 
     /** The board on which the game is played. */
     protected final Board board;
@@ -99,6 +99,7 @@ public class Game {
         board.checkBoardAndMakeStonesLive();
         int whiteLiveStones = board.countLiveStones(Colour.WHITE);
         int blackLiveStones = board.countLiveStones(Colour.BLACK);
+        printWinner(whiteLiveStones, blackLiveStones);
         if (whiteLiveStones > blackLiveStones) {
             return Colour.WHITE;
         } else if (blackLiveStones > whiteLiveStones) {
@@ -106,5 +107,8 @@ public class Game {
         } else {
             return Colour.NONE;
         }
+    }
+
+    protected void printWinner(int whiteLiveStones, int blackLiveStones) {
     }
 }
