@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Scanner;
 
 import static dssc.project.freedom.basis.Colour.BLACK;
@@ -47,8 +48,10 @@ public class ApplicationRunner {
         assertEquals(expectedOutput, output);
     }
 
-    public void parseBoard(Position current, Colour colour) {
-        commandLineGame.move(current, colour);
+    public void parseBoard(List<Position> positions, List<Colour> colours) {
+        for (int i = 0; i < positions.size(); ++i) {
+            commandLineGame.move(positions.get(i), colours.get(i));
+        }
         commandLineGame.printBoard();
     }
 
