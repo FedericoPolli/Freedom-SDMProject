@@ -8,7 +8,7 @@ public class FakeRandomGenerator implements RandomGenerator {
     /**
      * Number of calls of the getRandomInteger function
      */
-    private int lastCall = 0;
+    private int lastCall = -1;
     /**
      * Return the number of times the function has been called. If the number is higher then a given upperbound the
      * the counter is set to 0.
@@ -17,8 +17,9 @@ public class FakeRandomGenerator implements RandomGenerator {
      */
     @Override
     public int getRandomInteger(int upperBound) {
-        if (lastCall >= upperBound)
+        ++lastCall;
+        if (lastCall > upperBound)
             lastCall = 0;
-        return ++lastCall;
+        return lastCall;
     }
 }
