@@ -1,5 +1,6 @@
 package dssc.project.freedom.players;
 
+import dssc.project.freedom.RandomInteger;
 import dssc.project.freedom.basis.Board;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class GreedyPlayerTests {
         }
         GreedyPlayer.setBoard(board);
         GreedyPlayer.setPrevious(at(3, 4));
-        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
+        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
         assertEquals(at(4, 4), greedyPlayer.getPlayerPosition());
     }
 
@@ -41,7 +42,7 @@ public class GreedyPlayerTests {
         }
         GreedyPlayer.setBoard(board);
         GreedyPlayer.setPrevious(at(4, 5));
-        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
+        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
         assertNotEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
 
@@ -55,7 +56,7 @@ public class GreedyPlayerTests {
         board.updateStoneAt(at(1, 1), BLACK);
         GreedyPlayer.setBoard(board);
         GreedyPlayer.setPrevious(at(3, 4));
-        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
+        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
         assertTrue(board.getFreePositions().contains(greedyPlayer.getPlayerPosition()));
     }
 
@@ -69,7 +70,7 @@ public class GreedyPlayerTests {
         board.updateStoneAt(at(3, 3), BLACK);
         GreedyPlayer.setBoard(board);
         GreedyPlayer.setPrevious(at(3, 3));
-        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
+        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
         assertEquals(at(3, 4), greedyPlayer.getPlayerPosition());
     }
 
@@ -89,7 +90,7 @@ public class GreedyPlayerTests {
         board.updateStoneAt(at(3, 5), WHITE);
         GreedyPlayer.setBoard(board);
         GreedyPlayer.setPrevious(at(4, 5));
-        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
+        GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
         assertEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
 }

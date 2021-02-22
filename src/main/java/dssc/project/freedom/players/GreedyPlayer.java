@@ -1,18 +1,20 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.Utility;
-import dssc.project.freedom.basis.*;
+import dssc.project.freedom.RandomGenerator;
+import dssc.project.freedom.basis.Board;
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.Direction;
+import dssc.project.freedom.basis.Position;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static dssc.project.freedom.Utility.getRandomInteger;
-
 public class GreedyPlayer extends Player {
 
     private static Board board;
     private static Position previous;
+    private final RandomGenerator randomGenerator;
 
     public static void setPrevious(Position previous) {
         GreedyPlayer.previous = previous;
@@ -22,8 +24,9 @@ public class GreedyPlayer extends Player {
         GreedyPlayer.board = board;
     }
 
-    public GreedyPlayer(String name, Colour colour) {
+    public GreedyPlayer(String name, Colour colour, RandomGenerator randomGenerator) {
         super(name, colour);
+        this.randomGenerator = randomGenerator;
     }
 
     public Position getPlayerPosition() {
@@ -37,7 +40,7 @@ public class GreedyPlayer extends Player {
     }
 
     public Position getRandomPosition() {
-        return Position.at(getRandomInteger(board.getBoardSize()) + 1, getRandomInteger(board.getBoardSize()) + 1);
+        return Position.at(randomGenerator.getRandomInteger(board.getBoardSize()) + 1, randomGenerator.getRandomInteger(board.getBoardSize()) + 1);
     }
 
     private Position findPositionToPlayIn(List<Position> freePositions) {
@@ -56,7 +59,7 @@ public class GreedyPlayer extends Player {
             }
         }
         if (freePositionsCopy.isEmpty())
-            return freePositions.get(Utility.getRandomInteger(freePositions.size()));
+            return freePositions.get(randomGenerator.getRandomInteger(freePositions.size()));
         else {
             int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
             return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));

@@ -1,5 +1,6 @@
 package dssc.project.freedom.games;
 
+import dssc.project.freedom.RandomInteger;
 import dssc.project.freedom.basis.*;
 import dssc.project.freedom.Utility;
 import dssc.project.freedom.players.*;
@@ -31,14 +32,14 @@ public class CommandLineGame extends Game {
         super(boardSize);
         switch (player1) {
             case 'h' -> this.player1 = new HumanPlayer(name1, Colour.WHITE);
-            case 'r' -> this.player1 = new RandomPlayer(name1, Colour.WHITE, boardSize);
-            case 'g' -> this.player1 = new GreedyPlayer(name1, Colour.WHITE);
+            case 'r' -> this.player1 = new RandomPlayer(name1, Colour.WHITE, boardSize, new RandomInteger());
+            case 'g' -> this.player1 = new GreedyPlayer(name1, Colour.WHITE, new RandomInteger());
             default -> throw new IllegalArgumentException("Wrong type of player!");
         }
         switch (player2) {
             case 'h' -> this.player2 = new HumanPlayer(name2, Colour.BLACK);
-            case 'r' -> this.player2 = new RandomPlayer(name2, Colour.BLACK, boardSize);
-            case 'g' -> this.player2 = new GreedyPlayer(name2, Colour.BLACK);
+            case 'r' -> this.player2 = new RandomPlayer(name2, Colour.BLACK, boardSize, new RandomInteger());
+            case 'g' -> this.player2 = new GreedyPlayer(name2, Colour.BLACK, new RandomInteger());
             default -> throw new IllegalArgumentException("Wrong type of player!");
         }
     }
