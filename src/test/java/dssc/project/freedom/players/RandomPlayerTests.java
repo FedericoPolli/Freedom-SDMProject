@@ -16,7 +16,8 @@ public class RandomPlayerTests {
         Player player = new RandomPlayer("White", Colour.WHITE, 5, randomGenerator);
         assertAll(
                 () -> assertEquals(at(1,2), player.getPlayerPosition()),
-                () -> assertEquals(at(3,4), player.getPlayerPosition())
+                () -> assertEquals(at(3,4), player.getPlayerPosition()),
+                () -> assertEquals(at(5,1), player.getPlayerPosition())
         );
     }
 
@@ -30,15 +31,15 @@ public class RandomPlayerTests {
          */
         private int lastCall = -1;
         /**
-         * Return the number of times the function has been called. If the number is higher then a given upperbound the
-         * the counter is set to 0.
+         * Return the number of times the function has been called. If the number is higher or equal to a given
+         * upperbound the counter is set to 0.
          * @param upperBound The upperbound of the number of calls
          * @return An integer representing the number of calls of the function.
          */
         @Override
         public int getRandomInteger(int upperBound) {
             ++lastCall;
-            if (lastCall > upperBound)
+            if (lastCall >= upperBound)
                 lastCall = 0;
             return lastCall;
         }
