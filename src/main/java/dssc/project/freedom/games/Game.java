@@ -7,18 +7,13 @@ import dssc.project.freedom.basis.*;
  */
 public abstract class Game {
 
-    /**
-     * The board on which the game is played.
-     */
+    /** The board on which the game is played. */
     protected final Board board;
-    /**
-     * Auxiliary field to know the previous played position.
-     */
+    /** Auxiliary field to know the previous played position. */
     protected Position previous = null;
 
     /**
      * Class constructor. A {@link Game} has a {@link Board} on which the players play.
-     *
      * @param boardSize The size of the Board to be created.
      */
     public Game(int boardSize) {
@@ -28,7 +23,6 @@ public abstract class Game {
     /**
      * Represents the move of a player: adds a {@link Stone} of the given {@link Colour}
      * in the given {@link Position}.
-     *
      * @param current The Position in which adding the Stone.
      * @param colour  The Colour of the Stone to be added.
      */
@@ -44,7 +38,8 @@ public abstract class Game {
      * {@link Stone} in the case in which the adjacent {@link Position}s of the previous
      * played {@link Stone} are not all occupied, otherwise the player has the freedom
      * of placing it in any non-occupied {@link Position}.
-     *
+     * The function raises an {@link Exception} if the move is not valid with a message
+     * explaining the reason why it is not valid.
      * @param current The Position of the Stone placed in the move that has to be checked.
      */
     public void isMoveValid(Position current) throws Exception {
@@ -58,7 +53,6 @@ public abstract class Game {
 
     /**
      * Checks if the {@link Stone}'s {@link Position} is adjacent to the previously played one.
-     *
      * @return true if the Stone is adjacent to the previously played one, false otherwise.
      */
     protected boolean anyPositionAdjacentToPreviousOneIsFree() {
@@ -69,7 +63,6 @@ public abstract class Game {
      * Decides if in the last move of the whole game placing the {@link Stone}
      * at the given {@link Position} is convenient or not for the player of the
      * given {@link Colour}.
-     *
      * @param position The Position of the last move.
      * @param colour   The Colour of the player.
      * @return true if placing the last Stone is convenient for the player, false otherwise.
@@ -85,7 +78,6 @@ public abstract class Game {
     /**
      * Computes the points of the player of the given {@link Colour} and then
      * resets all the {@link Stone}s as not "live".
-     *
      * @param colour The Colour of the player.
      * @return The number of "live" Stones of the given player.
      */
@@ -101,7 +93,6 @@ public abstract class Game {
      * Checks the {@link Stone}s that are "live" and changes its status, then
      * computes the number of "live" {@link Stone}s for each player: the one
      * with more "live" {@link Stone}s wins the game.
-     *
      * @return The Colour of the player who wins the game.
      */
     public Colour winner() {
@@ -118,6 +109,11 @@ public abstract class Game {
         }
     }
 
+    /**
+     * Helper function that has to be implemented in the subclass that handles the printings.
+     * @param whiteLiveStones The number of live Stones of the white player.
+     * @param blackLiveStones The number of live Stones of the black player.
+     */
     protected void printWinner(int whiteLiveStones, int blackLiveStones) {
     }
 }

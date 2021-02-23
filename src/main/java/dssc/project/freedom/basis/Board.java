@@ -65,9 +65,7 @@ public class Board {
         getStoneAt(p).makeOfColour(c);
     }
 
-    /**
-     * Sets all the {@link Stone}s of the {@link Board} as not "live".
-     */
+    /** Sets all the {@link Stone}s of the {@link Board} as not "live". */
     public void setAllStonesDead() {
         board.values().forEach(value -> value.changeLiveStatusTo(false));
     }
