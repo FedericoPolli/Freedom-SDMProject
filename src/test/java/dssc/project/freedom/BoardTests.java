@@ -20,8 +20,13 @@ public class BoardTests {
 
     @Test
     void createEmptyBoard() {
-        Board board = new Board(3);
-        assertFalse(board.stoneIsAlreadyPlacedAt(at(3,2)));
+        Board board = new Board(2);
+        assertAll(
+                () -> assertFalse(board.stoneIsAlreadyPlacedAt(at(1,1))),
+                () -> assertFalse(board.stoneIsAlreadyPlacedAt(at(1,2))),
+                () -> assertFalse(board.stoneIsAlreadyPlacedAt(at(2,1))),
+                () -> assertFalse(board.stoneIsAlreadyPlacedAt(at(2,2)))
+        );
     }
 
     @Test
@@ -40,7 +45,7 @@ public class BoardTests {
     @ParameterizedTest
     @MethodSource("positionToBeChecked")
     void areAdjacentPositionsOccupied(Board board, int x, int y, boolean expected){
-        assertEquals(expected, board.areAdjacentPositionOccupied(at(x,y)));
+        assertEquals(expected, !board.areAdjacentPositionFree(at(x,y)));
     }
 
     private static Stream<Arguments> positionToBeChecked() {

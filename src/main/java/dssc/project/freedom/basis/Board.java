@@ -112,8 +112,8 @@ public class Board {
      * @param pos The Position to be checked.
      * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
      */
-    public boolean areAdjacentPositionOccupied(Position pos) {
-        return getFreeAdjacentPositions(pos).isEmpty();
+    public boolean areAdjacentPositionFree(Position pos) {
+        return !getFreeAdjacentPositions(pos).isEmpty();
     }
 
     /**

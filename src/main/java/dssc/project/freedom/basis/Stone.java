@@ -41,11 +41,11 @@ public class Stone {
 
     /**
      * Checks if this {@link Stone} is of the same {@link Colour} as the given {@link Stone}.
-     * @param s The Stone to be used in the comparison.
+     * @param other The Stone to be used in the comparison.
      * @return true if the Colour is the same, false otherwise.
      */
-    public boolean isOfSameColourAs(Stone s) {
-        return this.colour.equals(s.colour);
+    public boolean isOfSameColourAs(Stone other) {
+        return this.colour.equals(other.getColour());
     }
 
     /**
