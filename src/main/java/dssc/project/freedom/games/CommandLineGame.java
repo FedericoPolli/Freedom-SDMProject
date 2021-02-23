@@ -141,6 +141,7 @@ public class CommandLineGame extends Game {
      * @param player1LiveStones Number of live Stones of the first Player.
      * @param player2LiveStones Number of live Stones of the second Player.
      */
+    @Override
     protected void printWinner(int player1LiveStones, int player2LiveStones) {
         if (player1LiveStones > player2LiveStones)
             System.out.println(player1.getName() + " won with " + player1LiveStones + " live stones against " + player2.getName() + "'s " + player2LiveStones);

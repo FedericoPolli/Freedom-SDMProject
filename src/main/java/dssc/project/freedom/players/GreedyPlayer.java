@@ -36,7 +36,7 @@ public class GreedyPlayer extends Player {
             return findPositionToPlayIn(freeAdjacentPositions);
     }
 
-    public Position getRandomPosition() {
+    private Position getRandomPosition() {
         return Position.at(getRandomInteger(board.getBoardSize()) + 1, getRandomInteger(board.getBoardSize()) + 1);
     }
 
