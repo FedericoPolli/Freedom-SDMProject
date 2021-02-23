@@ -11,7 +11,7 @@ public abstract class Player {
     /**
      * Name of the Player.
      */
-    private final String name;
+    private String name;
     /**
      * Colour of the Player.
      */
@@ -56,4 +56,11 @@ public abstract class Player {
      * @return
      */
     public abstract Position getPlayerPosition();
+
+    /**
+     * Change the name of the player
+     */
+    public void changeName(String newName){
+        this.name = newName;
+    }
 }

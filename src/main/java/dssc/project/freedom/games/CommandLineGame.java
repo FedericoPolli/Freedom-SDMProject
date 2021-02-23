@@ -1,9 +1,11 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.RandomInteger;
-import dssc.project.freedom.basis.*;
 import dssc.project.freedom.Utility;
-import dssc.project.freedom.players.*;
+import dssc.project.freedom.basis.Board;
+import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.players.GreedyPlayer;
+import dssc.project.freedom.players.HumanPlayer;
+import dssc.project.freedom.players.Player;
 
 /**
  * Class that represents a version of the game which can be played from the command line.
@@ -13,35 +15,23 @@ public class CommandLineGame extends Game {
     /**
      * The first Player of the game.
      */
-    private final Player player1;
+    private Player player1;
     /**
      * The second Player of the game.
      */
-    private final Player player2;
+    private Player player2;
 
     /**
      * Class constructor. A {@link CommandLineGame} has a {@link Board} on which the Players
      * play, then it has two Players.
      * @param boardSize The size of the Board to be created.
-     * @param player1 The char representing the type of the first Player ('h' = human, 'r' = random, 'g' = greedy).
-     * @param name1 The name of the first Player.
-     * @param player2 The char representing the type of the second Player ('h' = human, 'r' = random, 'g' = greedy).
-     * @param name2 The name of the second Player.
+     * @param player1 The first player.
+     * @param player2 The second player.
      */
-    public CommandLineGame(int boardSize, char player1, String name1, char player2, String name2) throws IllegalArgumentException{
+    public CommandLineGame(int boardSize, Player player1, Player player2) throws IllegalArgumentException{
         super(boardSize);
-        switch (player1) {
-            case 'h' -> this.player1 = new HumanPlayer(name1, Colour.WHITE);
-            case 'r' -> this.player1 = new RandomPlayer(name1, Colour.WHITE, boardSize, new RandomInteger());
-            case 'g' -> this.player1 = new GreedyPlayer(name1, Colour.WHITE, new RandomInteger());
-            default -> throw new IllegalArgumentException("Wrong type of player!");
-        }
-        switch (player2) {
-            case 'h' -> this.player2 = new HumanPlayer(name2, Colour.BLACK);
-            case 'r' -> this.player2 = new RandomPlayer(name2, Colour.BLACK, boardSize, new RandomInteger());
-            case 'g' -> this.player2 = new GreedyPlayer(name2, Colour.BLACK, new RandomInteger());
-            default -> throw new IllegalArgumentException("Wrong type of player!");
-        }
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     /**

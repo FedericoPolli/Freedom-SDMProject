@@ -4,6 +4,7 @@ import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.games.CommandLineGame;
 import dssc.project.freedom.players.HumanPlayer;
+import dssc.project.freedom.players.Player;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -27,7 +28,9 @@ public class ApplicationRunner {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         this.boardSize = boardSize;
-        this.commandLineGame = new CommandLineGame(boardSize, 'h', "White", 'h', "Black");
+        Player player1 = new HumanPlayer("White", WHITE);
+        Player player2 = new HumanPlayer("Black", BLACK);
+        this.commandLineGame = new CommandLineGame(boardSize, player1, player2);
     }
 
     public void testOutput(String expectedOutput) {
