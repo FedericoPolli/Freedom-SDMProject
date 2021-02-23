@@ -29,6 +29,7 @@ public class GreedyPlayer extends Player {
         this.randomGenerator = randomGenerator;
     }
 
+    @Override
     public Position getPlayerPosition() {
         if (previous == null)
             return getRandomPosition();

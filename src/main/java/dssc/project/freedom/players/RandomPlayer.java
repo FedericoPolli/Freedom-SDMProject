@@ -15,6 +15,7 @@ public class RandomPlayer extends Player {
         this.randomGenerator = randomGenerator;
     }
 
+    @Override
     public Position getPlayerPosition() {
         return Position.at(randomGenerator.getRandomInteger(boardSize) + 1, randomGenerator.getRandomInteger(boardSize) + 1);
     }
