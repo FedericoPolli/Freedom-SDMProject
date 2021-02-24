@@ -55,7 +55,7 @@ public abstract class Game {
      * Checks if the {@link Stone}'s {@link Position} is adjacent to the previously played one.
      * @return true if the Stone is adjacent to the previously played one, false otherwise.
      */
-    protected boolean anyPositionAdjacentToPreviousOneIsFree() {
+    private boolean anyPositionAdjacentToPreviousOneIsFree() {
         return previous != null && !board.areAdjacentPositionOccupied(previous);
     }
 
