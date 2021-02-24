@@ -9,11 +9,10 @@ import java.util.Scanner;
  */
 public class Main {
 
+    /** {@link Scanner} to read the input from the terminal. */
     private final static Scanner in = new Scanner(System.in);
 
-    /**
-     * Main of the project.
-     */
+    /** Main of the project. */
     public static void main(String[] args) {
         do {
             System.out.println("Game Start:");
@@ -33,6 +32,68 @@ public class Main {
         in.close();
     }
 
+    /**
+     * Asks the user to enter the size of the {@link dssc.project.freedom.basis.Board}.
+     * @return The sie of the Board.
+     */
+    private static int getBoardSize() {
+        int boardSize;
+        boolean flag;
+        do {
+            flag = false;
+            boardSize = Utility.getInteger(in);
+            if (boardSize < 4) {
+                flag = true;
+                System.out.print("The size of the board must be an integer >= 4! ");
+            }
+        } while (flag);
+        return boardSize;
+    }
+
+    /**
+     * Asks to enter a {@link dssc.project.freedom.players.Player} with which
+     * the user wants to play the {@link dssc.project.freedom.games.Game}:
+     * <ul>
+     *     <li>'h': {@link dssc.project.freedom.players.HumanPlayer}, so the user has to play. </li>
+     *     <li>'r': {@link dssc.project.freedom.players.RandomPlayer}. </li>
+     *     <li>'g': {@link dssc.project.freedom.players.GreedyPlayer}. </li>
+     * </ul>
+     * @return The type of the chosen Player.
+     */
+    private static char getTypeOfPlayer() {
+        System.out.print("Choose the player: 'h' for a Human Player, 'r' for a Random Player or 'g' for a Greedy Player. ");
+        char player;
+        do {
+            player = in.next().charAt(0);
+            in.nextLine();  // throws away the \n not consumed by next()
+            if (player == 'h' || player == 'r' || player == 'g')
+                break;
+            System.out.print("Wrong type of player! Reenter it: ");
+        } while (true);
+        return player;
+    }
+
+    /**
+     * Asks the user to enter the name of the selected
+     * {@link dssc.project.freedom.players.HumanPlayer}.
+     * @return The name of the HumanPlayer.
+     */
+    private static String getHumanPlayerName() {
+        System.out.print("Enter the name of the player: ");
+        return in.nextLine();
+    }
+
+    /**
+     * Keeps on playing {@link dssc.project.freedom.games.Game}s with the same
+     * settings specified in input (eventually with the names of the
+     * {@link dssc.project.freedom.players.Player}s switched if the user wants)
+     * until the user decides to quit the {@link dssc.project.freedom.games.Game}.
+     * @param boardSize The size of the Board.
+     * @param player1   The white Player.
+     * @param name1     The name of the white Player.
+     * @param player2   The black Player.
+     * @param name2     The name of the black Player.
+     */
     private static void playGameWithGivenSettings(int boardSize, char player1, String name1, char player2, String name2) {
         do {
             CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
@@ -48,37 +109,5 @@ public class Main {
             } else
                 break;
         } while (true);
-    }
-
-    private static int getBoardSize() {
-        int boardSize;
-        boolean flag;
-        do {
-            flag = false;
-            boardSize = Utility.getInteger(in);
-            if (boardSize < 4) {
-                flag = true;
-                System.out.print("The size of the board must be an integer >= 4. ");
-            }
-        } while (flag);
-        return boardSize;
-    }
-
-    private static char getTypeOfPlayer() {
-        System.out.print("Choose the player: h for a Human Player, r for a Random Player or g for a Greedy Player. ");
-        char player;
-        do {
-            player = in.next().charAt(0);
-            in.nextLine(); //throw away the \n not consumed by next()
-            if (player == 'h' || player == 'r' || player == 'g')
-                break;
-            System.out.print("Wrong type of player! Reenter it! ");
-        } while (true);
-        return player;
-    }
-
-    private static String getHumanPlayerName() {
-        System.out.print("Enter the name of Human Player: ");
-        return in.nextLine();
     }
 }

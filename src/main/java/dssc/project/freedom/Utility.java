@@ -1,10 +1,11 @@
 package dssc.project.freedom;
 
-import dssc.project.freedom.basis.Stone;
-
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Class that contains functions that are useful for various classes.
+ */
 public class Utility {
 
     /**
@@ -47,7 +48,7 @@ public class Utility {
     }
 
     /**
-     * Returns the symbol to be used for the white {@link Stone}s.
+     * Returns the symbol to be used for the white {@link dssc.project.freedom.basis.Stone}s.
      * @return The symbol for white Stones.
      */
     public static String getWhite() {
@@ -55,7 +56,7 @@ public class Utility {
     }
 
     /**
-     * Returns the symbol to be used for the black {@link Stone}s.
+     * Returns the symbol to be used for the black {@link dssc.project.freedom.basis.Stone}s.
      * @return The symbol for black Stones.
      */
     public static String getBlack() {
