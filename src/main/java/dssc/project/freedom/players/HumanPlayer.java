@@ -15,10 +15,10 @@ public class HumanPlayer extends Player {
     /**
      * Static member needed to get the user's input.
      */
-    private static Scanner in = new Scanner(System.in);
+    private static Scanner in;
 
     /**
-     * Sets the Scanner to the one in input.
+     * Sets the {@link Scanner} to the one in input.
      * @param in The new Scanner.
      */
     public static void setScanner(Scanner in) {
@@ -48,7 +48,7 @@ public class HumanPlayer extends Player {
 
     /**
      * Asks the user if he wants to do the last move.
-     * @return true if user does not want to do last move, false otherwise.
+     * @return true if the user does not want to do last move, false otherwise.
      */
     @Override
     public boolean doesNotWantToDoLastMove() {
