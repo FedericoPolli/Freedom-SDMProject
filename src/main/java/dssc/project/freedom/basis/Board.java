@@ -201,6 +201,19 @@ public class Board {
     }
 
     /**
+     * Computes the points of the player of the given {@link Colour} and then
+     * resets all the {@link Stone}s as not "live".
+     * @param colour The Colour of the player.
+     * @return The number of "live" Stones of the given player.
+     */
+    public int getPointsAndResetAllStonesDead(Colour colour) {
+        checkBoardAndMakeStonesLive();
+        int counter = countLiveStones(colour);
+        setAllStonesDead();
+        return counter;
+    }
+
+    /**
      * Checks the whole {@link Board} in the horizontal, vertical and diagonal
      * {@link Direction}s to find the {@link Stone}s which are part of a row of
      * exactly four {@link Stone}s of the same {@link Colour}, then makes them "live".

@@ -75,25 +75,11 @@ public abstract class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        long pointsBeforeLastMove = getPointsAndResetAllStonesDead(colour);
+        long pointsBeforeLastMove = board.getPointsAndResetAllStonesDead(colour);
         board.updateStoneAt(position, colour);
-        long pointsAfterLastMove = getPointsAndResetAllStonesDead(colour);
+        long pointsAfterLastMove = board.getPointsAndResetAllStonesDead(colour);
         board.updateStoneAt(position, Colour.NONE);
         return pointsAfterLastMove >= pointsBeforeLastMove;
-    }
-
-    /**
-     * Computes the points of the player of the given {@link Colour} and then
-     * resets all the {@link Stone}s as not "live".
-     *
-     * @param colour The Colour of the player.
-     * @return The number of "live" Stones of the given player.
-     */
-    private int getPointsAndResetAllStonesDead(Colour colour) {
-        board.checkBoardAndMakeStonesLive();
-        int counter = board.countLiveStones(colour);
-        board.setAllStonesDead();
-        return counter;
     }
 
     /**
