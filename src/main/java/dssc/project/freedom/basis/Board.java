@@ -173,7 +173,7 @@ public class Board {
      * @param current The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
-    public int countStonesInRow(Direction dir, Position current) {
+    private int countStonesInRow(Direction dir, Position current) {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
             Position next = current.moveInDirectionWithStep(dir, i);
@@ -223,6 +223,18 @@ public class Board {
         check4StonesInDirection(Direction.UP);
         check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
         check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
+    }
+
+    public int getMaximumNumberOfStonesInARow(Position p, Colour colour) {
+        updateStoneAt(p, colour);
+        int maximumNumberOfStonesInARow = 0;
+        for (Direction dir : Direction.values()) {
+            maximumNumberOfStonesInARow = Math.max(maximumNumberOfStonesInARow, countStonesInRow(dir, p));
+            if (maximumNumberOfStonesInARow == 5)
+                break;
+        }
+        updateStoneAt(p, Colour.NONE);
+        return maximumNumberOfStonesInARow;
     }
 
     /**
