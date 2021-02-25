@@ -18,7 +18,8 @@ public abstract class Player {
     protected final Colour colour;
 
     /**
-     * Class constructor. A {@link Player} has a name and an associateed {@link Colour}.
+     * Class constructor. A {@link dssc.project.freedom.players.Player} has a name and an associated
+     * {@link dssc.project.freedom.basis.Colour}.
      * @param name Name of the Player.
      * @param colour Colour of the Player.
      */
@@ -36,7 +37,7 @@ public abstract class Player {
     }
 
     /**
-     * Getter for the {@link Colour} associated to this Player.
+     * Getter for the {@link dssc.project.freedom.basis.Colour} associated to this Player.
      * @return the Colour of the Player.
      */
     public Colour getColour() {
@@ -52,7 +53,7 @@ public abstract class Player {
     }
 
     /**
-     * Get the {@link Position} in which the Player wants to place its Stone.
+     * Get the {@link dssc.project.freedom.basis.Position} in which the Player wants to place its Stone.
      * @return
      */
     public abstract Position getPlayerPosition();

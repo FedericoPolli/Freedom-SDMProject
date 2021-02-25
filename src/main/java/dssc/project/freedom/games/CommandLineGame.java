@@ -19,8 +19,8 @@ public class CommandLineGame extends Game {
     private final Player player2;
 
     /**
-     * Class constructor. A {@link CommandLineGame} has a {@link Board} on which the Players
-     * play, then it has two Players.
+     * Class constructor. A {@link dssc.project.freedom.games.CommandLineGame} has a
+     * {@link dssc.project.freedom.basis.Board} on which the Players play, then it has two Players.
      * @param boardSize The size of the Board to be created.
      * @param player1 The char representing the type of the first Player ('h' = human, 'r' = random, 'g' = greedy).
      * @param name1 The name of the first Player.
@@ -75,14 +75,14 @@ public class CommandLineGame extends Game {
     }
 
     /**
-     * Prints the {@link Board} in a graphical way.
+     * Prints the {@link dssc.project.freedom.basis.Board} in a graphical way.
      */
     public void printBoard() {
         System.out.print(board.toString());
     }
 
     /**
-     * Getter for the {@link Player} who should play in this turn.
+     * Getter for the {@link dssc.project.freedom.players.Player} who should play in this turn.
      * @param turn Turn of the play.
      * @return The Player who should play in this turn.
      */
