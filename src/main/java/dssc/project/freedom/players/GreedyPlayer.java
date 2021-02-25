@@ -14,12 +14,9 @@ public class GreedyPlayer extends Player {
     private static Board board;
     private static Position previous;
 
-    public static void setPrevious(Position previous) {
-        GreedyPlayer.previous = previous;
-    }
-
-    public static void setBoard(Board board) {
+    public static void updateBoardAndPreviousPosition(Board board, Position previous) {
         GreedyPlayer.board = board;
+        GreedyPlayer.previous = previous;
     }
 
     public GreedyPlayer(String name, Colour colour) {

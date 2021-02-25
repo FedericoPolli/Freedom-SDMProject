@@ -50,10 +50,8 @@ public class CommandLineGame extends Game {
         printGreetings();
         for (int turn = 1; turn <= board.getBoardSize() * board.getBoardSize(); ++turn) {
             Player currentPlayer = getCurrentPlayer(turn);
-            if (currentPlayer instanceof GreedyPlayer) {
-                GreedyPlayer.setBoard(board);
-                GreedyPlayer.setPrevious(previous);
-            }
+            if (currentPlayer instanceof GreedyPlayer)
+                GreedyPlayer.updateBoardAndPreviousPosition(board, previous);
             Position current = makeTurn(currentPlayer);
             if (isLastMove(board.getBoardSize(), turn) && !isLastMoveConvenient(current, currentPlayer.getColour())) {
                 if (currentPlayer.doesNotWantToDoLastMove())

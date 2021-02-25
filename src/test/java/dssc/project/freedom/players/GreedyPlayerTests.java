@@ -21,8 +21,7 @@ public class GreedyPlayerTests {
                 }
             }
         }
-        GreedyPlayer.setBoard(board);
-        GreedyPlayer.setPrevious(at(3, 4));
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(3, 4));
         GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
         assertEquals(at(4, 4), greedyPlayer.getPlayerPosition());
     }
@@ -39,8 +38,7 @@ public class GreedyPlayerTests {
                 }
             }
         }
-        GreedyPlayer.setBoard(board);
-        GreedyPlayer.setPrevious(at(4, 5));
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
         GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
         assertNotEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
@@ -53,8 +51,7 @@ public class GreedyPlayerTests {
         board.updateStoneAt(at(2, 2), BLACK);
         board.updateStoneAt(at(2, 1), WHITE);
         board.updateStoneAt(at(1, 1), BLACK);
-        GreedyPlayer.setBoard(board);
-        GreedyPlayer.setPrevious(at(3, 4));
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(3, 4));
         GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
         assertTrue(board.getFreePositions().contains(greedyPlayer.getPlayerPosition()));
     }
@@ -67,8 +64,7 @@ public class GreedyPlayerTests {
         board.updateStoneAt(at(2, 2), BLACK);
         board.updateStoneAt(at(2, 3), WHITE);
         board.updateStoneAt(at(3, 3), BLACK);
-        GreedyPlayer.setBoard(board);
-        GreedyPlayer.setPrevious(at(3, 3));
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(3, 3));
         GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
         assertEquals(at(3, 4), greedyPlayer.getPlayerPosition());
     }
@@ -87,8 +83,7 @@ public class GreedyPlayerTests {
         }
         board.updateStoneAt(at(5, 4), BLACK);
         board.updateStoneAt(at(3, 5), WHITE);
-        GreedyPlayer.setBoard(board);
-        GreedyPlayer.setPrevious(at(4, 5));
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
         GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE);
         assertEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
