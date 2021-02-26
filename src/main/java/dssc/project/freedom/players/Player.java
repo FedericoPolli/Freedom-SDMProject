@@ -36,6 +36,13 @@ public abstract class Player {
     }
 
     /**
+     * Setter for the name of this Player.
+     */
+    public void changeName(String newName){
+        this.name = newName;
+    }
+
+    /**
      * Getter for the {@link Colour} associated to this Player.
      * @return the Colour of the Player.
      */
@@ -56,11 +63,4 @@ public abstract class Player {
      * @return
      */
     public abstract Position getPlayerPosition();
-
-    /**
-     * Change the name of the player
-     */
-    public void changeName(String newName){
-        this.name = newName;
-    }
 }

@@ -24,37 +24,31 @@ public class Main {
             System.out.println("Game Start:");
             System.out.print("Enter the board size (minimum 4): ");
             int boardSize = getBoardSize();
-            char typeOfPlayer1 = getTypeOfPlayer();
-            String name1 = "ComputerPlayer1";
-            Player player1;
-            switch (typeOfPlayer1) {
-                case 'h' -> {
-                    name1 = getHumanPlayerName();
-                    player1 = new HumanPlayer(name1, Colour.WHITE);
-                }
-                case 'r' -> player1 = new RandomPlayer(name1, Colour.WHITE, boardSize, new RandomInteger());
-                case 'g' -> player1 = new GreedyPlayer(name1, Colour.WHITE, new RandomInteger());
-                default -> throw new IllegalStateException("Unexpected value: " + typeOfPlayer1);
-            }
+            Player player1 = setPlayer("ComputerPlayer1", Colour.WHITE, boardSize);
             char typeOfPlayer2 = getTypeOfPlayer();
-            String name2 = "ComputerPlayer2";            
-            Player player2;
-            switch (typeOfPlayer2) {
-                case 'h' -> {
-                    name2 = getHumanPlayerName();
-                    player2 = new HumanPlayer(name2, Colour.BLACK);
-                }
-                case 'r' -> player2 = new RandomPlayer(name2, Colour.BLACK, boardSize, new RandomInteger());
-                case 'g' -> player2 = new GreedyPlayer(name2, Colour.BLACK, new RandomInteger());
-                default -> throw new IllegalStateException("Unexpected value: " + typeOfPlayer2);
-            }
-            playGameWithGivenSettings(boardSize, player1, name1, player2, name2);
+            Player player2 = setPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
+            playGameWithGivenSettings(boardSize, player1, player2);
             System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
         } while (Utility.getInteger(in) != 0);
         in.close();
     }
 
-    private static void playGameWithGivenSettings(int boardSize, Player player1, String name1, Player player2, String name2) {
+    private static Player setPlayer(String name, Colour colour, int boardSize) {
+        Player player;
+        char typeOfPlayer = getTypeOfPlayer();
+        switch (typeOfPlayer) {
+            case 'h' -> {
+                name = getHumanPlayerName();
+                player = new HumanPlayer(name, colour);
+            }
+            case 'r' -> player = new RandomPlayer(name, colour, boardSize, new RandomInteger());
+            case 'g' -> player = new GreedyPlayer(name, colour, new RandomInteger());
+            default -> throw new IllegalStateException("Unexpected value: " + typeOfPlayer);
+        }
+        return player;
+    }
+
+    private static void playGameWithGivenSettings(int boardSize, Player player1, Player player2) {
         do {
             CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
             clGame.play();
@@ -62,11 +56,9 @@ public class Main {
             if (Utility.getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {
-                    String temp = name1;
-                    name1 = name2;
-                    name2 = temp;
-                    player1.changeName(name1);
-                    player2.changeName(name2);
+                    String tmp = player1.getName();
+                    player1.changeName(player2.getName());
+                    player2.changeName(tmp);
                 }
             } else
                 break;
