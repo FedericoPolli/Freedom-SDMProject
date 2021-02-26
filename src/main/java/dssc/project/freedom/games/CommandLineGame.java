@@ -81,7 +81,7 @@ public class CommandLineGame extends Game {
 
     /**
      * Represents the turn of a {@link Player}. Advises the {@link Player} that
-     * is his turn and, if the {@link Player} is not human, tell where the
+     * is his turn and, if the {@link Player} is not human, tells where the
      * {@link dssc.project.freedom.basis.Stone} has been placed.
      * @param currentPlayer Player whose turn is.
      * @return The Position in which the PFlayer placed his stone.
@@ -96,8 +96,8 @@ public class CommandLineGame extends Game {
     }
 
     /**
-     * Gets the {@link Position} in which the player want to place the
-     * {@link dssc.project.freedom.basis.Stone} and check if it is valid.
+     * Gets the {@link Position} in which the {@link Player} wants to place the
+     * {@link dssc.project.freedom.basis.Stone} and checks if it is valid.
      * If it is not and the {@link Player} is human it prints an error message.
      * @param currentPlayer  Player whose turn is.
      * @return The Position in which the Player placed his stone.
