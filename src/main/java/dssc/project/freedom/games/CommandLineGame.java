@@ -12,14 +12,10 @@ import dssc.project.freedom.players.Player;
  */
 public class CommandLineGame extends Game {
 
-    /**
-     * The first Player of the game.
-     */
-    private Player player1;
-    /**
-     * The second Player of the game.
-     */
-    private Player player2;
+    /** The first Player of the game. */
+    private final Player player1;
+    /** The second Player of the game. */
+    private final Player player2;
 
     /**
      * Class constructor. A {@link CommandLineGame} has a {@link Board} on which the Players
@@ -28,14 +24,15 @@ public class CommandLineGame extends Game {
      * @param player1 The first player.
      * @param player2 The second player.
      */
-    public CommandLineGame(int boardSize, Player player1, Player player2) throws IllegalArgumentException{
+    public CommandLineGame(int boardSize, Player player1, Player player2) {
         super(boardSize);
         this.player1 = player1;
         this.player2 = player2;
     }
 
     /**
-     * Represent the actual match of the Game. It prints some information, perform all the turns and declare the winner.
+     * Represents the actual match of the Game. It prints some information, performs
+     * all the turns and declares the winner.
      */
     public void play() {
         printGreetings();

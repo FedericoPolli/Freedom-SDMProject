@@ -26,21 +26,27 @@ public class Main {
             int boardSize = getBoardSize();
             char typeOfPlayer1 = getTypeOfPlayer();
             String name1 = "ComputerPlayer1";
-            if (typeOfPlayer1 == 'h')
-                name1 = getHumanPlayerName();
-            char typeOfPlayer2 = getTypeOfPlayer();
-            String name2 = "ComputerPlayer2";
-            if (typeOfPlayer2 == 'h')
-                name2 = getHumanPlayerName();
-            Player player1 = new HumanPlayer(name1, Colour.WHITE);
-            Player player2 = new HumanPlayer(name2, Colour.BLACK);
+            Player player1;
             switch (typeOfPlayer1) {
+                case 'h' -> {
+                    name1 = getHumanPlayerName();
+                    player1 = new HumanPlayer(name1, Colour.WHITE);
+                }
                 case 'r' -> player1 = new RandomPlayer(name1, Colour.WHITE, boardSize, new RandomInteger());
                 case 'g' -> player1 = new GreedyPlayer(name1, Colour.WHITE, new RandomInteger());
+                default -> throw new IllegalStateException("Unexpected value: " + typeOfPlayer1);
             }
+            char typeOfPlayer2 = getTypeOfPlayer();
+            String name2 = "ComputerPlayer2";            
+            Player player2;
             switch (typeOfPlayer2) {
+                case 'h' -> {
+                    name2 = getHumanPlayerName();
+                    player2 = new HumanPlayer(name2, Colour.BLACK);
+                }
                 case 'r' -> player2 = new RandomPlayer(name2, Colour.BLACK, boardSize, new RandomInteger());
                 case 'g' -> player2 = new GreedyPlayer(name2, Colour.BLACK, new RandomInteger());
+                default -> throw new IllegalStateException("Unexpected value: " + typeOfPlayer2);
             }
             playGameWithGivenSettings(boardSize, player1, name1, player2, name2);
             System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
