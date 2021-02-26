@@ -25,7 +25,6 @@ public class Main {
             System.out.print("Enter the board size (minimum 4): ");
             int boardSize = getBoardSize();
             Player player1 = setPlayer("ComputerPlayer1", Colour.WHITE, boardSize);
-            char typeOfPlayer2 = getTypeOfPlayer();
             Player player2 = setPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
             playGameWithGivenSettings(boardSize, player1, player2);
             System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
