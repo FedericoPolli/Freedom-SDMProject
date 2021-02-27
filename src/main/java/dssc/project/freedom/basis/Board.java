@@ -39,20 +39,20 @@ public class Board {
     }
 
     /**
+     * Getter for the size of this {@link Board}.
+     * @return The size of this Board.
+     */
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    /**
      * Returns the {@link Stone} in the {@link Board} at the given {@link Position}.
      * @param p The Position of the Stone to be retrieved.
      * @return The Stone at the given Position.
      */
     private Stone getStoneAt(Position p) {
         return board.get(p);
-    }
-
-    /**
-     * Getter for the size of this {@link Board}.
-     * @return The size of this Board.
-     */
-    public int getBoardSize() {
-        return boardSize;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Board {
     /**
      * Sets all the {@link Stone}s of the {@link Board} as not "live".
      */
-    public void setAllStonesDead() {
+    private void setAllStonesDead() {
         board.values().forEach(value -> value.changeLiveStatusTo(false));
     }
 
@@ -201,6 +201,18 @@ public class Board {
     }
 
     /**
+     * Checks the whole {@link Board} in the horizontal, vertical and diagonal
+     * {@link Direction}s to find the {@link Stone}s which are part of a row of
+     * exactly four {@link Stone}s of the same {@link Colour}, then makes them "live".
+     */
+    public void checkBoardAndMakeStonesLive() {
+        check4StonesInDirection(Direction.RIGHT);
+        check4StonesInDirection(Direction.UP);
+        check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
+        check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
+    }
+
+    /**
      * Computes the points of the player of the given {@link Colour} and then
      * resets all the {@link Stone}s as not "live".
      * @param colour The Colour of the player.
@@ -211,18 +223,6 @@ public class Board {
         int counter = countLiveStones(colour);
         setAllStonesDead();
         return counter;
-    }
-
-    /**
-     * Checks the whole {@link Board} in the horizontal, vertical and diagonal
-     * {@link Direction}s to find the {@link Stone}s which are part of a row of
-     * exactly four {@link Stone}s of the same {@link Colour}, then makes them "live".
-     */
-    public void checkBoardAndMakeStonesLive() {
-        check4StonesInDirection(Direction.RIGHT);
-        check4StonesInDirection(Direction.UP);
-        check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
-        check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
     }
 
     public int getMaximumNumberOfStonesInARow(Position p, Colour colour) {
