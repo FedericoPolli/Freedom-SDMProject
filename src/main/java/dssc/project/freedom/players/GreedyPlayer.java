@@ -47,18 +47,13 @@ public class GreedyPlayer extends Player {
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         for (Position p : freePositions) {
-            int maximumNumberOfStonesInARow = board.getNumberOfStonesInRowForAllDirections(p, colour)
-                    .stream()
-                    .max(Comparator.naturalOrder())
-                    .get();
-            switch (maximumNumberOfStonesInARow) {
-                case 4:
-                    return p;
-                case 5:
-                    freePositionsCopy.remove(p);
-                    break;
-                default:
-                    maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
+            int maximumNumberOfStonesInARow = getMaximumNumberOfStonesInARow(p);
+            if (maximumNumberOfStonesInARow == 4) {
+                return p;
+            } else if (maximumNumberOfStonesInARow == 5) {
+                freePositionsCopy.remove(p);
+            } else {
+                maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
             }
         }
         if (freePositionsCopy.isEmpty())
@@ -67,5 +62,12 @@ public class GreedyPlayer extends Player {
             int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
             return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
         }
+    }
+
+    private Integer getMaximumNumberOfStonesInARow(Position p) {
+        return board.getNumberOfStonesInRowForAllDirections(p, colour)
+                .stream()
+                .max(Comparator.naturalOrder())
+                .get();
     }
 }

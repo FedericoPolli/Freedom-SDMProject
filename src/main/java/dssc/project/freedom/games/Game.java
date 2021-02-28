@@ -77,8 +77,10 @@ public abstract class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        List<Integer> bb = board.getNumberOfStonesInRowForAllDirections(position, colour);
-        return bb.stream().filter(x -> x == 4).count() >= bb.stream().filter(x -> x == 5).count();
+        List<Integer> numberOfStonesInRowForAllDirections = board.getNumberOfStonesInRowForAllDirections(position, colour);
+        long numberOfFourRows = numberOfStonesInRowForAllDirections.stream().filter(x -> x == 4).count();
+        long numberOfFiveRows = numberOfStonesInRowForAllDirections.stream().filter(x -> x == 5).count();
+        return numberOfFourRows >= numberOfFiveRows;
     }
 
     /**
