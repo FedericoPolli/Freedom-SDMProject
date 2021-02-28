@@ -32,11 +32,9 @@ public class Board {
      */
     public Board(int boardSize) {
         this.boardSize = boardSize;
-        for (int i = 1; i <= boardSize; ++i) {
-            for (int j = 1; j <= boardSize; ++j) {
+        for (int i = 1; i <= boardSize; ++i)
+            for (int j = 1; j <= boardSize; ++j)
                 board.put(at(i, j), new Stone(Colour.NONE));
-            }
-        }
     }
 
     /**
@@ -130,12 +128,10 @@ public class Board {
     private void check4StonesInDirection(Direction dir) {
         for (Position current : board.keySet()) {
             Position previous = current.moveInDirectionWithStep(dir, -1);
-            if (positionIsInsideTheBoard(previous) && areStonesOfSameColourAt(current, previous)) {
+            if (positionIsInsideTheBoard(previous) && areStonesOfSameColourAt(current, previous))
                 continue;
-            }
-            if (countStonesInRow(dir, current) == 4) {
+            if (countStonesInRow(dir, current) == 4)
                 setStonesInRowOf4Live(dir, current);
-            }
         }
     }
 
@@ -161,36 +157,35 @@ public class Board {
 
     /**
      * Counts the number of {@link Stone}s of the same {@link Colour} in a row
-     * starting from the <code>current</code> {@link Position}, according to the
+     * starting from the <code>startingPosition</code> {@link Position}, according to the
      * direction specified by the input {@link Direction}.
      * @param dir     The direction in which to move.
-     * @param current The starting Position.
+     * @param startingPosition The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
-    private int countStonesInRow(Direction dir, Position current) {
-        int counter = 1;
+    private int countStonesInRow(Direction dir, Position startingPosition) {
+        int stonesInRow = 1;
         for (int i = 1; i < 5; ++i) {
-            Position next = current.moveInDirectionWithStep(dir, i);
-            if (positionIsInsideTheBoard(next) && areStonesOfSameColourAt(current, next))
-                counter++;
+            Position current = startingPosition.moveInDirectionWithStep(dir, i);
+            if (positionIsInsideTheBoard(current) && areStonesOfSameColourAt(startingPosition, current))
+                stonesInRow++;
             else
                 break;
         }
-        return counter;
+        return stonesInRow;
     }
 
     /**
      * Sets as "live" the {@link Stone}s that are part of a row of exactly four {@link Stone}s
-     * of the same {@link Colour}, starting from the {@link Position} <code>current</code>,
+     * of the same {@link Colour}, starting from the {@link Position} <code>startingPosition</code>,
      * in the direction given by the input <code>xDir</code> and <code>yDir</code>.
      * @param dir     The direction in which to move.
-     * @param current The starting Position.
+     * @param startingPosition The starting Position.
      */
-    private void setStonesInRowOf4Live(Direction dir, Position current) {
-        getStoneAt(current).changeLiveStatusTo(true);
-        for (int i = 1; i < 4; ++i) {
-            Position next = current.moveInDirectionWithStep(dir, i);
-            getStoneAt(next).changeLiveStatusTo(true);
+    private void setStonesInRowOf4Live(Direction dir, Position startingPosition) {
+        for (int i = 0; i < 4; ++i) {
+            Position current = startingPosition.moveInDirectionWithStep(dir, i);
+            getStoneAt(current).changeLiveStatusTo(true);
         }
     }
 
@@ -228,11 +223,10 @@ public class Board {
         for (int j = boardSize; j > 0; --j) {
             boardString += j + " ";
             for (int i = 1; i <= boardSize; ++i) {
-                boardString += "| ";
                 switch (getStoneAt(at(i, j)).getColour()) {
-                    case WHITE -> boardString += white;
-                    case BLACK -> boardString += black;
-                    case NONE -> boardString += " ";
+                    case WHITE -> boardString += "| " + white;
+                    case BLACK -> boardString += "| " + black;
+                    case NONE -> boardString += "|  ";
                 }
                 boardString += " ";
             }
