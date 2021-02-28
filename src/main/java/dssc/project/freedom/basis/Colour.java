@@ -1,9 +1,7 @@
 package dssc.project.freedom.basis;
 
 /**
- * Enum that represents the colours of a {@link Stone}.
- *
- * This {@link Enum} represents the colours of a {@link Stone}: it can be white, black
+ * Enum that represents the colours of a {@link Stone}:white, black
  * or empty, thus without colour.
  * It is used to avoid working with a {@link String} all the time.
  */

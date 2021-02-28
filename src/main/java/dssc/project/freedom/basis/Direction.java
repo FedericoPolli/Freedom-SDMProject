@@ -3,8 +3,6 @@ package dssc.project.freedom.basis;
 /**
  * Enum that represents the direction in which to move.
  *
- * This {@link Enum} represents the colours of a {@link Stone}: it can be white, black
- * or empty, thus without colour.
  * It is used to avoid working with two integers like `(1, 0)` to move right.
  */
 public enum Direction {

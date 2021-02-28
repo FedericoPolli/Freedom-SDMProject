@@ -5,7 +5,6 @@ package dssc.project.freedom.basis;
  *
  * It has a {@link Colour} and a "live" status: a stone is "live" if it is
  * part of exactly four stones in a row (horizontal, vertical or diagonal).
- * All the Stones are stored in the {@link Board} of the game.
  */
 public class Stone {
 
