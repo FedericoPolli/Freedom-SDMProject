@@ -125,13 +125,11 @@ public class CLGameTests {
         String input = "";
         for (int i = 1; i <= boardSize; ++i) {
             if (i % 2 == 1) {
-                for (int j = 1; j <= boardSize; ++j) {
+                for (int j = 1; j <= boardSize; ++j)
                     input += i + " " + j + lineSeparator();
-                }
             } else {
-                for (int j = boardSize; j >= 1; --j) {
+                for (int j = boardSize; j >= 1; --j)
                     input += i + " " + j + lineSeparator();
-                }
             }
         }
         return input + "0";

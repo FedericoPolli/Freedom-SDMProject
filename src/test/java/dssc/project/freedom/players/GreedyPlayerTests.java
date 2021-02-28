@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GreedyPlayerTests {
 
-    GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
+    final GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
 
     @Test
     public void chooseFourthStone() {

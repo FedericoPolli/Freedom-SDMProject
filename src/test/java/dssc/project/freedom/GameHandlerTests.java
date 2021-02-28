@@ -3,7 +3,6 @@ package dssc.project.freedom;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.System.lineSeparator;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameHandlerTests {
 

@@ -76,8 +76,8 @@ public class GameRunner {
     }
 
     public void parsePlay(String input) {
-        HumanPlayer.setScanner(new Scanner(new ByteArrayInputStream(
-                input.getBytes(StandardCharsets.UTF_8))));
+        ByteArrayInputStream source = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+        HumanPlayer.setScanner(new Scanner(source));
         commandLineGame.playGame();
     }
 }

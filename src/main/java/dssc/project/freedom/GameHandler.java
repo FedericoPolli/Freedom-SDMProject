@@ -68,12 +68,11 @@ public class GameHandler {
     }
 
     /**
-     * Asks to enter a {@link dssc.project.freedom.players.Player} with which
-     * the user wants to play the {@link dssc.project.freedom.games.Game}:
+     * Asks to enter a {@link Player} with which the user wants to play the {@link dssc.project.freedom.games.Game}:
      * <ul>
-     *     <li>'h': {@link dssc.project.freedom.players.HumanPlayer}, so the user has to play. </li>
-     *     <li>'r': {@link dssc.project.freedom.players.RandomPlayer}. </li>
-     *     <li>'g': {@link dssc.project.freedom.players.GreedyPlayer}. </li>
+     *     <li>'h': {@link HumanPlayer}, so the user has to play. </li>
+     *     <li>'r': {@link RandomPlayer}. </li>
+     *     <li>'g': {@link GreedyPlayer}. </li>
      * </ul>
      * @return The type of the chosen Player.
      */
@@ -91,8 +90,7 @@ public class GameHandler {
     }
 
     /**
-     * Asks the user to enter the name of the selected
-     * {@link dssc.project.freedom.players.HumanPlayer}.
+     * Asks the user to enter the name of the selected {@link HumanPlayer}.
      * @return The name of the HumanPlayer.
      */
     String getHumanPlayerName() {
@@ -102,8 +100,8 @@ public class GameHandler {
 
     /**
      * Keeps on playing {@link dssc.project.freedom.games.Game}s with the same
-     * settings specified in input (eventually with the names of the
-     * {@link dssc.project.freedom.players.Player}s switched if the user wants)
+     * settings specified in input (eventually with the {@link Colour}s of the
+     * {@link Player}s switched if the user wants)
      * until the user decides to quit the {@link dssc.project.freedom.games.Game}.
      * @param boardSize The size of the Board.
      * @param player1   The white Player.
@@ -117,12 +115,16 @@ public class GameHandler {
             if (Utility.getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {
-                    Colour tmp = player1.getColour();
-                    player1.changeColour(player2.getColour());
-                    player2.changeColour(tmp);
+                    swapColours(player1, player2);
                 }
             } else
                 break;
         } while (true);
+    }
+
+    private void swapColours(Player player1, Player player2) {
+        Colour temp = player1.getColour();
+        player1.changeColour(player2.getColour());
+        player2.changeColour(temp);
     }
 }
