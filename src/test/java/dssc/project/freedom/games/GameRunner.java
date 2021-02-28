@@ -17,13 +17,13 @@ import static dssc.project.freedom.basis.Colour.*;
 import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ApplicationRunner {
+public class GameRunner {
 
     private final ByteArrayOutputStream outputStream;
     private final int boardSize;
     private final CommandLineGame commandLineGame;
 
-    public ApplicationRunner(int boardSize) {
+    public GameRunner(int boardSize) {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         this.boardSize = boardSize;
