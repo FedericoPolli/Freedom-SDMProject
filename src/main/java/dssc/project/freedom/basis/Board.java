@@ -67,13 +67,6 @@ public class Board {
     }
 
     /**
-     * Sets all the {@link Stone}s of the {@link Board} as not "live".
-     */
-    private void setAllStonesDead() {
-        board.values().forEach(value -> value.changeLiveStatusTo(false));
-    }
-
-    /**
      * Counts the "live" {@link Stone}s of the player of the given {@link Colour}.
      * @param colour The Colour of the player.
      * @return The number of "live" Stones for that player.
@@ -211,19 +204,6 @@ public class Board {
         check4StonesInDirection(Direction.UP);
         check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
         check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
-    }
-
-    /**
-     * Computes the points of the player of the given {@link Colour} and then
-     * resets all the {@link Stone}s as not "live".
-     * @param colour The Colour of the player.
-     * @return The number of "live" Stones of the given player.
-     */
-    public int getPointsAndResetAllStonesDead(Colour colour) {
-        checkBoardAndMakeStonesLive();
-        int counter = countLiveStones(colour);
-        setAllStonesDead();
-        return counter;
     }
 
     public List<Integer> getNumberOfStonesInRowForAllDirections(Position p, Colour colour) {
