@@ -1,6 +1,6 @@
 package dssc.project.freedom.basis;
 
-import dssc.project.freedom.Utility;
+import dssc.project.freedom.utilities.Utility;
 
 import java.util.ArrayList;
 import java.util.HashMap;

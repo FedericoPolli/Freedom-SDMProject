@@ -1,7 +1,6 @@
-package dssc.project.freedom;
+package dssc.project.freedom.games;
 
 import dssc.project.freedom.basis.Position;
-import dssc.project.freedom.games.Game;
 import org.junit.jupiter.api.Test;
 
 import static dssc.project.freedom.basis.Colour.*;

@@ -1,6 +1,6 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.Utility;
+import dssc.project.freedom.utilities.Utility;
 import dssc.project.freedom.basis.Board;
 import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.players.GreedyPlayer;

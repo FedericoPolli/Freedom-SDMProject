@@ -1,6 +1,6 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.RandomInteger;
+import dssc.project.freedom.utilities.RandomInteger;
 import dssc.project.freedom.basis.Board;
 import org.junit.jupiter.api.Test;
 

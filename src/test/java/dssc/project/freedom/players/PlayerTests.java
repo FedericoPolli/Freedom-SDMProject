@@ -20,7 +20,7 @@ public class PlayerTests {
         }
     }
 
-    private Player player = new TestPlayer("Player One", Colour.WHITE);
+    private final Player player = new TestPlayer("Player One", Colour.WHITE);
 
     @Test
     void testGetName(){

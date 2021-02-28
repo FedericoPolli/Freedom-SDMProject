@@ -1,4 +1,4 @@
-package dssc.project.freedom;
+package dssc.project.freedom.utilities;
 
 /**
  * Interface representing a Random Generator.

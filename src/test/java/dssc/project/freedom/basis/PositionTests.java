@@ -1,7 +1,5 @@
-package dssc.project.freedom;
+package dssc.project.freedom.basis;
 
-import dssc.project.freedom.basis.Direction;
-import dssc.project.freedom.basis.Position;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -10,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PositionTests {
 
-    private Position position = new Position(3,3);
+    private final Position position = new Position(3,3);
 
     @ParameterizedTest
     @CsvSource({"5, 3, RIGHT", "1, 3, LEFT", "3, 5, UP", "3, 1, DOWN"})
-    void checkMoveInDirectionWithStepTwo(int expectedX, int expectexY, Direction direction){
-        assertEquals(at(expectedX,expectexY), position.moveInDirectionWithStep(direction, 2));
+    void checkMoveInDirectionWithStepTwo(int expectedX, int expectedY, Direction direction){
+        assertEquals(at(expectedX,expectedY), position.moveInDirectionWithStep(direction, 2));
     }
 
     @ParameterizedTest

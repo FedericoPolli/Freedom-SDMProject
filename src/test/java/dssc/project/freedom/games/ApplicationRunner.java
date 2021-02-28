@@ -1,10 +1,10 @@
-package dssc.project.freedom;
+package dssc.project.freedom.games;
 
 import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
-import dssc.project.freedom.games.CommandLineGame;
 import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
+import dssc.project.freedom.utilities.Utility;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,8 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
-import static dssc.project.freedom.basis.Colour.BLACK;
-import static dssc.project.freedom.basis.Colour.WHITE;
+import static dssc.project.freedom.basis.Colour.*;
 import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,6 +1,6 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.RandomGenerator;
+import dssc.project.freedom.utilities.RandomGenerator;
 import dssc.project.freedom.basis.Board;
 import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;

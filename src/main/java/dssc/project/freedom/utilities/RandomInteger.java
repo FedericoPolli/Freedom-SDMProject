@@ -1,4 +1,6 @@
-package dssc.project.freedom;
+package dssc.project.freedom.utilities;
+
+import dssc.project.freedom.utilities.RandomGenerator;
 
 import java.util.Random;
 

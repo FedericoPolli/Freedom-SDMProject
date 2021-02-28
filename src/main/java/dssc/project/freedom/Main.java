@@ -6,6 +6,8 @@ import dssc.project.freedom.players.GreedyPlayer;
 import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
 import dssc.project.freedom.players.RandomPlayer;
+import dssc.project.freedom.utilities.RandomInteger;
+import dssc.project.freedom.utilities.Utility;
 
 import java.util.Scanner;
 

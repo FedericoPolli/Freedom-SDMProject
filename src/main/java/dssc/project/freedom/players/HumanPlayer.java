@@ -5,7 +5,7 @@ import dssc.project.freedom.basis.Position;
 
 import java.util.Scanner;
 
-import static dssc.project.freedom.Utility.getInteger;
+import static dssc.project.freedom.utilities.Utility.getInteger;
 
 /**
  * Class that represents a human {@link Player}.

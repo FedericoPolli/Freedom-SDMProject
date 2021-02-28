@@ -1,8 +1,9 @@
-package dssc.project.freedom;
+package dssc.project.freedom.basis;
 
 import dssc.project.freedom.basis.Board;
 import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.utilities.Utility;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
