@@ -78,6 +78,6 @@ public class ApplicationRunner {
     public void parsePlay(String input) {
         HumanPlayer.setScanner(new Scanner(new ByteArrayInputStream(
                 input.getBytes(StandardCharsets.UTF_8))));
-        commandLineGame.play();
+        commandLineGame.playGame();
     }
 }

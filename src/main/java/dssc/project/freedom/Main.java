@@ -112,7 +112,7 @@ public class Main {
     private static void playGameWithGivenSettings(int boardSize, Player player1, Player player2) {
         do {
             CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
-            clGame.play();
+            clGame.playGame();
             System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
             if (Utility.getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");

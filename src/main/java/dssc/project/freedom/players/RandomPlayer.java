@@ -15,6 +15,7 @@ public class RandomPlayer extends Player {
 
     /** The size of the {@link dssc.project.freedom.basis.Board}. */
     private final int boardSize;
+    /** The generator of random numbers. */
     private final RandomGenerator randomGenerator;
 
     /**
@@ -22,6 +23,7 @@ public class RandomPlayer extends Player {
      * @param name      The name of the player.
      * @param colour    The Colour of the player.
      * @param boardSize The size of the Board.
+     * @param randomGenerator The generator of random numbers.
      */
     public RandomPlayer(String name, Colour colour, int boardSize, RandomGenerator randomGenerator) {
         super(name, colour);

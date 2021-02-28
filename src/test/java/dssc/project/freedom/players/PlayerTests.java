@@ -8,7 +8,8 @@ import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTests {
-    private class TestPlayer extends Player {
+
+    private static class TestPlayer extends Player {
 
         public TestPlayer(String name, Colour colour) {
             super(name, colour);
@@ -23,17 +24,17 @@ public class PlayerTests {
     private final Player player = new TestPlayer("Player One", Colour.WHITE);
 
     @Test
-    void testGetName(){
+    void testGetName() {
         assertEquals("Player One", player.getName());
     }
 
     @Test
-    void testGetColour(){
+    void testGetColour() {
         assertEquals(Colour.WHITE, player.getColour());
     }
 
     @Test
-    void testChangeColour(){
+    void testChangeColour() {
         player.changeColour(Colour.BLACK);
         assertEquals(Colour.BLACK, player.getColour());
     }

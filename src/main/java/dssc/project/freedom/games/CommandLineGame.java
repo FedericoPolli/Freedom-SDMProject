@@ -1,21 +1,17 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.basis.*;
+import dssc.project.freedom.players.*;
 import dssc.project.freedom.utilities.Utility;
-import dssc.project.freedom.basis.Board;
-import dssc.project.freedom.basis.Position;
-import dssc.project.freedom.players.GreedyPlayer;
-import dssc.project.freedom.players.HumanPlayer;
-import dssc.project.freedom.players.Player;
 
 /**
  * Class that represents a version of the game which can be played from the command line.
  */
 public class CommandLineGame extends Game {
 
-    /** The first Player of the game. */
+    /** The first {@link Player} of the game. */
     private final Player player1;
-    /** The second Player of the game. */
+    /** The second {@link Player} of the game. */
     private final Player player2;
 
     /**
@@ -35,13 +31,13 @@ public class CommandLineGame extends Game {
      * Represents the actual match of the {@link Game}. It prints some information, performs
      * all the turns and declares the winner.
      */
-    public void play() {
+    public void playGame() {
         printGreetings();
         for (int turn = 1; turn <= board.getBoardSize() * board.getBoardSize(); ++turn) {
             Player currentPlayer = getCurrentPlayer(turn);
             if (currentPlayer instanceof GreedyPlayer)
                 GreedyPlayer.updateBoardAndPreviousPosition(board, previous);
-            Position current = makeTurn(currentPlayer);
+            Position current = playATurn(currentPlayer);
             if (isLastMove(board.getBoardSize(), turn) && !isLastMoveConvenient(current, currentPlayer.getColour())) {
                 if (currentPlayer.doesNotWantToDoLastMove())
                     break;
@@ -94,7 +90,7 @@ public class CommandLineGame extends Game {
      * @param currentPlayer Player whose turn is.
      * @return The Position in which the PFlayer placed his stone.
      */
-    private Position makeTurn(Player currentPlayer) {
+    private Position playATurn(Player currentPlayer) {
         System.out.print(currentPlayer.getName() + " it's your turn!");
         Position current = getPositionFromPlayer(currentPlayer);
         if (!(currentPlayer instanceof HumanPlayer)) {
