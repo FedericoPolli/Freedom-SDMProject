@@ -45,7 +45,7 @@ public class Stone {
      * @return true if the Colour is the same, false otherwise.
      */
     public boolean isOfSameColourAs(Stone other) {
-        return this.colour.equals(other.getColour());
+        return this.colour.equals(other.colour);
     }
 
     /**

@@ -33,9 +33,8 @@ public class PlayerTests {
     }
 
     @Test
-    void testChangeName(){
-        player.changeName("New name for player One");
-        assertEquals("New name for player One", player.getName());
+    void testChangeColour(){
+        player.changeColour(Colour.BLACK);
+        assertEquals(Colour.BLACK, player.getColour());
     }
-
 }

@@ -9,9 +9,9 @@ import dssc.project.freedom.basis.Position;
 public abstract class Player {
 
     /** Name of the Player. */
-    private String name;
+    private final String name;
     /** Colour of the Player. */
-    protected final Colour colour;
+    protected Colour colour;
 
     /**
      * Class constructor. A {@link Player} has a name and a {@link Colour}.
@@ -32,18 +32,18 @@ public abstract class Player {
     }
 
     /**
-     * Setter for the name of this Player.
-     */
-    public void changeName(String newName) {
-        this.name = newName;
-    }
-
-    /**
      * Getter for the {@link Colour} associated to this Player.
      * @return The Colour of this Player.
      */
     public Colour getColour() {
         return colour;
+    }
+
+    /**
+     * Setter for the {@link Colour} of this Player.
+     */
+    public void changeColour(Colour colour) {
+        this.colour = colour;
     }
 
     /**

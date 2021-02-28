@@ -1,5 +1,6 @@
 package dssc.project.freedom.games;
 
+import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.utilities.Utility;
 import dssc.project.freedom.basis.Board;
 import dssc.project.freedom.basis.Position;
@@ -56,8 +57,13 @@ public class CommandLineGame extends Game {
      * initial empty {@link Board}.
      */
     private void printGreetings() {
-        System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
-        System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
+        if (player1.getColour() == Colour.WHITE) {
+            System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
+            System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
+        } else {
+            System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getBlack());
+            System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getWhite());
+        }
         printBoard();
     }
 
@@ -74,7 +80,11 @@ public class CommandLineGame extends Game {
      * @return The Player who should play in this turn.
      */
     private Player getCurrentPlayer(int turn) {
-        return turn % 2 == 1 ? player1 : player2;
+        if (player1.getColour() == Colour.WHITE) {
+            return turn % 2 == 1 ? player1 : player2;
+        } else {
+            return turn % 2 == 1 ? player2 : player1;
+        }
     }
 
     /**

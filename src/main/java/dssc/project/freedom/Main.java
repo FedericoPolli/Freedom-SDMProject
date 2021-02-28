@@ -21,6 +21,7 @@ public class Main {
 
     /** Main of the project. */
     public static void main(String[] args) {
+        HumanPlayer.setScanner(in);
         do {
             System.out.println("Game Start:");
             System.out.print("Enter the board size (minimum 4): ");
@@ -116,9 +117,9 @@ public class Main {
             if (Utility.getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {
-                    String tmp = player1.getName();
-                    player1.changeName(player2.getName());
-                    player2.changeName(tmp);
+                    Colour tmp = player1.getColour();
+                    player1.changeColour(player2.getColour());
+                    player2.changeColour(tmp);
                 }
             } else
                 break;
