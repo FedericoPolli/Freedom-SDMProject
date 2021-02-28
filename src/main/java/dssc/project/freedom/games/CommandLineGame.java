@@ -33,12 +33,11 @@ public class CommandLineGame extends Game {
      */
     public void playGame() {
         printGreetings();
-        for (int turn = 1; turn <= board.getBoardSize() * board.getBoardSize(); ++turn) {
+        int boardSize = board.getBoardSize();
+        for (int turn = 1; turn <= boardSize * boardSize; ++turn) {
             Player currentPlayer = getCurrentPlayer(turn);
-            if (currentPlayer instanceof GreedyPlayer)
-                GreedyPlayer.updateBoardAndPreviousPosition(board, previous);
             Position current = playATurn(currentPlayer);
-            if (isLastMove(board.getBoardSize(), turn) && !isLastMoveConvenient(current, currentPlayer.getColour())) {
+            if (isLastMove(boardSize, turn) && !isLastMoveConvenient(current, currentPlayer.getColour())) {
                 if (currentPlayer.doesNotWantToDoLastMove())
                     break;
             }
@@ -92,6 +91,8 @@ public class CommandLineGame extends Game {
      */
     private Position playATurn(Player currentPlayer) {
         System.out.print(currentPlayer.getName() + " it's your turn!");
+        if (currentPlayer instanceof GreedyPlayer)
+            GreedyPlayer.updateBoardAndPreviousPosition(board, previous);
         Position current = getPositionFromPlayer(currentPlayer);
         if (!(currentPlayer instanceof HumanPlayer)) {
             System.out.println(" Moved in " + current.toString());

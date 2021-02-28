@@ -89,13 +89,12 @@ public class GreedyPlayer extends Player {
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         for (Position p : freePositions) {
             int maximumNumberOfStonesInARow = getMaximumNumberOfStonesInARow(p);
-            if (maximumNumberOfStonesInARow == 4) {
+            if (maximumNumberOfStonesInARow == 4)
                 return p;
-            } else if (maximumNumberOfStonesInARow == 5) {
+            else if (maximumNumberOfStonesInARow == 5)
                 freePositionsCopy.remove(p);
-            } else {
+            else
                 maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
-            }
         }
         if (freePositionsCopy.isEmpty())
             return freePositions.get(randomGenerator.getRandomInteger(freePositions.size()));

@@ -11,7 +11,7 @@ public abstract class Game {
 
     /** The board on which the game is played. */
     protected final Board board;
-    /** Auxiliary field to know the previous played position. */
+    /** Auxiliary field to know the previously played position. */
     protected Position previous = null;
 
     /**
@@ -36,8 +36,8 @@ public abstract class Game {
     /**
      * Checks if the move of the player is valid. A move is valid if the {@link Position}
      * in which the {@link Stone} is placed is inside the {@link Board}, if it is not on
-     * an already occupied {@link Position} and if it is adjacent to the previous played
-     * {@link Stone} in the case in which the adjacent {@link Position}s of the previous
+     * an already occupied {@link Position} and if it is adjacent to the previously played
+     * {@link Stone}, in the case in which the adjacent {@link Position}s of the previously
      * played {@link Stone} are not all occupied, otherwise the player has the freedom
      * of placing it in any non-occupied {@link Position}.
      * The function raises an {@link Exception} if the move is not valid with a message
