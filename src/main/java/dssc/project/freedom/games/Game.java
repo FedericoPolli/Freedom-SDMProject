@@ -2,6 +2,8 @@ package dssc.project.freedom.games;
 
 import dssc.project.freedom.basis.*;
 
+import java.util.List;
+
 /**
  * Class that represents the game itself.
  */
@@ -75,11 +77,8 @@ public abstract class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        long pointsBeforeLastMove = board.getPointsAndResetAllStonesDead(colour);
-        board.updateStoneAt(position, colour);
-        long pointsAfterLastMove = board.getPointsAndResetAllStonesDead(colour);
-        board.updateStoneAt(position, Colour.NONE);
-        return pointsAfterLastMove >= pointsBeforeLastMove;
+        List<Integer> bb = board.getNumberOfStonesInRowForAllDirections(position, colour);
+        return bb.stream().filter(x -> x == 4).count() >= bb.stream().filter(x -> x == 5).count();
     }
 
     /**

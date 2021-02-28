@@ -47,7 +47,10 @@ public class GreedyPlayer extends Player {
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         for (Position p : freePositions) {
-            int maximumNumberOfStonesInARow = board.getMaximumNumberOfStonesInARow(p, colour);
+            int maximumNumberOfStonesInARow = board.getNumberOfStonesInRowForAllDirections(p, colour)
+                    .stream()
+                    .max(Comparator.naturalOrder())
+                    .get();
             switch (maximumNumberOfStonesInARow) {
                 case 4:
                     return p;

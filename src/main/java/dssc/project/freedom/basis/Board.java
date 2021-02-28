@@ -2,6 +2,7 @@ package dssc.project.freedom.basis;
 
 import dssc.project.freedom.Utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -225,14 +226,11 @@ public class Board {
         return counter;
     }
 
-    public int getMaximumNumberOfStonesInARow(Position p, Colour colour) {
+    public List<Integer> getNumberOfStonesInRowForAllDirections(Position p, Colour colour) {
         updateStoneAt(p, colour);
-        int maximumNumberOfStonesInARow = 0;
-        for (Direction dir : Direction.values()) {
-            maximumNumberOfStonesInARow = Math.max(maximumNumberOfStonesInARow, countStonesInRow(dir, p));
-            if (maximumNumberOfStonesInARow == 5)
-                break;
-        }
+        List<Integer> maximumNumberOfStonesInARow = new ArrayList<>();
+        for (Direction dir : Direction.values())
+            maximumNumberOfStonesInARow.add(countStonesInRow(dir, p));
         updateStoneAt(p, Colour.NONE);
         return maximumNumberOfStonesInARow;
     }
