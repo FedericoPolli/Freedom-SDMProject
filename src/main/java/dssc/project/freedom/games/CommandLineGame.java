@@ -1,50 +1,38 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.basis.*;
 import dssc.project.freedom.Utility;
-import dssc.project.freedom.players.*;
+import dssc.project.freedom.basis.Board;
+import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.players.GreedyPlayer;
+import dssc.project.freedom.players.HumanPlayer;
+import dssc.project.freedom.players.Player;
 
 /**
  * Class that represents a version of the game which can be played from the command line.
  */
 public class CommandLineGame extends Game {
 
-    /**
-     * The first Player of the game.
-     */
+    /** The first Player of the game. */
     private final Player player1;
-    /**
-     * The second Player of the game.
-     */
+    /** The second Player of the game. */
     private final Player player2;
 
     /**
-     * Class constructor. A {@link dssc.project.freedom.games.CommandLineGame} has a
-     * {@link dssc.project.freedom.basis.Board} on which the Players play, then it has two Players.
+     * Class constructor. A {@link CommandLineGame} has a {@link Board} on which
+     * the {@link Player}s play, then it has two {@link Player}s.
      * @param boardSize The size of the Board to be created.
-     * @param player1 The char representing the type of the first Player ('h' = human, 'r' = random, 'g' = greedy).
-     * @param name1 The name of the first Player.
-     * @param player2 The char representing the type of the second Player ('h' = human, 'r' = random, 'g' = greedy).
-     * @param name2 The name of the second Player.
+     * @param player1 The first player.
+     * @param player2 The second player.
      */
-    public CommandLineGame(int boardSize, char player1, String name1, char player2, String name2) throws IllegalArgumentException{
+    public CommandLineGame(int boardSize, Player player1, Player player2) {
         super(boardSize);
-        switch (player1) {
-            case 'h' -> this.player1 = new HumanPlayer(name1, Colour.WHITE);
-            case 'r' -> this.player1 = new RandomPlayer(name1, Colour.WHITE, boardSize);
-            case 'g' -> this.player1 = new GreedyPlayer(name1, Colour.WHITE);
-            default -> throw new IllegalArgumentException("Wrong type of player!");
-        }
-        switch (player2) {
-            case 'h' -> this.player2 = new HumanPlayer(name2, Colour.BLACK);
-            case 'r' -> this.player2 = new RandomPlayer(name2, Colour.BLACK, boardSize);
-            case 'g' -> this.player2 = new GreedyPlayer(name2, Colour.BLACK);
-            default -> throw new IllegalArgumentException("Wrong type of player!");
-        }
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     /**
-     * Represent the actual match of the Game. It prints some information, perform all the turns and declare the winner.
+     * Represents the actual match of the {@link Game}. It prints some information, performs
+     * all the turns and declares the winner.
      */
     public void play() {
         printGreetings();
@@ -64,7 +52,8 @@ public class CommandLineGame extends Game {
     }
 
     /**
-     * Prints the names, colours and symbols of the two Players and the initial empty board.
+     * Prints the names, colours and symbols of the two {@link Player}s and the
+     * initial empty {@link Board}.
      */
     private void printGreetings() {
         System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
@@ -89,8 +78,9 @@ public class CommandLineGame extends Game {
     }
 
     /**
-     * Represents the turn of a Player. Advises the Player that is his turn and, if the Player
-     * is not human, tell where the Stone has been placed.
+     * Represents the turn of a {@link Player}. Advises the {@link Player} that
+     * is his turn and, if the {@link Player} is not human, tells where the
+     * {@link dssc.project.freedom.basis.Stone} has been placed.
      * @param currentPlayer Player whose turn is.
      * @return The Position in which the PFlayer placed his stone.
      */
@@ -104,10 +94,11 @@ public class CommandLineGame extends Game {
     }
 
     /**
-     * Gets the Position in which the player want to place the Stone and check if it is valid.
-     * If it is not and the Player is human it prints an error message.
+     * Gets the {@link Position} in which the {@link Player} wants to place the
+     * {@link dssc.project.freedom.basis.Stone} and checks if it is valid.
+     * If it is not and the {@link Player} is human it prints an error message.
      * @param currentPlayer  Player whose turn is.
-     * @return The Position in which the PFlayer placed his stone.
+     * @return The Position in which the Player placed his stone.
      */
     private Position getPositionFromPlayer(Player currentPlayer) {
         Position current;
@@ -125,17 +116,17 @@ public class CommandLineGame extends Game {
     }
 
     /**
-     * Checks if it is the last move.
+     * Checks if it is the last move of the {@link Game}.
      * @param boardSize Size of the board of this Game.
      * @param turn Turn of the play.
-     * @return True if it is the last move, false otherwise.
+     * @return true if it is the last move, false otherwise.
      */
     private boolean isLastMove(int boardSize, int turn) {
         return turn == boardSize * boardSize;
     }
 
     /**
-     * Prints which Player has won and the scores of both Players.
+     * Prints which {@link Player} has won and the scores of both {@link Player}s.
      * @param player1LiveStones Number of live Stones of the first Player.
      * @param player2LiveStones Number of live Stones of the second Player.
      */
@@ -149,4 +140,3 @@ public class CommandLineGame extends Game {
             System.out.println("Draw: both players have the same number of live stones: " + player1LiveStones);
     }
 }
-

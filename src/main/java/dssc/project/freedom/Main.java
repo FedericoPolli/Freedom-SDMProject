@@ -1,6 +1,11 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.games.CommandLineGame;
+import dssc.project.freedom.players.GreedyPlayer;
+import dssc.project.freedom.players.HumanPlayer;
+import dssc.project.freedom.players.Player;
+import dssc.project.freedom.players.RandomPlayer;
 
 import java.util.Scanner;
 
@@ -9,7 +14,7 @@ import java.util.Scanner;
  */
 public class Main {
 
-    /** {@link Scanner} to read the input from the terminal. */
+    /** The {@link Scanner} to read the input from the terminal. */
     private final static Scanner in = new Scanner(System.in);
 
     /** Main of the project. */
@@ -18,15 +23,9 @@ public class Main {
             System.out.println("Game Start:");
             System.out.print("Enter the board size (minimum 4): ");
             int boardSize = getBoardSize();
-            char player1 = getTypeOfPlayer();
-            String name1 = "ComputerPlayer1";
-            if (player1 == 'h')
-                name1 = getHumanPlayerName();
-            char player2 = getTypeOfPlayer();
-            String name2 = "ComputerPlayer2";
-            if (player2 == 'h')
-                name2 = getHumanPlayerName();
-            playGameWithGivenSettings(boardSize, player1, name1, player2, name2);
+            Player player1 = setPlayer("ComputerPlayer1", Colour.WHITE, boardSize);
+            Player player2 = setPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
+            playGameWithGivenSettings(boardSize, player1, player2);
             System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
         } while (Utility.getInteger(in) != 0);
         in.close();
@@ -48,6 +47,21 @@ public class Main {
             }
         } while (flag);
         return boardSize;
+    }
+
+    private static Player setPlayer(String name, Colour colour, int boardSize) {
+        Player player;
+        char typeOfPlayer = getTypeOfPlayer();
+        switch (typeOfPlayer) {
+            case 'h' -> {
+                name = getHumanPlayerName();
+                player = new HumanPlayer(name, colour);
+            }
+            case 'r' -> player = new RandomPlayer(name, colour, boardSize, new RandomInteger());
+            case 'g' -> player = new GreedyPlayer(name, colour, new RandomInteger());
+            default -> throw new IllegalStateException("Unexpected value: " + typeOfPlayer);
+        }
+        return player;
     }
 
     /**
@@ -90,21 +104,19 @@ public class Main {
      * until the user decides to quit the {@link dssc.project.freedom.games.Game}.
      * @param boardSize The size of the Board.
      * @param player1   The white Player.
-     * @param name1     The name of the white Player.
      * @param player2   The black Player.
-     * @param name2     The name of the black Player.
      */
-    private static void playGameWithGivenSettings(int boardSize, char player1, String name1, char player2, String name2) {
+    private static void playGameWithGivenSettings(int boardSize, Player player1, Player player2) {
         do {
-            CommandLineGame clGame = new CommandLineGame(boardSize, player1, name1, player2, name2);
+            CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
             clGame.play();
             System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
             if (Utility.getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {
-                    String temp = name1;
-                    name1 = name2;
-                    name2 = temp;
+                    String tmp = player1.getName();
+                    player1.changeName(player2.getName());
+                    player2.changeName(tmp);
                 }
             } else
                 break;

@@ -1,9 +1,8 @@
 package dssc.project.freedom.players;
 
+import dssc.project.freedom.RandomGenerator;
 import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
-
-import static dssc.project.freedom.Utility.getRandomInteger;
 
 /**
  * Class that represents a {@link Player} which plays with random moves.
@@ -16,6 +15,7 @@ public class RandomPlayer extends Player {
 
     /** The size of the {@link dssc.project.freedom.basis.Board}. */
     private final int boardSize;
+    private final RandomGenerator randomGenerator;
 
     /**
      * Class constructor.
@@ -23,9 +23,10 @@ public class RandomPlayer extends Player {
      * @param colour    The Colour of the player.
      * @param boardSize The size of the Board.
      */
-    public RandomPlayer(String name, Colour colour, int boardSize) {
+    public RandomPlayer(String name, Colour colour, int boardSize, RandomGenerator randomGenerator) {
         super(name, colour);
         this.boardSize = boardSize;
+        this.randomGenerator = randomGenerator;
     }
 
     /**
@@ -33,7 +34,8 @@ public class RandomPlayer extends Player {
      * in which this {@link Player} will play its {@link dssc.project.freedom.basis.Stone}.
      * @return The position in which to play.
      */
+    @Override
     public Position getPlayerPosition() {
-        return Position.at(getRandomInteger(boardSize) + 1, getRandomInteger(boardSize) + 1);
+        return Position.at(randomGenerator.getRandomInteger(boardSize) + 1, randomGenerator.getRandomInteger(boardSize) + 1);
     }
 }

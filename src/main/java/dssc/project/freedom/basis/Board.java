@@ -2,6 +2,7 @@ package dssc.project.freedom.basis;
 
 import dssc.project.freedom.Utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,20 +40,20 @@ public class Board {
     }
 
     /**
+     * Getter for the size of this {@link Board}.
+     * @return The size of this Board.
+     */
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    /**
      * Returns the {@link Stone} in the {@link Board} at the given {@link Position}.
      * @param p The Position of the Stone to be retrieved.
      * @return The Stone at the given Position.
      */
     private Stone getStoneAt(Position p) {
         return board.get(p);
-    }
-
-    /**
-     * Getter for the size of this {@link Board}.
-     * @return The size of this Board.
-     */
-    public int getBoardSize() {
-        return boardSize;
     }
 
     /**
@@ -63,11 +64,6 @@ public class Board {
      */
     public void updateStoneAt(Position p, Colour c) {
         getStoneAt(p).makeOfColour(c);
-    }
-
-    /** Sets all the {@link Stone}s of the {@link Board} as not "live". */
-    public void setAllStonesDead() {
-        board.values().forEach(value -> value.changeLiveStatusTo(false));
     }
 
     /**
@@ -110,8 +106,8 @@ public class Board {
      * @param pos The Position to be checked.
      * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
      */
-    public boolean areAdjacentPositionOccupied(Position pos) {
-        return getFreeAdjacentPositions(pos).isEmpty();
+    public boolean areAdjacentPositionFree(Position pos) {
+        return !getFreeAdjacentPositions(pos).isEmpty();
     }
 
     /**
@@ -171,7 +167,7 @@ public class Board {
      * @param current The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
-    public int countStonesInRow(Direction dir, Position current) {
+    private int countStonesInRow(Direction dir, Position current) {
         int counter = 1;
         for (int i = 1; i < 5; ++i) {
             Position next = current.moveInDirectionWithStep(dir, i);
@@ -208,6 +204,15 @@ public class Board {
         check4StonesInDirection(Direction.UP);
         check4StonesInDirection(Direction.UP_MAIN_DIAGONAL);
         check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
+    }
+
+    public List<Integer> getNumberOfStonesInRowForAllDirections(Position p, Colour colour) {
+        updateStoneAt(p, colour);
+        List<Integer> maximumNumberOfStonesInARow = new ArrayList<>();
+        for (Direction dir : Direction.values())
+            maximumNumberOfStonesInARow.add(countStonesInRow(dir, p));
+        updateStoneAt(p, Colour.NONE);
+        return maximumNumberOfStonesInARow;
     }
 
     /**

@@ -1,6 +1,5 @@
 package dssc.project.freedom;
 
-import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.games.Game;
 import org.junit.jupiter.api.Test;
@@ -65,7 +64,7 @@ public class GameTests {
     public void draw() {
         playGameExceptLastMove(4);
         game.move(at(4,4), WHITE);
-        assertEquals(Colour.NONE, game.winner());
+        assertEquals(NONE, game.winner());
     }
 
     @Test

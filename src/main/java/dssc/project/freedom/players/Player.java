@@ -4,24 +4,19 @@ import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 
 /**
- * Class representing a generic Player for the Game.
+ * Class representing a generic player for the {@link dssc.project.freedom.games.Game}.
  */
 public abstract class Player {
 
-    /**
-     * Name of the Player.
-     */
-    private final String name;
-    /**
-     * Colour of the Player.
-     */
+    /** Name of the Player. */
+    private String name;
+    /** Colour of the Player. */
     protected final Colour colour;
 
     /**
-     * Class constructor. A {@link dssc.project.freedom.players.Player} has a name and an associated
-     * {@link dssc.project.freedom.basis.Colour}.
-     * @param name Name of the Player.
-     * @param colour Colour of the Player.
+     * Class constructor. A {@link Player} has a name and a {@link Colour}.
+     * @param name   The name of the Player.
+     * @param colour The Colour of the Player.
      */
     public Player(String name, Colour colour) {
         this.name = name;
@@ -30,31 +25,38 @@ public abstract class Player {
 
     /**
      * Getter for the name of this Player.
-     * @return The name of the Player.
+     * @return The name of this Player.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Getter for the {@link dssc.project.freedom.basis.Colour} associated to this Player.
-     * @return the Colour of the Player.
+     * Setter for the name of this Player.
+     */
+    public void changeName(String newName) {
+        this.name = newName;
+    }
+
+    /**
+     * Getter for the {@link Colour} associated to this Player.
+     * @return The Colour of this Player.
      */
     public Colour getColour() {
         return colour;
     }
 
     /**
-     * Checks whether the Player don't want to do the last move
-     * @return True
+     * Checks whether this Player doesn't want to do the last move.
+     * @return true if this Player doesn't want to do the last move, false otherwise.
      */
     public boolean doesNotWantToDoLastMove() {
         return true;
     }
 
     /**
-     * Get the {@link dssc.project.freedom.basis.Position} in which the Player wants to place its Stone.
-     * @return
+     * Gets the {@link Position} in which the Player wants to place its {@link dssc.project.freedom.basis.Stone}.
+     * @return The Position in which the Player wants to do its move.
      */
     public abstract Position getPlayerPosition();
 }

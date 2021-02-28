@@ -2,6 +2,8 @@ package dssc.project.freedom.games;
 
 import dssc.project.freedom.basis.*;
 
+import java.util.List;
+
 /**
  * Class that represents the game itself.
  */
@@ -56,7 +58,7 @@ public abstract class Game {
      * @return true if the Stone is adjacent to the previously played one, false otherwise.
      */
     private boolean anyPositionAdjacentToPreviousOneIsFree() {
-        return previous != null && !board.areAdjacentPositionOccupied(previous);
+        return previous != null && board.areAdjacentPositionFree(previous);
     }
 
     /**
@@ -68,24 +70,10 @@ public abstract class Game {
      * @return true if placing the last Stone is convenient for the player, false otherwise.
      */
     public boolean isLastMoveConvenient(Position position, Colour colour) {
-        long pointsBeforeLastMove = getPointsAndResetAllStonesDead(colour);
-        board.updateStoneAt(position, colour);
-        long pointsAfterLastMove = getPointsAndResetAllStonesDead(colour);
-        board.updateStoneAt(position, Colour.NONE);
-        return pointsAfterLastMove >= pointsBeforeLastMove;
-    }
-
-    /**
-     * Computes the points of the player of the given {@link Colour} and then
-     * resets all the {@link Stone}s as not "live".
-     * @param colour The Colour of the player.
-     * @return The number of "live" Stones of the given player.
-     */
-    private int getPointsAndResetAllStonesDead(Colour colour) {
-        board.checkBoardAndMakeStonesLive();
-        int counter = board.countLiveStones(colour);
-        board.setAllStonesDead();
-        return counter;
+        List<Integer> numberOfStonesInRowForAllDirections = board.getNumberOfStonesInRowForAllDirections(position, colour);
+        long numberOfFourRows = numberOfStonesInRowForAllDirections.stream().filter(x -> x == 4).count();
+        long numberOfFiveRows = numberOfStonesInRowForAllDirections.stream().filter(x -> x == 5).count();
+        return numberOfFourRows >= numberOfFiveRows;
     }
 
     /**

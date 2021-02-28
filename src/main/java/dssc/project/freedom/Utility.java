@@ -1,6 +1,5 @@
 package dssc.project.freedom;
 
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -26,15 +25,6 @@ public class Utility {
             }
         } while (true);
         return i;
-    }
-
-    /**
-     * Returns a randomly generated integer number.
-     * @param upperBound The upper bound for the random number.
-     * @return The randomly generated integer.
-     */
-    public static int getRandomInteger(int upperBound) {
-        return new Random().nextInt(upperBound);
     }
 
     /**
