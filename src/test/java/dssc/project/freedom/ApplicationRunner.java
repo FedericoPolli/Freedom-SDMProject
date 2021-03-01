@@ -37,18 +37,16 @@ public class ApplicationRunner {
     }
 
     private final ByteArrayOutputStream outputStream;
-    private final String input;
+    private final GameHandler gameHandler;
 
     public ApplicationRunner(String input) {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        this.input = input;
+        Scanner in = new Scanner(new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8)));
+        gameHandler = new FakeGameHandler(in);
     }
 
-    public void parseBoardSize(String input, String expectedOutput, int expectedValue) {
-        Scanner in = new Scanner(new ByteArrayInputStream(
-                input.getBytes(StandardCharsets.UTF_8)));
-        GameHandler gameHandler = new FakeGameHandler(in);
+    public void parseBoardSize(String expectedOutput, int expectedValue) {
         int value = gameHandler.getBoardSize();
         assertAll(
                 () -> assertEquals(expectedOutput, outputStream.toString()),
@@ -56,10 +54,7 @@ public class ApplicationRunner {
         );
     }
 
-    public void parseTypeOfPlayer(String input, String expectedOutput, char expectedValue) {
-        Scanner in = new Scanner(new ByteArrayInputStream(
-                input.getBytes(StandardCharsets.UTF_8)));
-        GameHandler gameHandler = new FakeGameHandler(in);
+    public void parseTypeOfPlayer(String expectedOutput, char expectedValue) {
         int value = gameHandler.getTypeOfPlayer();
         assertAll(
                 () -> assertEquals(expectedOutput, outputStream.toString()),
@@ -67,10 +62,7 @@ public class ApplicationRunner {
         );
     }
 
-    public void parseGameWithGivenSettings(String input) {
-        Scanner in = new Scanner(new ByteArrayInputStream(
-                input.getBytes(StandardCharsets.UTF_8)));
-        GameHandler gameHandler = new FakeGameHandler(in);
+    public void parseGameWithGivenSettings() {
     }
 
 }
