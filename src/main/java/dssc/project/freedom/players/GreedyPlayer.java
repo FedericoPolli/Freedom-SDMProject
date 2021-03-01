@@ -111,7 +111,7 @@ public class GreedyPlayer extends Player {
      * @param p The position on which to perform the search.
      * @return The maximum number of stones in a row for the given position.
      */
-    private Integer getMaximumNumberOfStonesInARow(Position p) {
+    Integer getMaximumNumberOfStonesInARow(Position p) {
         return board.getNumberOfStonesInRowForAllDirections(p, colour)
                 .stream()
                 .max(Comparator.naturalOrder())

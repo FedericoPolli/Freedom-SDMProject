@@ -11,11 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GreedyPlayerTests {
 
     final GreedyPlayer greedyPlayer = new GreedyPlayer("White", WHITE, new RandomInteger());
+    final Board board = new Board(5);
 
     @Test
-    public void chooseFourthStone() {
-        int boardSize = 5;
-        Board board = new Board(boardSize);
+    void chooseFourthStone() {
         for (int i = 1; i <= 3; ++i) {
             for (int j = 1; j <= 3; ++j) {
                 if (i == j) {
@@ -29,9 +28,7 @@ public class GreedyPlayerTests {
     }
 
     @Test
-    public void doNotChooseFifthStone() {
-        int boardSize = 5;
-        Board board = new Board(boardSize);
+    void doNotChooseFifthStone() {
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
                 if (i == j) {
@@ -45,9 +42,7 @@ public class GreedyPlayerTests {
     }
 
     @Test
-    public void hasTheFreedomToChooseAStone() {
-        int boardSize = 5;
-        Board board = new Board(boardSize);
+    void hasTheFreedomToChooseAStone() {
         board.updateStoneAt(at(1, 2), WHITE);
         board.updateStoneAt(at(2, 2), BLACK);
         board.updateStoneAt(at(2, 1), WHITE);
@@ -57,9 +52,7 @@ public class GreedyPlayerTests {
     }
 
     @Test
-    public void chooseStoneInLongestRow() {
-        int boardSize = 5;
-        Board board = new Board(boardSize);
+    void chooseStoneInLongestRow() {
         board.updateStoneAt(at(1, 2), WHITE);
         board.updateStoneAt(at(2, 2), BLACK);
         board.updateStoneAt(at(2, 3), WHITE);
@@ -69,9 +62,7 @@ public class GreedyPlayerTests {
     }
 
     @Test
-    public void hasToPutFifthStone() {
-        int boardSize = 5;
-        Board board = new Board(boardSize);
+    void hasToPutFifthStone() {
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
                 if (i == j) {
@@ -85,4 +76,15 @@ public class GreedyPlayerTests {
         GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
         assertEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
+
+    @Test
+    void testMaximumNumberOfStonesInARow(){
+        board.updateStoneAt(at(1, 2), WHITE);
+        board.updateStoneAt(at(2, 2), BLACK);
+        board.updateStoneAt(at(2, 1), WHITE);
+        board.updateStoneAt(at(1, 1), BLACK);
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(1, 1));
+        assertEquals(2, greedyPlayer.getMaximumNumberOfStonesInARow(at(1,1)));
+    }
+
 }
