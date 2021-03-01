@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class GameHandler {
 
     /** The {@link Scanner} to read the input from the terminal. */
-    private final Scanner in;
+    protected final Scanner in;
 
     /**
      * Class constructor.
@@ -39,7 +39,7 @@ public class GameHandler {
      * Asks the user to enter the size of the {@link dssc.project.freedom.basis.Board}.
      * @return The sie of the Board.
      */
-    int getBoardSize() {
+    protected int getBoardSize() {
         System.out.print("Enter the board size (minimum 4): ");
         int boardSize;
         do {
@@ -76,7 +76,7 @@ public class GameHandler {
      * </ul>
      * @return The type of the chosen Player.
      */
-    char getTypeOfPlayer() {
+    protected char getTypeOfPlayer() {
         System.out.print("Choose the player: 'h' for a Human Player, 'r' for a Random Player or 'g' for a Greedy Player. ");
         char player;
         do {
@@ -93,7 +93,7 @@ public class GameHandler {
      * Asks the user to enter the name of the selected {@link HumanPlayer}.
      * @return The name of the HumanPlayer.
      */
-    String getHumanPlayerName() {
+    private String getHumanPlayerName() {
         System.out.print("Enter the name of the player: ");
         return in.nextLine();
     }
@@ -107,22 +107,21 @@ public class GameHandler {
      * @param player1   The white Player.
      * @param player2   The black Player.
      */
-    void playGameWithGivenSettings(int boardSize, Player player1, Player player2) {
+    protected void playGameWithGivenSettings(int boardSize, Player player1, Player player2) {
         do {
             CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
             clGame.playGame();
             System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
             if (Utility.getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
-                if (Utility.getInteger(in) == 1) {
+                if (Utility.getInteger(in) == 1)
                     swapColours(player1, player2);
-                }
             } else
                 break;
         } while (true);
     }
 
-    private void swapColours(Player player1, Player player2) {
+    protected void swapColours(Player player1, Player player2) {
         Colour temp = player1.getColour();
         player1.changeColour(player2.getColour());
         player2.changeColour(temp);
