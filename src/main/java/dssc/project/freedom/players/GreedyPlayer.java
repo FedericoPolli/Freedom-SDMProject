@@ -72,28 +72,60 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * For each {@link Position} in input, it finds the most convenient one, i.e. the one
-     * that forms the longest row of at most four {@link dssc.project.freedom.basis.Stone}s.
-     * @param freePositions The Positions in which to perform the search.
+     * For each {@link Position} in input, it tries to find the most convenient one, i.e. the one
+     * that forms the longest row of at most four {@link dssc.project.freedom.basis.Stone}s or
+     * the one which hinders the other player. Otherwise it returns a random one.
+     * @param freePositions The Positions in which to perform the search in.
      * @return A good Position in which to play.
      */
     private Position findPositionToPlayIn(List<Position> freePositions) {
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
+        Position optimalPosition = getOptimalPositionAndUpdateLists(freePositions, maxStonesInARowForPositions, freePositionsCopy);
+        if (optimalPosition != null)
+            return optimalPosition;
+        else if (!freePositionsCopy.isEmpty()) {
+            int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
+            return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
+        } else {
+            return freePositions.get(randomGenerator.getRandomInteger(freePositions.size()));
+        }
+    }
+
+    /**
+     * It searches, for each position, firstly if it can make a row of four, secondly if it can avoid a row of five,
+     * thirdly if it can hinder the opposite player by stopping one of his rows of four, finally it saves the
+     * longest row for the given position.
+     * @param freePositions The Positions in which to perform the search in.
+     * @param maxStonesInARowForPositions The list in which to save the longest rows.
+     * @param freePositionsCopy A copy of <code>freePositions</code> in which
+     *                         the position that result in rows of five are eliminated
+     * @return The most convenient position, or null.
+     */
+    private Position getOptimalPositionAndUpdateLists(List<Position> freePositions, List<Integer> maxStonesInARowForPositions, List<Position> freePositionsCopy) {
         for (Position p : freePositions) {
             int maximumNumberOfStonesInARow = board.getMaximumNumberOfStonesInARow(p, colour);
             if (maximumNumberOfStonesInARow == 4)
                 return p;
             else if (maximumNumberOfStonesInARow == 5)
                 freePositionsCopy.remove(p);
+            else if (oppositePlayerWouldMakeRowOf4In(p))
+                return p;
             else
                 maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
         }
-        if (freePositionsCopy.isEmpty())
-            return freePositions.get(randomGenerator.getRandomInteger(freePositions.size()));
-        else {
-            int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
-            return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
-        }
+        return null;
+    }
+
+
+    /**
+     * Gets the opposite {@link Colour} and finds whether by playing in the given {@link Position}
+     * it can stop a row of four for the other player.
+     * @param p The position to perform the search on.
+     * @return true if the opposite player would form a row of four by playing in <code>p</code>, false otherwise.
+     */
+    private boolean oppositePlayerWouldMakeRowOf4In(Position p) {
+        Colour oppositeColour = (colour == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+        return board.getMaximumNumberOfStonesInARow(p, oppositeColour) == 4;
     }
 }

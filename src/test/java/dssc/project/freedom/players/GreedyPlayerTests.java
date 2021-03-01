@@ -15,28 +15,14 @@ public class GreedyPlayerTests {
 
     @Test
     void chooseFourthStone() {
-        for (int i = 1; i <= 3; ++i) {
-            for (int j = 1; j <= 3; ++j) {
-                if (i == j) {
-                    board.colourStoneAt(at(i, j), WHITE);
-                    board.colourStoneAt(at(i, j + 1), BLACK);
-                }
-            }
-        }
+        populateBoardDiagonally(3);
         GreedyPlayer.updateBoardAndPreviousPosition(board, at(3, 4));
         assertEquals(at(4, 4), greedyPlayer.getPlayerPosition());
     }
 
     @Test
     void doNotChooseFifthStone() {
-        for (int i = 1; i <= 4; ++i) {
-            for (int j = 1; j <= 4; ++j) {
-                if (i == j) {
-                    board.colourStoneAt(at(i, j), WHITE);
-                    board.colourStoneAt(at(i, j + 1), BLACK);
-                }
-            }
-        }
+        populateBoardDiagonally(4);
         GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
         assertNotEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
@@ -63,17 +49,27 @@ public class GreedyPlayerTests {
 
     @Test
     void hasToPutFifthStone() {
-        for (int i = 1; i <= 4; ++i) {
-            for (int j = 1; j <= 4; ++j) {
+        board.colourStoneAt(at(5, 4), BLACK);
+        board.colourStoneAt(at(3, 5), WHITE);
+        populateBoardDiagonally(4);
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
+        assertEquals(at(5, 5), greedyPlayer.getPlayerPosition());
+    }
+
+    @Test
+    void blocksRowOf4OfOppositePlayer() {
+        populateBoardDiagonally(2);
+        board.colourStoneAt(at(3, 4), BLACK);
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(3, 4));
+        assertEquals(at(4, 5), greedyPlayer.getPlayerPosition());
+    }
+
+    private void populateBoardDiagonally(int numberOfStones) {
+        for (int i = 1; i <= numberOfStones; ++i)
+            for (int j = 1; j <= numberOfStones; ++j)
                 if (i == j) {
                     board.colourStoneAt(at(i, j), WHITE);
                     board.colourStoneAt(at(i, j + 1), BLACK);
                 }
-            }
-        }
-        board.colourStoneAt(at(5, 4), BLACK);
-        board.colourStoneAt(at(3, 5), WHITE);
-        GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
-        assertEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
 }
