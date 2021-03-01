@@ -1,5 +1,7 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Colour;
+import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
 import dssc.project.freedom.utilities.Utility;
 
@@ -20,15 +22,13 @@ public class ApplicationRunner {
             super(in);
         }
 
-        @Override
-        protected void playGameWithGivenSettings(int boardSize, Player player1, Player player2) {
+        protected void playGameWithGivenSettings(Player player1, Player player2) {
             do {
                 System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
                 if (Utility.getInteger(in) == 1) {
                     System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
-                    if (Utility.getInteger(in) == 1) {
+                    if (Utility.getInteger(in) == 1)
                         swapColours(player1, player2);
-                    }
                 } else
                     break;
             } while (true);
@@ -37,7 +37,7 @@ public class ApplicationRunner {
     }
 
     private final ByteArrayOutputStream outputStream;
-    private final GameHandler gameHandler;
+    private final FakeGameHandler gameHandler;
 
     public ApplicationRunner(String input) {
         outputStream = new ByteArrayOutputStream();
@@ -63,6 +63,13 @@ public class ApplicationRunner {
     }
 
     public void parseGameWithGivenSettings() {
+        Player player1 = new HumanPlayer("F", Colour.WHITE);
+        Player player2 = new HumanPlayer("G", Colour.BLACK);
+        gameHandler.playGameWithGivenSettings(player1, player2);
+        assertAll(
+                () -> assertEquals(Colour.BLACK, player1.getColour()),
+                () -> assertEquals(Colour.WHITE, player2.getColour())
+                );
     }
 
 }

@@ -25,8 +25,8 @@ public class GameHandlerTests {
     }
 
     @Test
-    void replayGameAndSwitchColours() {
-        String input = "1 1";
+    void replayGameWithSwitchedColours() {
+        String input = "1 1 0";
         ApplicationRunner application = new ApplicationRunner(input);
         application.parseGameWithGivenSettings();
     }
