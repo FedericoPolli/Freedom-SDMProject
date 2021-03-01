@@ -1,6 +1,5 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
@@ -9,7 +8,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Scanner;
 
 import static dssc.project.freedom.basis.Colour.BLACK;
