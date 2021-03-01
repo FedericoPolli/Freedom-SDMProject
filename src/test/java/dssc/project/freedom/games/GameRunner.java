@@ -4,7 +4,6 @@ import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
-import dssc.project.freedom.utilities.Utility;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,7 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
-import static dssc.project.freedom.basis.Colour.*;
+import static dssc.project.freedom.basis.Colour.BLACK;
+import static dssc.project.freedom.basis.Colour.WHITE;
 import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,6 +37,7 @@ public class GameRunner {
                 move(current, currentPlayer.getColour());
             }
         }
+
     }
 
     private final ByteArrayOutputStream outputStream;
@@ -85,5 +86,9 @@ public class GameRunner {
         ByteArrayInputStream source = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         HumanPlayer.setScanner(new Scanner(source));
         commandLineGame.playGame();
+    }
+
+    public void parseGreetings() {
+        commandLineGame.printGreetings();
     }
 }

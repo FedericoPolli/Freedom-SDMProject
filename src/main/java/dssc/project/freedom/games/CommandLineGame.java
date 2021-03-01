@@ -34,6 +34,7 @@ public class CommandLineGame extends Game {
     public void playGame() {
         printGreetings();
         int boardSize = board.getBoardSize();
+        printBoard();
         for (int turn = 1; turn <= boardSize * boardSize; ++turn) {
             Player currentPlayer = getCurrentPlayer(turn);
             Position current = playATurn(currentPlayer);
@@ -51,7 +52,7 @@ public class CommandLineGame extends Game {
      * Prints the names, colours and symbols of the two {@link Player}s and the
      * initial empty {@link Board}.
      */
-    private void printGreetings() {
+    protected void printGreetings() {
         if (player1.getColour() == Colour.WHITE) {
             System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
             System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
@@ -59,7 +60,6 @@ public class CommandLineGame extends Game {
             System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getBlack());
             System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getWhite());
         }
-        printBoard();
     }
 
     /**

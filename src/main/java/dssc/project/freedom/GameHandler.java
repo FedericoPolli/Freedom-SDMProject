@@ -28,8 +28,8 @@ public class GameHandler {
         do {
             System.out.println("Game Start:");
             int boardSize = getBoardSize();
-            Player player1 = setPlayer("ComputerPlayer1", Colour.WHITE, boardSize);
-            Player player2 = setPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
+            Player player1 = createPlayer("ComputerPlayer1", Colour.WHITE, boardSize);
+            Player player2 = createPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
             playGameWithGivenSettings(boardSize, player1, player2);
             System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
         } while (Utility.getInteger(in) != 0);
@@ -52,7 +52,7 @@ public class GameHandler {
         return boardSize;
     }
 
-    private Player setPlayer(String name, Colour colour, int boardSize) {
+    private Player createPlayer(String name, Colour colour, int boardSize) {
         Player player;
         char typeOfPlayer = getTypeOfPlayer();
         switch (typeOfPlayer) {

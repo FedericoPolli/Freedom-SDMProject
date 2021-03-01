@@ -12,10 +12,11 @@ import static java.lang.System.lineSeparator;
 
 public class CLGameTests {
 
+    private final String white = Utility.getWhite();
+    private final String black = Utility.getBlack();
     private final String whiteTurn = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
     private final String blackTurn = "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
     private final String wholeNormalTurn = whiteTurn + blackTurn;
-
 
     @Test
     void testWhiteWinner() {
@@ -28,8 +29,15 @@ public class CLGameTests {
     void testDraw() {
         GameRunner game = new GameRunner(4);
         game.parseDraw();
-        String drawPrint = "Draw: both players have the same number of live stones: ";
-        game.testOutput(drawPrint + 4 + lineSeparator());
+        game.testOutput("Draw: both players have the same number of live stones: " + 4 + lineSeparator());
+    }
+
+    @Test
+    void testGreetings() {
+        GameRunner game = new GameRunner(4);
+        game.parseGreetings();
+        game.testOutput("White has colour WHITE and his symbol is " + white + lineSeparator() +
+                "Black has colour BLACK and his symbol is " + black + lineSeparator());
     }
 
     @Test
@@ -121,8 +129,6 @@ public class CLGameTests {
     @Test
     void testPrintBoard() {
         GameRunner game = new GameRunner(4);
-        String white = Utility.getWhite();
-        String black = Utility.getBlack();
         List<Position> positions = Arrays.asList(Position.at(1, 1), Position.at(2, 1));
         List<Colour> colours = Arrays.asList(Colour.WHITE, Colour.BLACK);
         game.parseBoard(positions, colours);

@@ -71,5 +71,4 @@ public class ApplicationRunner {
                 () -> assertEquals(Colour.WHITE, player2.getColour())
                 );
     }
-
 }
