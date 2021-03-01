@@ -1,13 +1,12 @@
 package dssc.project.freedom.utilities;
 
-import dssc.project.freedom.utilities.RandomGenerator;
-
 import java.util.Random;
 
 /**
  * Implementation of the interface {@link RandomGenerator} to return random integers.
  */
-public class RandomInteger implements RandomGenerator{
+public class RandomInteger implements RandomGenerator {
+
     /**
      * Generate a random integer form 0 to a given upperbound.
      * @param upperBound The upperbound of the random integer.

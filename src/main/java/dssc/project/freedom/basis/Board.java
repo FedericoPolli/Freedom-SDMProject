@@ -22,7 +22,7 @@ public class Board {
 
     /** Dictionary that stores all the {@link Position}s and the corresponding {@link Stone}s in the {@link Board}. */
     private final Map<Position, Stone> board = new HashMap<>();
-    /** The size of the board. */
+    /** The size of the {@link Board}. */
     private final int boardSize;
 
     /**

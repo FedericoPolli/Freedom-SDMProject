@@ -7,7 +7,7 @@ import static java.lang.System.lineSeparator;
 public class GameHandlerTests {
 
     @Test
-    void testWrongBoardSize(){
+    void testWrongBoardSize() {
         String input = "2 4";
         ApplicationRunner application = new ApplicationRunner(input);
         String output = "Enter the board size (minimum 4): "

@@ -3,7 +3,8 @@ package dssc.project.freedom;
 import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.games.CommandLineGame;
 import dssc.project.freedom.players.*;
-import dssc.project.freedom.utilities.*;
+import dssc.project.freedom.utilities.RandomInteger;
+import dssc.project.freedom.utilities.Utility;
 
 import java.util.Scanner;
 
@@ -23,11 +24,14 @@ public class GameHandler {
         this.in = in;
     }
 
+    /**
+     * Function that handles the execution of the {@link CommandLineGame}.
+     */
     public void handleGame() {
         HumanPlayer.setScanner(in);
         do {
             System.out.println("Game Start:");
-            int boardSize = getBoardSize();
+            int boardSize = getBoardSizeFromUser();
             Player player1 = setPlayer("ComputerPlayer1", Colour.WHITE, boardSize);
             Player player2 = setPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
             playGameWithGivenSettings(boardSize, player1, player2);
@@ -39,7 +43,7 @@ public class GameHandler {
      * Asks the user to enter the size of the {@link dssc.project.freedom.basis.Board}.
      * @return The sie of the Board.
      */
-    protected int getBoardSize() {
+    protected int getBoardSizeFromUser() {
         System.out.print("Enter the board size (minimum 4): ");
         int boardSize;
         do {
@@ -52,12 +56,22 @@ public class GameHandler {
         return boardSize;
     }
 
+    /**
+     * Asks to the user the type of {@link Player}, and if it is a {@link HumanPlayer}
+     * it also asks the name of the {@link Player}, then it build the desired
+     * {@link Player} with the given name, the right {@link Colour} and the
+     * size of the {@link dssc.project.freedom.basis.Board}.
+     * @param name      The name of the Player.
+     * @param colour    The Colour of the Player.
+     * @param boardSize The size of the Board.
+     * @return A Player of the CommandLineGAme.
+     */
     private Player setPlayer(String name, Colour colour, int boardSize) {
         Player player;
-        char typeOfPlayer = getTypeOfPlayer();
+        char typeOfPlayer = getTypeOfPlayerFromUser();
         switch (typeOfPlayer) {
             case 'h' -> {
-                name = getHumanPlayerName();
+                name = getHumanPlayerNameFromUser();
                 player = new HumanPlayer(name, colour);
             }
             case 'r' -> player = new RandomPlayer(name, colour, boardSize, new RandomInteger());
@@ -76,7 +90,7 @@ public class GameHandler {
      * </ul>
      * @return The type of the chosen Player.
      */
-    protected char getTypeOfPlayer() {
+    protected char getTypeOfPlayerFromUser() {
         System.out.print("Choose the player: 'h' for a Human Player, 'r' for a Random Player or 'g' for a Greedy Player. ");
         char player;
         do {
@@ -93,7 +107,7 @@ public class GameHandler {
      * Asks the user to enter the name of the selected {@link HumanPlayer}.
      * @return The name of the HumanPlayer.
      */
-    private String getHumanPlayerName() {
+    private String getHumanPlayerNameFromUser() {
         System.out.print("Enter the name of the player: ");
         return in.nextLine();
     }
@@ -121,6 +135,11 @@ public class GameHandler {
         } while (true);
     }
 
+    /**
+     * Swaps two {@link Player}s among them swapping their {@link Colour}s.
+     * @param player1 The first Player.
+     * @param player2 The second Player.
+     */
     protected void swapColours(Player player1, Player player2) {
         Colour temp = player1.getColour();
         player1.changeColour(player2.getColour());

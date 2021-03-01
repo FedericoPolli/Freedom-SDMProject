@@ -1,7 +1,7 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.utilities.RandomInteger;
 import dssc.project.freedom.basis.Board;
+import dssc.project.freedom.utilities.RandomInteger;
 import org.junit.jupiter.api.Test;
 
 import static dssc.project.freedom.basis.Colour.*;
@@ -78,13 +78,12 @@ public class GreedyPlayerTests {
     }
 
     @Test
-    void testMaximumNumberOfStonesInARow(){
+    void testMaximumNumberOfStonesInARow() {
         board.updateStoneAt(at(1, 2), WHITE);
         board.updateStoneAt(at(2, 2), BLACK);
         board.updateStoneAt(at(2, 1), WHITE);
         board.updateStoneAt(at(1, 1), BLACK);
         GreedyPlayer.updateBoardAndPreviousPosition(board, at(1, 1));
-        assertEquals(2, greedyPlayer.getMaximumNumberOfStonesInARow(at(1,1)));
+        assertEquals(2, greedyPlayer.getMaximumNumberOfStonesInARow(at(1, 1)));
     }
-
 }

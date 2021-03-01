@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static dssc.project.freedom.basis.Colour.BLACK;
-import static dssc.project.freedom.basis.Colour.WHITE;
+import static dssc.project.freedom.basis.Colour.*;
 import static dssc.project.freedom.basis.Position.at;
 import static java.lang.System.lineSeparator;
 import static org.junit.jupiter.api.Assertions.*;

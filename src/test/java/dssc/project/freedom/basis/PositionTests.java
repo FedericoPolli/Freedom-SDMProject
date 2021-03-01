@@ -8,23 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PositionTests {
 
-    private final Position position = new Position(3,3);
+    private final Position position = new Position(3, 3);
 
     @ParameterizedTest
     @CsvSource({"5, 3, RIGHT", "1, 3, LEFT", "3, 5, UP", "3, 1, DOWN"})
-    void checkMoveInDirectionWithStepTwo(int expectedX, int expectedY, Direction direction){
-        assertEquals(at(expectedX,expectedY), position.moveInDirectionWithStep(direction, 2));
+    void checkMoveInDirectionWithStepTwo(int expectedX, int expectedY, Direction direction) {
+        assertEquals(at(expectedX, expectedY), position.moveInDirectionWithStep(direction, 2));
     }
 
     @ParameterizedTest
     @CsvSource({"2, 2", "4, 3", "3, 4"})
-    void checkIsInAdjacentPositions(int x, int y){
-        assertTrue(position.isInAdjacentPositions(at(x,y)));
+    void checkIsInAdjacentPositions(int x, int y) {
+        assertTrue(position.isInAdjacentPositions(at(x, y)));
     }
 
     @ParameterizedTest
     @CsvSource({"1, 1", "1, 3", "3, 5"})
-    void checkNotInAdjacentPositions(int x, int y){
-        assertFalse(position.isInAdjacentPositions(at(x,y)));
+    void checkNotInAdjacentPositions(int x, int y) {
+        assertFalse(position.isInAdjacentPositions(at(x, y)));
     }
 }

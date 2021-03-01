@@ -22,7 +22,7 @@ public class GameTests {
     @Test
     void positionValid() {
         Position pos = at(1, 1);
-        assertDoesNotThrow( () -> game.isMoveValid(pos) );
+        assertDoesNotThrow(() -> game.isMoveValid(pos));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class GameTests {
         game.move(pos, WHITE);
         assertAll(
                 () -> assertThrows(Exception.class, () -> game.isMoveValid(at(1, 3))),
-                () -> assertDoesNotThrow( () -> game.isMoveValid(at(1, 2)))
+                () -> assertDoesNotThrow(() -> game.isMoveValid(at(1, 2)))
         );
     }
 
@@ -53,7 +53,7 @@ public class GameTests {
         game = new ConcreteGame(4);
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
-                game.move(at(i,j), j <= 3 ? WHITE : BLACK);
+                game.move(at(i, j), j <= 3 ? WHITE : BLACK);
             }
         }
         assertEquals(WHITE, game.winner());
@@ -62,20 +62,20 @@ public class GameTests {
     @Test
     void draw() {
         playGameExceptLastMove(4);
-        game.move(at(4,4), WHITE);
+        game.move(at(4, 4), WHITE);
         assertEquals(NONE, game.winner());
     }
 
     @Test
-    void lastMoveNotConvenient(){
+    void lastMoveNotConvenient() {
         playGameExceptLastMove(5);
-        assertFalse(game.isLastMoveConvenient(at(5,5), WHITE));
+        assertFalse(game.isLastMoveConvenient(at(5, 5), WHITE));
     }
 
     @Test
-    void lastMoveConvenient(){
+    void lastMoveConvenient() {
         playGameExceptLastMove(4);
-        assertTrue(game.isLastMoveConvenient(at(4,4), WHITE));
+        assertTrue(game.isLastMoveConvenient(at(4, 4), WHITE));
     }
 
     private void playGameExceptLastMove(int boardSize) {
