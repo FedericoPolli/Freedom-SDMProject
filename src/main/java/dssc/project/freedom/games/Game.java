@@ -23,8 +23,8 @@ public abstract class Game {
     }
 
     /**
-     * Represents the move of a {@link dssc.project.freedom.players.Player}: adds
-     * a {@link Stone} of the given {@link Colour} in the given {@link Position}.
+     * Represents a move: adds a {@link Stone} of the given {@link Colour} in
+     * the given {@link Position}.
      * @param current The Position in which adding the Stone.
      * @param colour  The Colour of the Stone to be added.
      */
@@ -34,7 +34,7 @@ public abstract class Game {
     }
 
     /**
-     * Checks if the move of the player is valid. A move is valid if the {@link Position}
+     * Checks if the move is valid. A move is valid if the {@link Position}
      * in which the {@link Stone} is placed is inside the {@link Board}, if it is not on
      * an already occupied {@link Position} and if it is adjacent to the previously played
      * {@link Stone}, in the case in which the adjacent {@link Position}s of the previously

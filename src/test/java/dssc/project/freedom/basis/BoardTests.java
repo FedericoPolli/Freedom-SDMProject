@@ -49,7 +49,7 @@ public class BoardTests {
 
     @ParameterizedTest
     @MethodSource("positionToBeChecked")
-    void areAdjacentPositionsFree(Board board, int x, int y, boolean expected){
+    void testAreAdjacentPositionsFree(Board board, int x, int y, boolean expected){
         assertEquals(expected, board.areAdjacentPositionFree(at(x,y)));
     }
 

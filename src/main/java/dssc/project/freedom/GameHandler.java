@@ -81,7 +81,7 @@ public class GameHandler {
     }
 
     /**
-     * Asks to enter the type of {@link Player} with which the user wants to play the {@link CommandLineGame}:
+     * Asks to enter the type of {@link Player} with which the user wants to play the {@link CommandLineGame}:1
      * <ul>
      *     <li>'h': {@link HumanPlayer}, so the user has to play. </li>
      *     <li>'r': {@link RandomPlayer}. </li>

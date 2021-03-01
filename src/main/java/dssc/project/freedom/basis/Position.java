@@ -37,21 +37,21 @@ public final class Position {
 
     /**
      * Returns a {@link Position} obtained by moving in the given {@link Direction} by the given steps.
-     * @param dir  The direction in which to move.
-     * @param step The number of steps.
+     * @param direction The Direction in which to move.
+     * @param step      The number of steps.
      * @return A Position with the new coordinates.
      */
-    public Position moveInDirectionWithStep(Direction dir, int step) {
-        return at(this.x + step * dir.getX(), this.y + step * dir.getY());
+    public Position moveInDirectionWithStep(Direction direction, int step) {
+        return at(this.x + step * direction.getX(), this.y + step * direction.getY());
     }
 
     /**
      * Checks if this {@link Position} is adjacent to the {@link Position} taken in input.
-     * @param p The Position to which this Position must be adjacent.
+     * @param position The Position to which this Position must be adjacent.
      * @return true if this Position is adjacent to the given Position, false otherwise.
      */
-    public boolean isInAdjacentPositions(Position p) {
-        return x <= p.x + 1 && y <= p.y + 1 && x >= p.x - 1 && y >= p.y - 1 && !this.equals(p);
+    public boolean isInAdjacentPositions(Position position) {
+        return x <= position.x + 1 && y <= position.y + 1 && x >= position.x - 1 && y >= position.y - 1 && !this.equals(position);
     }
 
     /**
