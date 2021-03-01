@@ -1,7 +1,8 @@
 package dssc.project.freedom.basis;
 
 /**
- * Class that represents the position of a {@link Stone} in the {@link Board} of the game.
+ * Class that represents the position of a {@link Stone} in the {@link Board}
+ * of the {@link dssc.project.freedom.games.Game}.
  */
 public final class Position {
 

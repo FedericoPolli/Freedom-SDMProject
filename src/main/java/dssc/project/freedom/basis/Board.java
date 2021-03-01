@@ -13,7 +13,7 @@ import static java.lang.System.lineSeparator;
 
 
 /**
- * Class that represents the board of the game.
+ * Class that represents the board of the {@link dssc.project.freedom.games.Game}.
  *
  * It has a set of {@link Stone}s and at the end of the game it checks
  * which are "live" and which not.

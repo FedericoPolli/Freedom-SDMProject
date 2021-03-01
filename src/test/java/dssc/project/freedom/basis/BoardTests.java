@@ -4,6 +4,7 @@ import dssc.project.freedom.utilities.Utility;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -63,16 +64,11 @@ public class BoardTests {
         );
     }
 
-    @Test
-    void positionInsideBoard(){
+    @ParameterizedTest
+    @CsvSource({"1, 1, true", "4, 4, false"})
+    void positionInsideBoard(int x, int y, boolean expected){
         Board board = new Board(3);
-        assertTrue(board.positionIsInsideTheBoard(at(1,1)));
-    }
-
-    @Test
-    void positionOutsideBoard(){
-        Board board = new Board(3);
-        assertFalse(board.positionIsInsideTheBoard(at(4,4)));
+        assertEquals(expected, board.positionIsInsideTheBoard(at(x,y)));
     }
 
     @Test

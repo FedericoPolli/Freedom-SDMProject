@@ -1,12 +1,7 @@
 package dssc.project.freedom.games;
 
-import dssc.project.freedom.basis.Colour;
-import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.utilities.Utility;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static java.lang.System.lineSeparator;
 
@@ -124,21 +119,5 @@ public class CLGameTests {
             }
         }
         return input + "0";
-    }
-
-    @Test
-    void testPrintBoard() {
-        GameRunner game = new GameRunner(4);
-        List<Position> positions = Arrays.asList(Position.at(1, 1), Position.at(2, 1));
-        List<Colour> colours = Arrays.asList(Colour.WHITE, Colour.BLACK);
-        game.parseBoard(positions, colours);
-        String line = "  " + "+---".repeat(4) + "+" + lineSeparator();
-        String boardAfterSecondMove = line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
-                        line +
-                        "1 " + "| " + white + " | " + black + " |  ".repeat(2) + " |" + lineSeparator() +
-                        line + "    1   2   3   4  " + lineSeparator();
-        game.testOutput(boardAfterSecondMove);
     }
 }

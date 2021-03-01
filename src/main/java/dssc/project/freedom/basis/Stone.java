@@ -1,7 +1,7 @@
 package dssc.project.freedom.basis;
 
 /**
- * Class that represents a stone on the board's tile in the game.
+ * Class that represents a stone on the {@link Board}'s tile in the {@link dssc.project.freedom.games.Game}.
  *
  * It has a {@link Colour} and a "live" status: a stone is "live" if it is
  * part of exactly four stones in a row (horizontal, vertical or diagonal).

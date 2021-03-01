@@ -57,13 +57,6 @@ public class GameRunner {
         assertEquals(expectedOutput, outputStream.toString());
     }
 
-    public void parseBoard(List<Position> positions, List<Colour> colours) {
-        for (int i = 0; i < positions.size(); ++i) {
-            commandLineGame.move(positions.get(i), colours.get(i));
-        }
-        commandLineGame.printBoard();
-    }
-
     public void parseWinner() {
         for (int x = 1; x <= boardSize; ++x) {
             for (int y = 1; y <= boardSize; ++y) {
