@@ -5,12 +5,16 @@ import dssc.project.freedom.basis.Position;
 
 /**
  * Class representing a generic player for the {@link dssc.project.freedom.games.Game}.
+ *
+ * The class {@link dssc.project.freedom.games.Game} or a subclass of it are in
+ * charge of checking if the move of the {@link Player} is valid, if it is not,
+ * another move is asked to the {@link Player}.
  */
 public abstract class Player {
 
-    /** Name of the Player. */
+    /** The name of the Player. */
     private final String name;
-    /** Colour of the Player. */
+    /** The Colour of the Player. */
     protected Colour colour;
 
     /**
@@ -32,7 +36,7 @@ public abstract class Player {
     }
 
     /**
-     * Getter for the {@link Colour} associated to this Player.
+     * Getter for the {@link Colour} of this Player.
      * @return The Colour of this Player.
      */
     public Colour getColour() {
@@ -57,7 +61,8 @@ public abstract class Player {
     }
 
     /**
-     * Gets the {@link Position} in which the Player wants to place its {@link dssc.project.freedom.basis.Stone}.
+     * Gets the {@link Position} in which this Player wants to do its move, thus
+     * where he wants to place its {@link dssc.project.freedom.basis.Stone}.
      * @return The Position in which the Player wants to do its move.
      */
     public abstract Position getPlayerPosition();

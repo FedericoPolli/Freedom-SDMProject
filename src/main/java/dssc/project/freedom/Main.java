@@ -7,7 +7,6 @@ import java.util.Scanner;
  */
 public class Main {
 
-
     /**
      * Main of the project.
      * @param args Possible arguments.

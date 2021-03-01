@@ -12,8 +12,8 @@ import static java.lang.System.lineSeparator;
 /**
  * Class that represents the board of the {@link dssc.project.freedom.games.Game}.
  *
- * It has a set of {@link Stone}s and at the end of the game it checks
- * which are "live" and which not.
+ * It has a set of {@link Stone}s and at the end of the {@link dssc.project.freedom.games.Game}
+ * it checks which are "live" and which not.
  */
 public class Board {
 
@@ -52,7 +52,7 @@ public class Board {
     }
 
     /**
-     * Colours the {@link Stone} in the given {@link Position} in the {@link Board},
+     * Colours the {@link Stone} in the given {@link Position} of the {@link Board},
      * colouring it with the given {@link Colour}.
      * @param p The Position of the Stone to be updated.
      * @param c The Colour to be assigned to the Stone.
@@ -99,7 +99,7 @@ public class Board {
     /**
      * Checks if all the {@link Position}s adjacent to the given one are free.
      * @param pos The Position to be checked.
-     * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
+     * @return true if all the Positions adjacent to the given one are free, false otherwise.
      */
     public boolean areAdjacentPositionFree(Position pos) {
         return !getFreeAdjacentPositions(pos).isEmpty();
@@ -142,21 +142,21 @@ public class Board {
     }
 
     /**
-     * Checks if the {@link Stone} in the next {@link Position} is of the same
+     * Checks if the {@link Stone} in the previous {@link Position} is of the same
      * {@link Colour} as the {@link Stone} in the current one.
-     * @param current The current Position.
-     * @param next    The Position next to the current one.
-     * @return true if the next Position is of the same Colour as the current one, false otherwise.
+     * @param current  The current Position.
+     * @param previous The Position previous to the current one.
+     * @return true if the previous Position is of the same Colour as the current one, false otherwise.
      */
-    private boolean areStonesOfSameColourAt(Position current, Position next) {
-        return getStoneAt(next).isOfSameColourAs(getStoneAt(current));
+    private boolean areStonesOfSameColourAt(Position current, Position previous) {
+        return getStoneAt(previous).isOfSameColourAs(getStoneAt(current));
     }
 
     /**
      * Counts the number of {@link Stone}s of the same {@link Colour} in a row
-     * starting from the <code>startingPosition</code> {@link Position}, according to the
+     * starting from the {@link Position} <code>startingPosition</code>, according to the
      * direction specified by the input {@link Direction}.
-     * @param dir     The direction in which to move.
+     * @param dir              The direction in which to move.
      * @param startingPosition The starting Position.
      * @return The number of Stones of the same Colour adjacent to the given one.
      */
@@ -176,7 +176,7 @@ public class Board {
      * Sets as "live" the {@link Stone}s that are part of a row of exactly four {@link Stone}s
      * of the same {@link Colour}, starting from the {@link Position} <code>startingPosition</code>,
      * in the direction given by the input <code>xDir</code> and <code>yDir</code>.
-     * @param dir     The direction in which to move.
+     * @param dir              The direction in which to move.
      * @param startingPosition The starting Position.
      */
     private void setStonesInRowOf4Live(Direction dir, Position startingPosition) {
@@ -200,9 +200,9 @@ public class Board {
 
     /**
      * Returns the maximum number of {@link Stone}s of the same {@link Colour}
-     * of the given one in a certain row starting from the given {@link Stone}
+     * of the given one in a certain row, starting from the given {@link Stone}
      * for all the {@link Direction}s.
-     * @param p The Position of the given Stone.
+     * @param p      The Position of the given Stone.
      * @param colour The Colour of the given Stone.
      * @return The maximum number of Stones of the same Colour in a row.
      */
@@ -216,10 +216,9 @@ public class Board {
     }
 
     /**
-     * It searches in all eight {@link dssc.project.freedom.basis.Direction}s for
-     * the maximum number of {@link dssc.project.freedom.basis.Stone}s in a row
-     * that would be obtained by playing in the given {@link Position}.
-     * @param p The Position on which to perform the search.
+     * It searches in all eight {@link Direction}s for the maximum number of {@link Stone}s
+     * in a row that would be obtained by playing in the given {@link Position}.
+     * @param p The Position from which starting to perform the search.
      * @return The maximum number of Stones in a row for the given Position.
      */
     public Integer getMaximumNumberOfStonesInARow(Position p, Colour colour) {

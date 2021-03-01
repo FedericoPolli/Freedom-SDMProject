@@ -24,8 +24,8 @@ public class GreedyPlayer extends Player {
     private final RandomGenerator randomGenerator;
 
     /**
-     * Updates the {@link dssc.project.freedom.basis.Board} of the {@link dssc.project.freedom.games.Game}
-     * and the previous {@link dssc.project.freedom.basis.Position}.
+     * Updates the {@link Board} of the {@link dssc.project.freedom.games.Game}
+     * and the previous {@link Position}.
      * @param board    The Board of the Game
      * @param previous The last played-in Position.
      */
@@ -33,7 +33,6 @@ public class GreedyPlayer extends Player {
         GreedyPlayer.board = board;
         GreedyPlayer.previous = previous;
     }
-
 
     /**
      * Class constructor. It takes the name and the {@link Colour} of the {@link Player}
@@ -48,9 +47,9 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * Computes the positions adjacent to the previous one, chooses one among
-     * them and returns it.
-     * @return The position that this {@link GreedyPlayer} decided to play in.
+     * Computes the free {@link Position}s adjacent to the previous played one,
+     * chooses one among them and returns it.
+     * @return The Position that this {@link GreedyPlayer} decided to play in.
      */
     @Override
     public Position getPlayerPosition() {
@@ -64,20 +63,19 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * Computes a random {@link dssc.project.freedom.basis.Position} in the
-     * {@link dssc.project.freedom.basis.Board} and returns it.
+     * Computes a random {@link Position} in the {@link Board} and returns it.
      * @return The Position to play in.
      */
     private Position getRandomPosition() {
         return Position.at(randomGenerator.getRandomInteger(board.getBoardSize()) + 1,
-                randomGenerator.getRandomInteger(board.getBoardSize()) + 1);
+                           randomGenerator.getRandomInteger(board.getBoardSize()) + 1);
     }
 
     /**
-     * For each {@link Position} in input, it finds the most convenient one i.e. the one
+     * For each {@link Position} in input, it finds the most convenient one, i.e. the one
      * that forms the longest row of at most four {@link dssc.project.freedom.basis.Stone}s.
-     * @param freePositions The positions to perform the search in.
-     * @return The best Position it can find.
+     * @param freePositions The Positions in which to perform the search.
+     * @return A good Position in which to play.
      */
     private Position findPositionToPlayIn(List<Position> freePositions) {
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();

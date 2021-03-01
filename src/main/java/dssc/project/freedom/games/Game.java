@@ -23,8 +23,8 @@ public abstract class Game {
     }
 
     /**
-     * Represents the move of a player: adds a {@link Stone} of the given {@link Colour}
-     * in the given {@link Position}.
+     * Represents the move of a {@link dssc.project.freedom.players.Player}: adds
+     * a {@link Stone} of the given {@link Colour} in the given {@link Position}.
      * @param current The Position in which adding the Stone.
      * @param colour  The Colour of the Stone to be added.
      */
@@ -33,18 +33,17 @@ public abstract class Game {
         previous = current;
     }
 
-
     /**
      * Checks if the move of the player is valid. A move is valid if the {@link Position}
      * in which the {@link Stone} is placed is inside the {@link Board}, if it is not on
      * an already occupied {@link Position} and if it is adjacent to the previously played
      * {@link Stone}, in the case in which the adjacent {@link Position}s of the previously
-     * played {@link Stone} are not all occupied, otherwise the player has the freedom
-     * of placing it in any non-occupied {@link Position}.
+     * played {@link Stone} are not all occupied, otherwise the {@link dssc.project.freedom.players.Player}
+     * has the freedom of placing it in any non-occupied {@link Position}.
      * The function raises an {@link Exception} if the move is not valid with a message
      * explaining the reason why it is not valid.
      * @param current The Position of the Stone placed in the move that has to be checked.
-     * @throws Exception Exception with an error message regarding the invalid move.
+     * @throws Exception Exception with the error message regarding the invalid move.
      */
     public void isMoveValid(Position current) throws Exception {
         if (!board.positionIsInsideTheBoard(current))

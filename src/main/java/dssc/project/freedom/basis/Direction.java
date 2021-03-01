@@ -3,7 +3,8 @@ package dssc.project.freedom.basis;
 /**
  * Enum that represents the direction in which to move.
  *
- * It is used to avoid working with two integers like `(1, 0)` to move right.
+ * It is used to avoid working with two integers to move in a certain direction,
+ * e.g. instead of using `(1, 0)` to move right.
  */
 public enum Direction {
 

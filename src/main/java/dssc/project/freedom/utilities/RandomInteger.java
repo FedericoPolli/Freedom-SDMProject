@@ -8,8 +8,8 @@ import java.util.Random;
 public class RandomInteger implements RandomGenerator {
 
     /**
-     * Generate a random integer form 0 to a given upperbound.
-     * @param upperBound The upperbound of the random integer.
+     * Generate a random integer form 0 to a given upper bound.
+     * @param upperBound The upper bound of the random integer.
      * @return A random integer form 0 to the given upperbound.
      */
     @Override

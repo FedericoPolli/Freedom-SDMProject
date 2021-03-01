@@ -9,7 +9,7 @@ import dssc.project.freedom.utilities.Utility;
 import java.util.Scanner;
 
 /**
- * Class that controls the execution of the game.
+ * Class that controls the execution of the {@link CommandLineGame}.
  */
 public class GameHandler {
 
@@ -58,15 +58,13 @@ public class GameHandler {
 
     /**
      * Asks to the user the type of {@link Player}, and if it is a {@link HumanPlayer}
-     * it also asks the name of the {@link Player}, then it build the desired
-     * {@link Player} with the given name, the right {@link Colour} and the
-     * size of the {@link dssc.project.freedom.basis.Board}.
+     * it also asks its name, then it build the desired {@link Player} with the given
+     * name, the right {@link Colour} and the size of the {@link dssc.project.freedom.basis.Board}.
      * @param name      The name of the Player.
      * @param colour    The Colour of the Player.
      * @param boardSize The size of the Board.
      * @return A Player of the CommandLineGAme.
      */
-
     private Player createPlayer(String name, Colour colour, int boardSize) {
         Player player;
         char typeOfPlayer = getTypeOfPlayerFromUser();
@@ -83,7 +81,7 @@ public class GameHandler {
     }
 
     /**
-     * Asks to enter a {@link Player} with which the user wants to play the {@link dssc.project.freedom.games.Game}:
+     * Asks to enter the type of {@link Player} with which the user wants to play the {@link CommandLineGame}:
      * <ul>
      *     <li>'h': {@link HumanPlayer}, so the user has to play. </li>
      *     <li>'r': {@link RandomPlayer}. </li>
@@ -114,10 +112,9 @@ public class GameHandler {
     }
 
     /**
-     * Keeps on playing {@link dssc.project.freedom.games.Game}s with the same
-     * settings specified in input (eventually with the {@link Colour}s of the
-     * {@link Player}s switched if the user wants)
-     * until the user decides to quit the {@link dssc.project.freedom.games.Game}.
+     * Keeps on playing {@link CommandLineGame}s with the same settings specified
+     * in input (eventually with the {@link Colour}s of the {@link Player}s switched
+     * if the user wants) until the user decides to quit the {@link CommandLineGame}.
      * @param boardSize The size of the Board.
      * @param player1   The white Player.
      * @param player2   The black Player.

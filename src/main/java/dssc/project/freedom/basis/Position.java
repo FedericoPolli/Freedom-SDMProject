@@ -5,7 +5,7 @@ package dssc.project.freedom.basis;
  * of the {@link dssc.project.freedom.games.Game}.
  *
  * This class is used to encapsulate the fields <code>x</code> and <code>y</code>
- * of the position in the {@link Board}.
+ * of a position in the {@link Board}.
  */
 public final class Position {
 
@@ -16,8 +16,8 @@ public final class Position {
 
     /**
      * Creates a new {@link Position} at the specified coordinates.
-     * @param x The x-coordinate of the Position to be created.
-     * @param y The y-coordinate of the Position to be created.
+     * @param x The x-coordinate of the Position.
+     * @param y The y-coordinate of the Position.
      * @return The Position created.
      */
     public static Position at(int x, int y) {
@@ -36,7 +36,7 @@ public final class Position {
     }
 
     /**
-     * Returns a {@link Position} obtained by moving in the given direction by the given steps.
+     * Returns a {@link Position} obtained by moving in the given {@link Direction} by the given steps.
      * @param dir  The direction in which to move.
      * @param step The number of steps.
      * @return A Position with the new coordinates.

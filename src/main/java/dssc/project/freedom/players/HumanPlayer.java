@@ -8,13 +8,11 @@ import java.util.Scanner;
 import static dssc.project.freedom.utilities.Utility.getInteger;
 
 /**
- * Class that represents a human {@link Player}.
+ * Class that represents a human {@link Player}, thus the user.
  */
 public class HumanPlayer extends Player {
 
-    /**
-     * Static member needed to get the user's input.
-     */
+    /** Static member needed to get the user's input. */
     private static Scanner in;
 
     /**
@@ -27,7 +25,7 @@ public class HumanPlayer extends Player {
 
     /**
      * Class constructor.
-     * @param name The name of this {@link Player}.
+     * @param name   The name of this {@link Player}.
      * @param colour The colour of this {@link Player}.
      */
     public HumanPlayer(String name, Colour colour) {
@@ -35,7 +33,7 @@ public class HumanPlayer extends Player {
     }
 
     /**
-     * Asks the user for the coordinates in which to play in, and returns the corresponding position.
+     * Asks the user for the coordinates in which to play, and returns the corresponding {@link Position}.
      * @return The position in which to play.
      */
     @Override
@@ -48,7 +46,7 @@ public class HumanPlayer extends Player {
 
     /**
      * Asks the user if he wants to do the last move.
-     * @return true if the user does not want to do last move, false otherwise.
+     * @return true if the user does not want to do the last move, false otherwise.
      */
     @Override
     public boolean doesNotWantToDoLastMove() {
