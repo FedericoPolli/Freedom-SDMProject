@@ -20,26 +20,26 @@ public class GameTests {
     private ConcreteGame game = new ConcreteGame(5);
 
     @Test
-    public void positionValid() {
+    void positionValid() {
         Position pos = at(1, 1);
         assertDoesNotThrow( () -> game.isMoveValid(pos) );
     }
 
     @Test
-    public void positionNotInsideBoard() {
+    void positionNotInsideBoard() {
         Position wrongPosition = at(0, 0);
         assertThrows(Exception.class, () -> game.isMoveValid(wrongPosition));
     }
 
     @Test
-    public void positionOnAlreadyPlacedStone() {
+    void positionOnAlreadyPlacedStone() {
         Position pos = at(1, 1);
         game.move(pos, WHITE);
         assertThrows(Exception.class, () -> game.isMoveValid(pos));
     }
 
     @Test
-    public void positionShouldBeAdjacentToPrevious() {
+    void positionShouldBeAdjacentToPrevious() {
         Position pos = at(1, 1);
         game.move(pos, WHITE);
         assertAll(
@@ -49,7 +49,7 @@ public class GameTests {
     }
 
     @Test
-    public void whiteWon() {
+    void whiteWon() {
         game = new ConcreteGame(4);
         for (int i = 1; i <= 4; ++i) {
             for (int j = 1; j <= 4; ++j) {
@@ -60,20 +60,20 @@ public class GameTests {
     }
 
     @Test
-    public void draw() {
+    void draw() {
         playGameExceptLastMove(4);
         game.move(at(4,4), WHITE);
         assertEquals(NONE, game.winner());
     }
 
     @Test
-    public void lastMoveNotConvenient(){
+    void lastMoveNotConvenient(){
         playGameExceptLastMove(5);
         assertFalse(game.isLastMoveConvenient(at(5,5), WHITE));
     }
 
     @Test
-    public void lastMoveConvenient(){
+    void lastMoveConvenient(){
         playGameExceptLastMove(4);
         assertTrue(game.isLastMoveConvenient(at(4,4), WHITE));
     }

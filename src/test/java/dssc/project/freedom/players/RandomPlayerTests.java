@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RandomPlayerTests {
 
     @Test
-    public void RandomPosition() {
+    void RandomPosition() {
         RandomGenerator randomGenerator = new StubRandomGenerator();
         Player player = new RandomPlayer("White", Colour.WHITE, 5, randomGenerator);
         assertAll(

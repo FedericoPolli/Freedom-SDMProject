@@ -31,21 +31,21 @@ public class CLGameTests {
 
 
     @Test
-    public void testWhiteWinner() {
+    void testWhiteWinner() {
         GameRunner game = new GameRunner(4);
         game.parseWinner();
         game.testOutput("White won with " + 12 + " live stones against Black's " + 0 + lineSeparator());
     }
 
     @Test
-    public void testDraw() {
+    void testDraw() {
         GameRunner game = new GameRunner(4);
         game.parseDraw();
         game.testOutput("Draw: both players have the same number of live stones: " + 4 + lineSeparator());
     }
 
     @Test
-    public void testPlay() {
+    void testPlay() {
         GameRunner game = new GameRunner(1);
         game.parsePlay("1 1");
         game.testOutput(playersColours + initialBoardOfDim1 + whiteTurn +
@@ -53,7 +53,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPlayWithInvalidInteger() {
+    void testPlayWithInvalidInteger() {
         GameRunner game = new GameRunner(1);
         String input = "q 1" + System.lineSeparator() + "1";
         game.parsePlay(input);
@@ -63,7 +63,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPlayWithPositionOutsideBoard() {
+    void testPlayWithPositionOutsideBoard() {
         GameRunner game = new GameRunner(1);
         String input = "1 0" + System.lineSeparator() + "1 1";
         game.parsePlay(input);
@@ -73,7 +73,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPlayWithPositionAlreadyOccupied() {
+    void testPlayWithPositionAlreadyOccupied() {
         GameRunner game = new GameRunner(2);
         String input = "1 1" + lineSeparator() + "1 1" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2";
@@ -85,7 +85,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPlayWithNotAdjacentPosition() {
+    void testPlayWithNotAdjacentPosition() {
         GameRunner game = new GameRunner(3);
         String input = "1 1" + lineSeparator() + "1 3" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() + " 1 3" + lineSeparator() +
@@ -98,7 +98,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPlayWithFreedomChoice() {
+    void testPlayWithFreedomChoice() {
         GameRunner game = new GameRunner(3);
         String input = "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() +
                 " 1 1" + lineSeparator() + "1 3" + lineSeparator() + "2 3" + lineSeparator() +
@@ -110,7 +110,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testLastMoveChoice() {
+    void testLastMoveChoice() {
         int boardSize = 5;
         GameRunner game = new GameRunner(boardSize);
         String input = buildInputMoves(boardSize);
@@ -136,7 +136,7 @@ public class CLGameTests {
     }
 
     @Test
-    public void testPrintBoard() {
+    void testPrintBoard() {
         GameRunner game = new GameRunner(4);
         String white = Utility.getWhite();
         String black = Utility.getBlack();
