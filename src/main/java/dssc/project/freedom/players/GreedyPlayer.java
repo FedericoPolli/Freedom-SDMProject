@@ -1,48 +1,46 @@
 package dssc.project.freedom.players;
 
-import dssc.project.freedom.utilities.RandomGenerator;
 import dssc.project.freedom.basis.Board;
 import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
+import dssc.project.freedom.utilities.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 /**
- *  Class that represents a greedy computer {@link Player}.
+ * Class that represents a greedy computer {@link Player}.
  *
- *  It chooses its moves by adopting a greedy strategy.
+ * It chooses its moves by adopting a greedy strategy.
  */
 public class GreedyPlayer extends Player {
 
-    /**
-     * Represents the board of the game being played by this player.
-     */
+    /** Represents the board of the game being played by this player. */
     private static Board board;
-    /**
-     * Represents the position of the previous move in the game being played by this player.
-     */
+    /** Represents the position of the previous move in the game being played by this player. */
     private static Position previous;
+    /** The generator of random numbers. */
     private final RandomGenerator randomGenerator;
 
     /**
-     * Updates the {@link dssc.project.freedom.basis.Board}
+     * Updates the {@link dssc.project.freedom.basis.Board} of the {@link dssc.project.freedom.games.Game}
      * and the previous {@link dssc.project.freedom.basis.Position}.
-     *
-     * @param board    The board of the game
-     * @param previous The last played-in position.
+     * @param board    The Board of the Game
+     * @param previous The last played-in Position.
      */
     public static void updateBoardAndPreviousPosition(Board board, Position previous) {
         GreedyPlayer.board = board;
         GreedyPlayer.previous = previous;
     }
 
+
     /**
-     * Class constructor.
-     *
-     * @param name   The name of this {@link Player}.
-     * @param colour The colour of this {@link Player}.
+     * Class constructor. It takes the name and the {@link Colour} of the {@link Player}
+     * and a generator of random numbers.
+     * @param name            The name of this Player.
+     * @param colour          The colour of this Player.
+     * @param randomGenerator The generator of random numbers.
      */
     public GreedyPlayer(String name, Colour colour, RandomGenerator randomGenerator) {
         super(name, colour);
@@ -50,9 +48,8 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * Computes the positions adjacent to the previous one,
-     * chooses one among them and returns it.
-     *
+     * Computes the positions adjacent to the previous one, chooses one among
+     * them and returns it.
      * @return The position that this {@link GreedyPlayer} decided to play in.
      */
     @Override
@@ -67,10 +64,9 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * Computes a random {@link dssc.project.freedom.basis.Position}
-     * in the {@link dssc.project.freedom.basis.Board} and returns it.
-     *
-     * @return The position to play in.
+     * Computes a random {@link dssc.project.freedom.basis.Position} in the
+     * {@link dssc.project.freedom.basis.Board} and returns it.
+     * @return The Position to play in.
      */
     private Position getRandomPosition() {
         return Position.at(randomGenerator.getRandomInteger(board.getBoardSize()) + 1,
@@ -78,11 +74,10 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * For each position in input, it finds the most convenient one
-     * i.e. the one that forms the longest row of at most four stones.
-     *
+     * For each {@link Position} in input, it finds the most convenient one i.e. the one
+     * that forms the longest row of at most four {@link dssc.project.freedom.basis.Stone}s.
      * @param freePositions The positions to perform the search in.
-     * @return The best position it can find.
+     * @return The best Position it can find.
      */
     private Position findPositionToPlayIn(List<Position> freePositions) {
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();
@@ -105,11 +100,11 @@ public class GreedyPlayer extends Player {
     }
 
     /**
-     * It searches in all eight directions for the maximum number of stones in a row
-     * that would be obtained by playing in the given position.
-     *
-     * @param p The position on which to perform the search.
-     * @return The maximum number of stones in a row for the given position.
+     * It searches in all eight {@link dssc.project.freedom.basis.Direction}s for
+     * the maximum number of {@link dssc.project.freedom.basis.Stone}s in a row
+     * that would be obtained by playing in the given {@link Position}.
+     * @param p The Position on which to perform the search.
+     * @return The maximum number of Stones in a row for the given Position.
      */
     Integer getMaximumNumberOfStonesInARow(Position p) {
         return board.getNumberOfStonesInRowForAllDirections(p, colour)

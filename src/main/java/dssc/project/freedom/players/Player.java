@@ -39,8 +39,10 @@ public abstract class Player {
         return colour;
     }
 
+
     /**
      * Setter for the {@link Colour} of this Player.
+     * @param colour The Colour to substitute.
      */
     public void changeColour(Colour colour) {
         this.colour = colour;

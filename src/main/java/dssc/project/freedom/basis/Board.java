@@ -201,6 +201,14 @@ public class Board {
         check4StonesInDirection(Direction.UP_ANTI_DIAGONAL);
     }
 
+    /**
+     * Returns the maximum number of {@link Stone}s of the same {@link Colour}
+     * of the given one in a certain row starting from the given {@link Stone}
+     * for all the {@link Direction}s.
+     * @param p The Position of the given Stone.
+     * @param colour The Colour of the given Stone.
+     * @return The maximum number of Stones of the same Colour in a row.
+     */
     public List<Integer> getNumberOfStonesInRowForAllDirections(Position p, Colour colour) {
         updateStoneAt(p, colour);
         List<Integer> maximumNumberOfStonesInARow = new ArrayList<>();

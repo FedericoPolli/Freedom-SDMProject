@@ -33,6 +33,7 @@ public abstract class Game {
         previous = current;
     }
 
+
     /**
      * Checks if the move of the player is valid. A move is valid if the {@link Position}
      * in which the {@link Stone} is placed is inside the {@link Board}, if it is not on
@@ -43,6 +44,7 @@ public abstract class Game {
      * The function raises an {@link Exception} if the move is not valid with a message
      * explaining the reason why it is not valid.
      * @param current The Position of the Stone placed in the move that has to be checked.
+     * @throws Exception Exception with an error message regarding the invalid move.
      */
     public void isMoveValid(Position current) throws Exception {
         if (!board.positionIsInsideTheBoard(current))
