@@ -1,5 +1,6 @@
 package dssc.project.freedom;
 
+import dssc.project.freedom.basis.Colour;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.System.lineSeparator;
@@ -28,6 +29,13 @@ public class GameHandlerTests {
     void replayGameWithSwitchedColours() {
         String input = "1 1 0";
         ApplicationRunner application = new ApplicationRunner(input);
-        application.testGameWithGivenSettings();
+        application.testGameWithGivenSettings(Colour.BLACK, Colour.WHITE);
+    }
+
+    @Test
+    void replayGameWithoutSwitchingColours() {
+        String input = "1 0 0";
+        ApplicationRunner application = new ApplicationRunner(input);
+        application.testGameWithGivenSettings(Colour.WHITE, Colour.BLACK);
     }
 }

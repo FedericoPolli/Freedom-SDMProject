@@ -61,13 +61,13 @@ public class ApplicationRunner {
         );
     }
 
-    public void testGameWithGivenSettings() {
+    public void testGameWithGivenSettings(Colour player1Colour, Colour player2Colour) {
         Player player1 = new HumanPlayer("F", Colour.WHITE);
         Player player2 = new HumanPlayer("G", Colour.BLACK);
         gameHandler.playGameWithGivenSettings(player1, player2);
         assertAll(
-                () -> assertEquals(Colour.BLACK, player1.getColour()),
-                () -> assertEquals(Colour.WHITE, player2.getColour())
+                () -> assertEquals(player1Colour, player1.getColour()),
+                () -> assertEquals(player2Colour, player2.getColour())
         );
     }
 }

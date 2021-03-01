@@ -8,6 +8,8 @@ import dssc.project.freedom.utilities.Utility;
 
 import java.util.Scanner;
 
+import static dssc.project.freedom.utilities.Utility.getInteger;
+
 /**
  * Class that controls the execution of the {@link CommandLineGame}.
  */
@@ -36,7 +38,7 @@ public class GameHandler {
             Player player2 = createPlayer("ComputerPlayer2", Colour.BLACK, boardSize);
             playGameWithGivenSettings(boardSize, player1, player2);
             System.out.print("Do you want to start a new game with new settings? (0 = no, 1 = yes) ");
-        } while (Utility.getInteger(in) != 0);
+        } while (getInteger(in) != 0);
     }
 
     /**
@@ -47,7 +49,7 @@ public class GameHandler {
         System.out.print("Enter the board size (minimum 4): ");
         int boardSize;
         do {
-            boardSize = Utility.getInteger(in);
+            boardSize = getInteger(in);
             if (boardSize < 4)
                 System.out.print("The size of the board must be an integer >= 4! ");
             else
@@ -124,9 +126,9 @@ public class GameHandler {
             CommandLineGame clGame = new CommandLineGame(boardSize, player1, player2);
             clGame.playGame();
             System.out.print("Do you want to play again with the same settings? (0 = no, 1 = yes) ");
-            if (Utility.getInteger(in) == 1) {
+            if (getInteger(in) == 1) {
                 System.out.print("Do you want to switch colours? (0 = no, 1 = yes) ");
-                if (Utility.getInteger(in) == 1)
+                if (getInteger(in) == 1)
                     swapColours(player1, player2);
             } else
                 break;
