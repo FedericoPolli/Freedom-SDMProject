@@ -65,13 +65,11 @@ public class GreedyPlayerTests {
     }
 
     private void populateBoardDiagonally(int numberOfStones) {
-        for (int i = 1; i <= numberOfStones; ++i) {
-            for (int j = 1; j <= numberOfStones; ++j) {
+        for (int i = 1; i <= numberOfStones; ++i)
+            for (int j = 1; j <= numberOfStones; ++j)
                 if (i == j) {
                     board.colourStoneAt(at(i, j), WHITE);
                     board.colourStoneAt(at(i, j + 1), BLACK);
                 }
-            }
-        }
     }
 }
