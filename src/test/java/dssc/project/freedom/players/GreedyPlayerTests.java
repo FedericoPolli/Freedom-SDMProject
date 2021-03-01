@@ -76,4 +76,19 @@ public class GreedyPlayerTests {
         GreedyPlayer.updateBoardAndPreviousPosition(board, at(4, 5));
         assertEquals(at(5, 5), greedyPlayer.getPlayerPosition());
     }
+
+    @Test
+    void blocksRowOf4OfOppositePlayer() {
+        for (int i = 1; i <= 2; ++i) {
+            for (int j = 1; j <= 2; ++j) {
+                if (i == j) {
+                    board.colourStoneAt(at(i, j), WHITE);
+                    board.colourStoneAt(at(i, j + 1), BLACK);
+                }
+            }
+        }
+        board.colourStoneAt(at(3, 4), BLACK);
+        GreedyPlayer.updateBoardAndPreviousPosition(board, at(3, 4));
+        assertEquals(at(4, 5), greedyPlayer.getPlayerPosition());
+    }
 }

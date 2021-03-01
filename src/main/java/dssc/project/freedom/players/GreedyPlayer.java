@@ -88,6 +88,8 @@ public class GreedyPlayer extends Player {
                 return p;
             else if (maximumNumberOfStonesInARow == 5)
                 freePositionsCopy.remove(p);
+            else if (oppositePlayerMakesRowOf4(p))
+                return p;
             else
                 maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
         }
@@ -97,5 +99,10 @@ public class GreedyPlayer extends Player {
             int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
             return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
         }
+    }
+
+    private boolean oppositePlayerMakesRowOf4(Position p) {
+        Colour oppositeColour = (colour == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+        return board.getMaximumNumberOfStonesInARow(p, oppositeColour) == 4;
     }
 }
