@@ -97,7 +97,7 @@ public class Board {
     }
 
     /**
-     * Checks if all the {@link Position}s adjacent to the given one are occupied.
+     * Checks if all the {@link Position}s adjacent to the given one are free.
      * @param pos The Position to be checked.
      * @return true if all the Positions adjacent to the given one are occupied, false otherwise.
      */

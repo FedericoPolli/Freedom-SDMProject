@@ -3,6 +3,9 @@ package dssc.project.freedom.basis;
 /**
  * Class that represents the position of a {@link Stone} in the {@link Board}
  * of the {@link dssc.project.freedom.games.Game}.
+ *
+ * This class is used to encapsulate the fields <code>x</code> and <code>y</code>
+ * of the position in the {@link Board}.
  */
 public final class Position {
 

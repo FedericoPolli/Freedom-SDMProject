@@ -42,7 +42,7 @@ public class Utility {
      * @return The symbol for white Stones.
      */
     public static String getWhite() {
-        return getOS().equals("Windows") ? "w" : "\u26AA";
+        return getOS().equals("Windows") ? "W" : "\u26AA";
     }
 
     /**
@@ -50,6 +50,6 @@ public class Utility {
      * @return The symbol for black Stones.
      */
     public static String getBlack() {
-        return getOS().equals("Windows") ? "b" : "\u26AB";
+        return getOS().equals("Windows") ? "B" : "\u26AB";
     }
 }
