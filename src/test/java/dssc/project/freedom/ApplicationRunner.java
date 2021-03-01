@@ -33,7 +33,6 @@ public class ApplicationRunner {
                     break;
             } while (true);
         }
-
     }
 
     private final ByteArrayOutputStream outputStream;

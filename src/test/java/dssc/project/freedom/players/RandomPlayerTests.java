@@ -26,16 +26,13 @@ public class RandomPlayerTests {
      */
     public static class StubRandomGenerator implements RandomGenerator {
 
-        /**
-         * Number of calls of the getRandomInteger function
-         */
+        /** Number of calls of the getRandomInteger function. */
         private int lastCall = -1;
 
         /**
-         * Return the number of times the function has been called. If the number is higher or equal to a given
-         * upperbound the counter is set to 0.
-         *
-         * @param upperBound The upperbound of the number of calls
+         * Return the number of times the function has been called. If the number
+         * is higher or equal to a given upper bound the counter is set to 0.
+         * @param upperBound The upper bound of the number of calls.
          * @return An integer representing the number of calls of the function.
          */
         @Override

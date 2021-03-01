@@ -10,8 +10,7 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import static dssc.project.freedom.basis.Colour.BLACK;
-import static dssc.project.freedom.basis.Colour.WHITE;
+import static dssc.project.freedom.basis.Colour.*;
 import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,7 +34,6 @@ public class GameRunner {
                 move(current, currentPlayer.getColour());
             }
         }
-
     }
 
     private final ByteArrayOutputStream outputStream;
