@@ -29,7 +29,7 @@ public abstract class Game {
      * @param colour  The Colour of the Stone to be added.
      */
     public void move(Position current, Colour colour) {
-        board.updateStoneAt(current, colour);
+        board.colourStoneAt(current, colour);
         previous = current;
     }
 

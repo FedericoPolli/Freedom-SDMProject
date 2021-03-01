@@ -57,31 +57,35 @@ public class GameRunner {
         assertEquals(expectedOutput, outputStream.toString());
     }
 
-    public void parseWinner() {
+    public void testWinner(String output) {
         for (int x = 1; x <= boardSize; ++x) {
             for (int y = 1; y <= boardSize; ++y) {
                 commandLineGame.move(at(x, y), (x * y) % 2 == 0 ? WHITE : BLACK);
             }
         }
         commandLineGame.winner();
+        testOutput(output);
     }
 
-    public void parseDraw() {
+    public void testDraw(String output) {
         for (int i = 1; i <= boardSize; ++i) {
             for (int j = 1; j <= boardSize; ++j) {
                 commandLineGame.move(at(i, j), (i + j) % 2 == 0 ? WHITE : BLACK);
             }
         }
         commandLineGame.winner();
+        testOutput(output);
     }
 
-    public void parsePlay(String input) {
+    public void testPlay(String input, String output) {
         ByteArrayInputStream source = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         HumanPlayer.setScanner(new Scanner(source));
         commandLineGame.playGame();
+        testOutput(output);
     }
 
-    public void parseGreetings() {
+    public void testGreetings(String output) {
         commandLineGame.printGreetings();
+        testOutput(output);
     }
 }

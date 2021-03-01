@@ -2,10 +2,7 @@ package dssc.project.freedom.basis;
 
 import dssc.project.freedom.utilities.Utility;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static dssc.project.freedom.basis.Position.at;
@@ -55,12 +52,12 @@ public class Board {
     }
 
     /**
-     * Updates a {@link Stone} in a given {@link Position} in the {@link Board},
+     * Colours the {@link Stone} in the given {@link Position} in the {@link Board},
      * colouring it with the given {@link Colour}.
      * @param p The Position of the Stone to be updated.
      * @param c The Colour to be assigned to the Stone.
      */
-    public void updateStoneAt(Position p, Colour c) {
+    public void colourStoneAt(Position p, Colour c) {
         getStoneAt(p).makeOfColour(c);
     }
 
@@ -210,12 +207,26 @@ public class Board {
      * @return The maximum number of Stones of the same Colour in a row.
      */
     public List<Integer> getNumberOfStonesInRowForAllDirections(Position p, Colour colour) {
-        updateStoneAt(p, colour);
+        colourStoneAt(p, colour);
         List<Integer> maximumNumberOfStonesInARow = new ArrayList<>();
         for (Direction dir : Direction.values())
             maximumNumberOfStonesInARow.add(countStonesInRow(dir, p));
-        updateStoneAt(p, Colour.NONE);
+        colourStoneAt(p, Colour.NONE);
         return maximumNumberOfStonesInARow;
+    }
+
+    /**
+     * It searches in all eight {@link dssc.project.freedom.basis.Direction}s for
+     * the maximum number of {@link dssc.project.freedom.basis.Stone}s in a row
+     * that would be obtained by playing in the given {@link Position}.
+     * @param p The Position on which to perform the search.
+     * @return The maximum number of Stones in a row for the given Position.
+     */
+    public Integer getMaximumNumberOfStonesInARow(Position p, Colour colour) {
+        return getNumberOfStonesInRowForAllDirections(p, colour)
+                .stream()
+                .max(Comparator.naturalOrder())
+                .get();
     }
 
     /**

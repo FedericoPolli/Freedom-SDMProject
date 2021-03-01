@@ -46,7 +46,7 @@ public class ApplicationRunner {
         gameHandler = new FakeGameHandler(in);
     }
 
-    public void parseBoardSize(String expectedOutput, int expectedValue) {
+    public void testBoardSize(String expectedOutput, int expectedValue) {
         int value = gameHandler.getBoardSizeFromUser();
         assertAll(
                 () -> assertEquals(expectedOutput, outputStream.toString()),
@@ -54,7 +54,7 @@ public class ApplicationRunner {
         );
     }
 
-    public void parseTypeOfPlayer(String expectedOutput, char expectedValue) {
+    public void testTypeOfPlayer(String expectedOutput, char expectedValue) {
         int value = gameHandler.getTypeOfPlayerFromUser();
         assertAll(
                 () -> assertEquals(expectedOutput, outputStream.toString()),
@@ -62,7 +62,7 @@ public class ApplicationRunner {
         );
     }
 
-    public void parseGameWithGivenSettings() {
+    public void testGameWithGivenSettings() {
         Player player1 = new HumanPlayer("F", Colour.WHITE);
         Player player2 = new HumanPlayer("G", Colour.BLACK);
         gameHandler.playGameWithGivenSettings(player1, player2);

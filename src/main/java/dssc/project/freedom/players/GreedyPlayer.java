@@ -83,7 +83,7 @@ public class GreedyPlayer extends Player {
         List<Integer> maxStonesInARowForPositions = new ArrayList<>();
         List<Position> freePositionsCopy = new ArrayList<>(freePositions);
         for (Position p : freePositions) {
-            int maximumNumberOfStonesInARow = getMaximumNumberOfStonesInARow(p);
+            int maximumNumberOfStonesInARow = board.getMaximumNumberOfStonesInARow(p, colour);
             if (maximumNumberOfStonesInARow == 4)
                 return p;
             else if (maximumNumberOfStonesInARow == 5)
@@ -97,19 +97,5 @@ public class GreedyPlayer extends Player {
             int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
             return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
         }
-    }
-
-    /**
-     * It searches in all eight {@link dssc.project.freedom.basis.Direction}s for
-     * the maximum number of {@link dssc.project.freedom.basis.Stone}s in a row
-     * that would be obtained by playing in the given {@link Position}.
-     * @param p The Position on which to perform the search.
-     * @return The maximum number of Stones in a row for the given Position.
-     */
-    Integer getMaximumNumberOfStonesInARow(Position p) {
-        return board.getNumberOfStonesInRowForAllDirections(p, colour)
-                .stream()
-                .max(Comparator.naturalOrder())
-                .get();
     }
 }

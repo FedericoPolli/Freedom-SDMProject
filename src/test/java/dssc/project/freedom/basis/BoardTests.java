@@ -43,7 +43,7 @@ public class BoardTests {
     @Test
     void changeStoneColour() {
         Board board = new Board(5);
-        board.updateStoneAt(at(3, 2), WHITE);
+        board.colourStoneAt(at(3, 2), WHITE);
         assertTrue(board.stoneIsAlreadyPlacedAt(at(3,2)));
     }
 
@@ -55,9 +55,9 @@ public class BoardTests {
 
     private static Stream<Arguments> positionToBeChecked() {
         Board board = new Board(3);
-        board.updateStoneAt(at(1, 2), WHITE);
-        board.updateStoneAt(at(2, 1), BLACK);
-        board.updateStoneAt(at(2, 2), WHITE);
+        board.colourStoneAt(at(1, 2), WHITE);
+        board.colourStoneAt(at(2, 1), BLACK);
+        board.colourStoneAt(at(2, 2), WHITE);
         return Stream.of(
                 Arguments.of(board, 1, 1, false),
                 Arguments.of(board, 1, 3, true)
@@ -75,9 +75,9 @@ public class BoardTests {
     void checkLiveStonesInHorizontalRow(){
         Board board = new Board(5);
         for (int i = 1; i <= 4; ++i) {
-            board.updateStoneAt(at(i, 1), WHITE);
+            board.colourStoneAt(at(i, 1), WHITE);
         }
-        board.updateStoneAt(at(5, 1), BLACK);
+        board.colourStoneAt(at(5, 1), BLACK);
         board.checkBoardAndMakeStonesLive();
         assertEquals(4, board.countLiveStones(WHITE));
     }
@@ -86,9 +86,9 @@ public class BoardTests {
     void checkLiveStonesInVerticalRow(){
         Board board = new Board(5);
         for (int i = 1; i <= 4; ++i) {
-            board.updateStoneAt(at(1, i), WHITE);
+            board.colourStoneAt(at(1, i), WHITE);
         }
-        board.updateStoneAt(at(1, 5), BLACK);
+        board.colourStoneAt(at(1, 5), BLACK);
         board.checkBoardAndMakeStonesLive();
         assertEquals(4, board.countLiveStones(WHITE));
     }
@@ -97,9 +97,9 @@ public class BoardTests {
     void checkLiveStonesInDiagonalRow(){
         Board board = new Board(5);
         for (int i = 1; i <= 4; ++i) {
-            board.updateStoneAt(at(i, i), WHITE);
+            board.colourStoneAt(at(i, i), WHITE);
         }
-        board.updateStoneAt(at(5, 5), BLACK);
+        board.colourStoneAt(at(5, 5), BLACK);
         board.checkBoardAndMakeStonesLive();
         assertEquals(4, board.countLiveStones(WHITE));
     }
@@ -109,7 +109,7 @@ public class BoardTests {
     void moreThanFiveStonesOfSameColourInARowAreNotLive(int row){
         Board board = new Board(row);
         for (int i = 1; i <= row; ++i) {
-            board.updateStoneAt(at(i, 1), WHITE);
+            board.colourStoneAt(at(i, 1), WHITE);
         }
         board.checkBoardAndMakeStonesLive();
         assertEquals(0, board.countLiveStones(WHITE));
@@ -119,7 +119,7 @@ public class BoardTests {
     void notEnoughStonesOfSameColourToBeLive(){
         Board board = new Board(5);
         for (int i = 1; i <= 5; ++i) {
-            board.updateStoneAt(at(i, 1), i == 3 ? WHITE : BLACK);
+            board.colourStoneAt(at(i, 1), i == 3 ? WHITE : BLACK);
         }
         board.checkBoardAndMakeStonesLive();
         assertEquals(0, board.countLiveStones(WHITE));
@@ -141,8 +141,8 @@ public class BoardTests {
         Board board2 = new Board(size);
         for(int x = 1; x <= size; ++x) {
             for(int y = 1; y <= size; ++y) {
-                board1.updateStoneAt(at(x, y), (x * y) % 2 == 0 ? WHITE : BLACK);
-                board2.updateStoneAt(at(x, y), (x + y) % 2 == 0 ? WHITE : BLACK);
+                board1.colourStoneAt(at(x, y), (x * y) % 2 == 0 ? WHITE : BLACK);
+                board2.colourStoneAt(at(x, y), (x + y) % 2 == 0 ? WHITE : BLACK);
             }
         }
         return Stream.of(
@@ -152,12 +152,22 @@ public class BoardTests {
     }
 
     @Test
+    void testMaximumNumberOfStonesInARow() {
+        Board board = new Board(5);
+        board.colourStoneAt(at(1, 2), WHITE);
+        board.colourStoneAt(at(2, 2), BLACK);
+        board.colourStoneAt(at(2, 1), WHITE);
+        board.colourStoneAt(at(1, 1), BLACK);
+        assertEquals(2, board.getMaximumNumberOfStonesInARow(at(1, 1), WHITE));
+    }
+
+    @Test
     public void testBoardToString(){
         String white = Utility.getWhite();
         String black = Utility.getBlack();
         Board board = new Board(4);
-        board.updateStoneAt(Position.at(1, 1), Colour.WHITE);
-        board.updateStoneAt(Position.at(2, 1), Colour.BLACK);
+        board.colourStoneAt(Position.at(1, 1), Colour.WHITE);
+        board.colourStoneAt(Position.at(2, 1), Colour.BLACK);
         String line = "  " + "+---".repeat(4) + "+" + lineSeparator();
         String boardAfterSecondMove =
                 line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +

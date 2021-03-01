@@ -16,48 +16,44 @@ public class CLGameTests {
     @Test
     void testWhiteWinner() {
         GameRunner game = new GameRunner(4);
-        game.parseWinner();
-        game.testOutput("White won with " + 12 + " live stones against Black's " + 0 + lineSeparator());
+        game.testWinner("White won with " + 12 + " live stones against Black's " + 0 + lineSeparator());
     }
 
     @Test
     void testDraw() {
         GameRunner game = new GameRunner(4);
-        game.parseDraw();
-        game.testOutput("Draw: both players have the same number of live stones: " + 4 + lineSeparator());
+        game.testDraw("Draw: both players have the same number of live stones: " + 4 + lineSeparator());
     }
 
     @Test
     void testGreetings() {
         GameRunner game = new GameRunner(4);
-        game.parseGreetings();
-        game.testOutput("White has colour WHITE and his symbol is " + white + lineSeparator() +
+        game.testGreetings("White has colour WHITE and his symbol is " + white + lineSeparator() +
                 "Black has colour BLACK and his symbol is " + black + lineSeparator());
     }
 
     @Test
     void testPlay() {
         GameRunner game = new GameRunner(1);
-        game.parsePlay("1 1");
-        game.testOutput(whiteTurn);
+        game.testPlay("1 1", whiteTurn);
     }
 
     @Test
     void testPlayWithInvalidInteger() {
         GameRunner game = new GameRunner(1);
         String input = "q 1" + System.lineSeparator() + "1";
-        game.parsePlay(input);
-        game.testOutput( whiteTurn +
-                "You didn't enter an integer! Enter again an integer" + lineSeparator());
+        String output =  whiteTurn +
+                "You didn't enter an integer! Enter again an integer" + lineSeparator();
+        game.testPlay(input, output);
     }
 
     @Test
     void testPlayWithPositionOutsideBoard() {
         GameRunner game = new GameRunner(1);
         String input = "1 0" + System.lineSeparator() + "1 1";
-        game.parsePlay(input);
-        game.testOutput( whiteTurn + "The position is not inside the board!"
-                + " Enter the x and y coordinates of the stone:" + lineSeparator());
+        String output = whiteTurn + "The position is not inside the board!"
+                + " Enter the x and y coordinates of the stone:" + lineSeparator();
+        game.testPlay(input, output);
     }
 
     @Test
@@ -65,12 +61,10 @@ public class CLGameTests {
         GameRunner game = new GameRunner(2);
         String input = "1 1" + lineSeparator() + "1 1" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2";
-        game.parsePlay(input);
         String output = wholeNormalTurn +
                 "The position is already occupied!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
                 wholeNormalTurn;
-        game.testOutput(output);
-    }
+        game.testPlay(input, output);    }
 
     @Test
     void testPlayWithNotAdjacentPosition() {
@@ -78,11 +72,10 @@ public class CLGameTests {
         String input = "1 1" + lineSeparator() + "1 3" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() + " 1 3" + lineSeparator() +
                 "2 3" + lineSeparator() + "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1";
-        game.parsePlay(input);
         String output = wholeNormalTurn +
                 "The position is not adjacent to the previous one!" + " Enter the x and y coordinates of the stone:" +
                 lineSeparator() + wholeNormalTurn.repeat(3) + whiteTurn;
-        game.testOutput(output);
+        game.testPlay(input, output);
     }
 
     @Test
@@ -91,9 +84,8 @@ public class CLGameTests {
         String input = "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() +
                 " 1 1" + lineSeparator() + "1 3" + lineSeparator() + "2 3" + lineSeparator() +
                 "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1";
-        game.parsePlay(input);
         String output = wholeNormalTurn.repeat(4) + whiteTurn;
-        game.testOutput(output);
+        game.testPlay(input, output);
     }
 
     @Test
@@ -101,10 +93,9 @@ public class CLGameTests {
         int boardSize = 5;
         GameRunner game = new GameRunner(boardSize);
         String input = buildInputMoves(boardSize);
-        game.parsePlay(input);
         String output = wholeNormalTurn.repeat(12) + whiteTurn +
                 "Do you want to do the last move? (0 = no, 1 = yes)" + lineSeparator();
-        game.testOutput(output);
+        game.testPlay(input, output);
     }
 
     private String buildInputMoves(int boardSize) {
