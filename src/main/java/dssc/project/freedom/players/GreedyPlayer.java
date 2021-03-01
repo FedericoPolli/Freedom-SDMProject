@@ -86,6 +86,8 @@ public class GreedyPlayer extends Player {
                 return p;
             else if (maximumNumberOfStonesInARow == 5)
                 freePositionsCopy.remove(p);
+            else if (oppositePlayerMakesRowOf4(p))
+                return p;
             else
                 maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
         }
@@ -95,5 +97,17 @@ public class GreedyPlayer extends Player {
             int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
             return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
         }
+    }
+
+
+    /**
+     * Gets the opposite {@link Colour} and finds whether by playing in the given {@link Position}
+     * it can stop a row of four for the other player.
+     * @param p The position to perform the search on.
+     * @return true if the opposite player would form a row of four by playing in <code>p</code>, false otherwise.
+     */
+    private boolean oppositePlayerMakesRowOf4(Position p) {
+        Colour oppositeColour = (colour == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+        return board.getMaximumNumberOfStonesInARow(p, oppositeColour) == 4;
     }
 }
