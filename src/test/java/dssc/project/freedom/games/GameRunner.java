@@ -4,7 +4,6 @@ import dssc.project.freedom.basis.Colour;
 import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.players.HumanPlayer;
 import dssc.project.freedom.players.Player;
-import dssc.project.freedom.utilities.Utility;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,15 +12,37 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
-import static dssc.project.freedom.basis.Colour.*;
+import static dssc.project.freedom.basis.Colour.BLACK;
+import static dssc.project.freedom.basis.Colour.WHITE;
 import static dssc.project.freedom.basis.Position.at;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameRunner {
 
+    private static class FakeCommandLineGame extends CommandLineGame {
+
+        public FakeCommandLineGame(int boardSize, Player player1, Player player2) {
+            super(boardSize, player1, player2);
+        }
+
+        @Override
+        public void playGame() {
+            int boardSize = board.getBoardSize();
+            for (int turn = 1; turn <= boardSize * boardSize; ++turn) {
+                Player currentPlayer = getCurrentPlayer(turn);
+                Position current = playATurn(currentPlayer);
+                if (isLastMove(boardSize, turn) && !isLastMoveConvenient(current, currentPlayer.getColour()))
+                    if (currentPlayer.doesNotWantToDoLastMove())
+                        break;
+                move(current, currentPlayer.getColour());
+            }
+        }
+
+    }
+
     private final ByteArrayOutputStream outputStream;
     private final int boardSize;
-    private final CommandLineGame commandLineGame;
+    private final FakeCommandLineGame commandLineGame;
 
     public GameRunner(int boardSize) {
         outputStream = new ByteArrayOutputStream();
@@ -29,25 +50,11 @@ public class GameRunner {
         this.boardSize = boardSize;
         Player player1 = new HumanPlayer("White", WHITE);
         Player player2 = new HumanPlayer("Black", BLACK);
-        this.commandLineGame = new CommandLineGame(boardSize, player1, player2);
+        this.commandLineGame = new FakeCommandLineGame(boardSize, player1, player2);
     }
 
     public void testOutput(String expectedOutput) {
         assertEquals(expectedOutput, outputStream.toString());
-    }
-
-    public void testOutputWithoutBoardPrints(String expectedOutput) {
-        String output = outputStream.toString();
-        StringBuffer text = new StringBuffer(output);
-        int boardLength = (4 * boardSize + 4) * (2 * boardSize + 2);
-        if (Utility.getOS().equals("Windows"))
-            boardLength += boardSize * 2 + 2;
-        while (output.contains("+")) {
-            int i = text.indexOf("+") - 2;
-            text = text.replace(i, i + boardLength, "");
-            output = text.toString();
-        }
-        assertEquals(expectedOutput, output);
     }
 
     public void parseBoard(List<Position> positions, List<Colour> colours) {
@@ -79,5 +86,9 @@ public class GameRunner {
         ByteArrayInputStream source = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         HumanPlayer.setScanner(new Scanner(source));
         commandLineGame.playGame();
+    }
+
+    public void parseGreetings() {
+        commandLineGame.printGreetings();
     }
 }

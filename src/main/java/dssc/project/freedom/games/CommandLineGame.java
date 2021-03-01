@@ -34,6 +34,7 @@ public class CommandLineGame extends Game {
     public void playGame() {
         printGreetings();
         int boardSize = board.getBoardSize();
+        printBoard();
         for (int turn = 1; turn <= boardSize * boardSize; ++turn) {
             Player currentPlayer = getCurrentPlayer(turn);
             Position current = playATurn(currentPlayer);
@@ -51,7 +52,7 @@ public class CommandLineGame extends Game {
      * Prints the names, colours and symbols of the two {@link Player}s and the
      * initial empty {@link Board}.
      */
-    private void printGreetings() {
+    protected void printGreetings() {
         if (player1.getColour() == Colour.WHITE) {
             System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getWhite());
             System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getBlack());
@@ -59,7 +60,6 @@ public class CommandLineGame extends Game {
             System.out.println(player1.getName() + " has colour " + player1.getColour() + " and his symbol is " + Utility.getBlack());
             System.out.println(player2.getName() + " has colour " + player2.getColour() + " and his symbol is " + Utility.getWhite());
         }
-        printBoard();
     }
 
     /**
@@ -74,7 +74,7 @@ public class CommandLineGame extends Game {
      * @param turn Turn of the play.
      * @return The Player who should play in this turn.
      */
-    private Player getCurrentPlayer(int turn) {
+    protected Player getCurrentPlayer(int turn) {
         if (player1.getColour() == Colour.WHITE) {
             return turn % 2 == 1 ? player1 : player2;
         } else {
@@ -89,7 +89,7 @@ public class CommandLineGame extends Game {
      * @param currentPlayer Player whose turn is.
      * @return The Position in which the PFlayer placed his stone.
      */
-    private Position playATurn(Player currentPlayer) {
+    protected Position playATurn(Player currentPlayer) {
         System.out.print(currentPlayer.getName() + " it's your turn!");
         if (currentPlayer instanceof GreedyPlayer)
             GreedyPlayer.updateBoardAndPreviousPosition(board, previous);
@@ -128,7 +128,7 @@ public class CommandLineGame extends Game {
      * @param turn Turn of the play.
      * @return true if it is the last move, false otherwise.
      */
-    private boolean isLastMove(int boardSize, int turn) {
+    protected boolean isLastMove(int boardSize, int turn) {
         return turn == boardSize * boardSize;
     }
 

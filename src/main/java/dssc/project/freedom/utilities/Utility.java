@@ -31,7 +31,7 @@ public class Utility {
      * Returns if the OS on which the program is running is Windows or not.
      * @return A String which tells if the OS is Windows or not.
      */
-    public static String getOS() {
+    private static String getOS() {
         String os = System.getProperty("os.name");
         if (os.contains("Windows")) return "Windows";
         else return "Not Windows";

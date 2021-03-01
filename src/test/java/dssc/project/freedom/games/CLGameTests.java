@@ -14,21 +14,9 @@ public class CLGameTests {
 
     private final String white = Utility.getWhite();
     private final String black = Utility.getBlack();
-    private final String initialBoardOfDim1 = "  +---+" + lineSeparator() +
-            "1 |   |" + lineSeparator() +
-            "  +---+" + lineSeparator() +
-            "    1  " + lineSeparator();
-    private final String finalBoardOfDim1 = "  +---+" + lineSeparator() +
-            "1 | " + white + " |" + lineSeparator() +
-            "  +---+" + lineSeparator() +
-            "    1  " + lineSeparator();
     private final String whiteTurn = "White it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
     private final String blackTurn = "Black it's your turn!" + " Enter the x and y coordinates of the stone:" + lineSeparator();
     private final String wholeNormalTurn = whiteTurn + blackTurn;
-    private final String playersColours = "White has colour WHITE and his symbol is " + white + lineSeparator() +
-            "Black has colour BLACK and his symbol is " + black + lineSeparator();
-    private final String drawPrint = "Draw: both players have the same number of live stones: ";
-
 
     @Test
     void testWhiteWinner() {
@@ -45,11 +33,18 @@ public class CLGameTests {
     }
 
     @Test
+    void testGreetings() {
+        GameRunner game = new GameRunner(4);
+        game.parseGreetings();
+        game.testOutput("White has colour WHITE and his symbol is " + white + lineSeparator() +
+                "Black has colour BLACK and his symbol is " + black + lineSeparator());
+    }
+
+    @Test
     void testPlay() {
         GameRunner game = new GameRunner(1);
         game.parsePlay("1 1");
-        game.testOutput(playersColours + initialBoardOfDim1 + whiteTurn +
-                finalBoardOfDim1 + drawPrint + 0 + lineSeparator());
+        game.testOutput(whiteTurn);
     }
 
     @Test
@@ -57,9 +52,8 @@ public class CLGameTests {
         GameRunner game = new GameRunner(1);
         String input = "q 1" + System.lineSeparator() + "1";
         game.parsePlay(input);
-        game.testOutput(playersColours + initialBoardOfDim1 + whiteTurn +
-                "You didn't enter an integer! Enter again an integer" + lineSeparator() +
-                finalBoardOfDim1 + drawPrint + 0 + lineSeparator());
+        game.testOutput( whiteTurn +
+                "You didn't enter an integer! Enter again an integer" + lineSeparator());
     }
 
     @Test
@@ -67,9 +61,8 @@ public class CLGameTests {
         GameRunner game = new GameRunner(1);
         String input = "1 0" + System.lineSeparator() + "1 1";
         game.parsePlay(input);
-        game.testOutput(playersColours + initialBoardOfDim1 + whiteTurn +
-                "The position is not inside the board!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                finalBoardOfDim1 + drawPrint + 0 + lineSeparator());
+        game.testOutput( whiteTurn + "The position is not inside the board!"
+                + " Enter the x and y coordinates of the stone:" + lineSeparator());
     }
 
     @Test
@@ -78,10 +71,10 @@ public class CLGameTests {
         String input = "1 1" + lineSeparator() + "1 1" + lineSeparator() +
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2";
         game.parsePlay(input);
-        String output = playersColours + wholeNormalTurn +
+        String output = wholeNormalTurn +
                 "The position is already occupied!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                wholeNormalTurn + drawPrint + 0 + lineSeparator();
-        game.testOutputWithoutBoardPrints(output);
+                wholeNormalTurn;
+        game.testOutput(output);
     }
 
     @Test
@@ -91,10 +84,10 @@ public class CLGameTests {
                 "1 2" + lineSeparator() + "2 1" + lineSeparator() + "2 2" + lineSeparator() + " 1 3" + lineSeparator() +
                 "2 3" + lineSeparator() + "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1";
         game.parsePlay(input);
-        String output = playersColours + wholeNormalTurn +
-                "The position is not adjacent to the previous one!" + " Enter the x and y coordinates of the stone:" + lineSeparator() +
-                wholeNormalTurn.repeat(3) + whiteTurn + drawPrint + 0 + lineSeparator();
-        game.testOutputWithoutBoardPrints(output);
+        String output = wholeNormalTurn +
+                "The position is not adjacent to the previous one!" + " Enter the x and y coordinates of the stone:" +
+                lineSeparator() + wholeNormalTurn.repeat(3) + whiteTurn;
+        game.testOutput(output);
     }
 
     @Test
@@ -104,9 +97,8 @@ public class CLGameTests {
                 " 1 1" + lineSeparator() + "1 3" + lineSeparator() + "2 3" + lineSeparator() +
                 "3 3" + lineSeparator() + "3 2" + lineSeparator() + "3 1";
         game.parsePlay(input);
-        String output = playersColours + wholeNormalTurn.repeat(4) +
-                whiteTurn + drawPrint + 0 + lineSeparator();
-        game.testOutputWithoutBoardPrints(output);
+        String output = wholeNormalTurn.repeat(4) + whiteTurn;
+        game.testOutput(output);
     }
 
     @Test
@@ -115,10 +107,9 @@ public class CLGameTests {
         GameRunner game = new GameRunner(boardSize);
         String input = buildInputMoves(boardSize);
         game.parsePlay(input);
-        String output = playersColours + wholeNormalTurn.repeat(12) +
-                whiteTurn + "Do you want to do the last move? (0 = no, 1 = yes)" + lineSeparator() +
-                "Black won with 12 live stones against White's 4" + lineSeparator();
-        game.testOutputWithoutBoardPrints(output);
+        String output = wholeNormalTurn.repeat(12) + whiteTurn +
+                "Do you want to do the last move? (0 = no, 1 = yes)" + lineSeparator();
+        game.testOutput(output);
     }
 
     private String buildInputMoves(int boardSize) {
@@ -138,14 +129,11 @@ public class CLGameTests {
     @Test
     void testPrintBoard() {
         GameRunner game = new GameRunner(4);
-        String white = Utility.getWhite();
-        String black = Utility.getBlack();
         List<Position> positions = Arrays.asList(Position.at(1, 1), Position.at(2, 1));
         List<Colour> colours = Arrays.asList(Colour.WHITE, Colour.BLACK);
         game.parseBoard(positions, colours);
         String line = "  " + "+---".repeat(4) + "+" + lineSeparator();
-        String boardAfterSecondMove =
-                line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
+        String boardAfterSecondMove = line + "4 " + "|   ".repeat(4) + "|" + lineSeparator() +
                         line + "3 " + "|   ".repeat(4) + "|" + lineSeparator() +
                         line + "2 " + "|   ".repeat(4) + "|" + lineSeparator() +
                         line +
