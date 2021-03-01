@@ -101,6 +101,13 @@ public class GreedyPlayer extends Player {
         }
     }
 
+
+    /**
+     * Gets the opposite {@link Colour} and finds whether by playing in the given {@link Position}
+     * it can stop a row of four for the other player.
+     * @param p The position to perform the search on.
+     * @return true if the opposite player would form a row of four by playing in <code>p</code>, false otherwise.
+     */
     private boolean oppositePlayerMakesRowOf4(Position p) {
         Colour oppositeColour = (colour == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
         return board.getMaximumNumberOfStonesInARow(p, oppositeColour) == 4;
