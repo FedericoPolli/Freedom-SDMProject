@@ -22,7 +22,7 @@ public class CLGameTests {
     @Test
     void testDraw() {
         GameRunner game = new GameRunner(4);
-        game.testDraw("Draw: both players have the same number of live stones: " + 4 + lineSeparator());
+        game.testDraw("Draw: both players have the same number of 'live' stones: " + 4 + lineSeparator());
     }
 
     @Test
