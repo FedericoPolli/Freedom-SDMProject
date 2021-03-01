@@ -18,7 +18,7 @@ public class GreedyPlayer extends Player {
 
     /** Represents the board of the game being played by this player. */
     private static Board board;
-    /** Represents the position of the previous move in the game being played by this player. */
+    /** Represents the position of the previous move in the game being played by the other player. */
     private static Position previous;
     /** The generator of random numbers. */
     private final RandomGenerator randomGenerator;

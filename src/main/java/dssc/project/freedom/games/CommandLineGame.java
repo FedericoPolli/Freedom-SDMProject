@@ -87,7 +87,7 @@ public class CommandLineGame extends Game {
      * is his turn and, if the {@link Player} is not human, tells where the
      * {@link dssc.project.freedom.basis.Stone} has been placed.
      * @param currentPlayer Player whose turn is.
-     * @return The Position in which the PFlayer placed his stone.
+     * @return The Position in which the Player placed his stone.
      */
     protected Position playATurn(Player currentPlayer) {
         System.out.print(currentPlayer.getName() + " it's your turn!");

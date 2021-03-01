@@ -83,7 +83,7 @@ public class GameHandler {
     }
 
     /**
-     * Asks to enter a {@link Player} with which the user wants to play the {@link dssc.project.freedom.games.Game}:
+     * Asks to enter the type of {@link Player} with which the user wants to play the {@link dssc.project.freedom.games.Game}:
      * <ul>
      *     <li>'h': {@link HumanPlayer}, so the user has to play. </li>
      *     <li>'r': {@link RandomPlayer}. </li>
