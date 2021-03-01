@@ -79,44 +79,43 @@ public class GreedyPlayer extends Player {
      * @return A good Position in which to play.
      */
     private Position findPositionToPlayIn(List<Position> freePositions) {
-        List<Integer> maxStonesInARowForPositions = new ArrayList<>();
-        List<Position> freePositionsCopy = new ArrayList<>(freePositions);
-        Position optimalPosition = getOptimalPositionAndUpdateLists(freePositions, maxStonesInARowForPositions, freePositionsCopy);
+        List<Integer> maxStonesInARowForEachPosition = new ArrayList<>();
+        List<Position> nonInconvenientPosition = new ArrayList<>(freePositions);
+        Position optimalPosition =
+                getOptimalPositionAndUpdateLists(freePositions, maxStonesInARowForEachPosition, nonInconvenientPosition);
         if (optimalPosition != null)
             return optimalPosition;
-        else if (!freePositionsCopy.isEmpty()) {
-            int indexOfMax = maxStonesInARowForPositions.stream().max(Comparator.naturalOrder()).get();
-            return freePositionsCopy.get(maxStonesInARowForPositions.indexOf(indexOfMax));
-        } else {
+        else if (notAllPositionsAreInconvenient(nonInconvenientPosition)) {
+            int indexOfMax = maxStonesInARowForEachPosition.stream().max(Comparator.naturalOrder()).get();
+            return nonInconvenientPosition.get(maxStonesInARowForEachPosition.indexOf(indexOfMax));
+        } else
             return freePositions.get(randomGenerator.getRandomInteger(freePositions.size()));
-        }
     }
 
     /**
      * It searches, for each position, firstly if it can make a row of four, secondly if it can avoid a row of five,
-     * thirdly if it can hinder the opposite player by stopping one of his rows of four, finally it saves the
-     * longest row for the given position.
-     * @param freePositions The Positions in which to perform the search in.
-     * @param maxStonesInARowForPositions The list in which to save the longest rows.
-     * @param freePositionsCopy A copy of <code>freePositions</code> in which
-     *                         the position that result in rows of five are eliminated
+     * thirdly if it can hinder the opposite Player by stopping one of his rows of three, finally it saves the
+     * longest row for the given {@link Position}.
+     * @param freePositions                  The Positions in which to perform the search in.
+     * @param maxStonesInARowForEachPosition The list in which to save the longest rows for each Position.
+     * @param nonInconvenientPositions       A copy of <code>freePositions</code> in which
+     *                                       the position that result in rows of five are eliminated
      * @return The most convenient position, or null.
      */
-    private Position getOptimalPositionAndUpdateLists(List<Position> freePositions, List<Integer> maxStonesInARowForPositions, List<Position> freePositionsCopy) {
+    private Position getOptimalPositionAndUpdateLists(List<Position> freePositions, List<Integer> maxStonesInARowForEachPosition, List<Position> nonInconvenientPositions) {
         for (Position p : freePositions) {
             int maximumNumberOfStonesInARow = board.getMaximumNumberOfStonesInARow(p, colour);
             if (maximumNumberOfStonesInARow == 4)
                 return p;
             else if (maximumNumberOfStonesInARow == 5)
-                freePositionsCopy.remove(p);
+                nonInconvenientPositions.remove(p);
             else if (oppositePlayerWouldMakeRowOf4In(p))
                 return p;
             else
-                maxStonesInARowForPositions.add(maximumNumberOfStonesInARow);
+                maxStonesInARowForEachPosition.add(maximumNumberOfStonesInARow);
         }
         return null;
     }
-
 
     /**
      * Gets the opposite {@link Colour} and finds whether by playing in the given {@link Position}
@@ -127,5 +126,14 @@ public class GreedyPlayer extends Player {
     private boolean oppositePlayerWouldMakeRowOf4In(Position p) {
         Colour oppositeColour = (colour == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
         return board.getMaximumNumberOfStonesInARow(p, oppositeColour) == 4;
+    }
+
+    /**
+     * Checks if there is at least a non inconvenient {@link Position}.
+     * @param positionsInRowsOfAtMost4 The list of the non inconvenient Positions.
+     * @return true if there is at least a non inconvenient Position, false otherwise.
+     */
+    private boolean notAllPositionsAreInconvenient(List<Position> positionsInRowsOfAtMost4) {
+        return !positionsInRowsOfAtMost4.isEmpty();
     }
 }
