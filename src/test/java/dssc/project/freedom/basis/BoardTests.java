@@ -1,8 +1,5 @@
 package dssc.project.freedom.basis;
 
-import dssc.project.freedom.basis.Board;
-import dssc.project.freedom.basis.Colour;
-import dssc.project.freedom.basis.Position;
 import dssc.project.freedom.utilities.Utility;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static dssc.project.freedom.basis.Colour.*;
+import static dssc.project.freedom.basis.Colour.BLACK;
+import static dssc.project.freedom.basis.Colour.WHITE;
 import static dssc.project.freedom.basis.Position.at;
 import static java.lang.System.lineSeparator;
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +29,12 @@ public class BoardTests {
     }
 
     @Test
+    void testGetBoardSize(){
+        Board board = new Board(5);
+        assertEquals(board.getBoardSize(), 5);
+    }
+
+    @Test
     void countLiveStonesInEmptyBoard() {
         Board board = new Board(5);
         assertEquals(0, board.countLiveStones(BLACK));
@@ -45,8 +49,8 @@ public class BoardTests {
 
     @ParameterizedTest
     @MethodSource("positionToBeChecked")
-    void areAdjacentPositionsOccupied(Board board, int x, int y, boolean expected){
-        assertEquals(expected, !board.areAdjacentPositionFree(at(x,y)));
+    void areAdjacentPositionsFree(Board board, int x, int y, boolean expected){
+        assertEquals(expected, board.areAdjacentPositionFree(at(x,y)));
     }
 
     private static Stream<Arguments> positionToBeChecked() {
@@ -55,9 +59,21 @@ public class BoardTests {
         board.updateStoneAt(at(2, 1), BLACK);
         board.updateStoneAt(at(2, 2), WHITE);
         return Stream.of(
-                Arguments.of(board, 1, 1, true),
-                Arguments.of(board, 1, 3, false)
+                Arguments.of(board, 1, 1, false),
+                Arguments.of(board, 1, 3, true)
         );
+    }
+
+    @Test
+    void positionInsideBoard(){
+        Board board = new Board(3);
+        assertTrue(board.positionIsInsideTheBoard(at(1,1)));
+    }
+
+    @Test
+    void positionOutsideBoard(){
+        Board board = new Board(3);
+        assertFalse(board.positionIsInsideTheBoard(at(4,4)));
     }
 
     @Test
